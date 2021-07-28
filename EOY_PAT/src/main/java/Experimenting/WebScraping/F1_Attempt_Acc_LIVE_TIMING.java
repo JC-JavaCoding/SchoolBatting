@@ -1,4 +1,4 @@
-package Experimenting;
+package Experimenting.WebScraping;
 
 import java.io.IOException;//the exception thrown by the jsoup class connecting to a network
 
