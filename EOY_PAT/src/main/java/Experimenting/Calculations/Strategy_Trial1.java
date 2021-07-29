@@ -5,6 +5,7 @@
  */
 package Experimenting.Calculations;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -29,6 +30,7 @@ public class Strategy_Trial1
         
         //for soft tyre compound
         Scanner scanS = new Scanner(softInfo).useDelimiter("#");
+        scanS.useLocale(Locale.US);
         double sLap1 = scanS.nextDouble();
         double sLapAvg = scanS.nextDouble();
         double sFormula;
@@ -36,6 +38,7 @@ public class Strategy_Trial1
         
         //for medium tyre compound
         Scanner scanM = new Scanner(mediumInfo).useDelimiter("#");
+        scanM.useLocale(Locale.US);
         double mLap1 = scanM.nextDouble();
         double mLapAvg = scanM.nextDouble();
         double mFormula;
@@ -43,6 +46,7 @@ public class Strategy_Trial1
         
         //for hard tyre compound
         Scanner scanH = new Scanner(hardInfo).useDelimiter("#");
+        scanH.useLocale(Locale.US);
         double hLap1 = scanH.nextDouble();
         double hLapAvg = scanH.nextDouble();
         double hFormula;
@@ -74,9 +78,10 @@ public class Strategy_Trial1
                 System.out.println(startCompound +", lap: "+ lap);
                 
                 //set second stint tyre-type
-                for (int secCompound = 0; secCompound < 2; secCompound++)
+                for (int secCompound = 0; secCompound < 3; secCompound++)
                 {
                     secondTyre = compounds[secCompound];
+                    
                     if (secCompound != compound)
                     {
                         for (int lapStint2 = maxLaps; lapStint2 < maxLaps+30; lapStint2++)
