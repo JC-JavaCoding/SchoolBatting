@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JLabel" name="jLabel11">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel11"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="User Data Input Screen"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jTextField1" alignment="0" pref="382" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="soft_Max_Laps_label" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="soft_Max_Laps" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="soft_Tyres_Label" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="soft_First_Lap_Time_label" alignment="0" max="32767" attributes="0"/>
+                          <Component id="soft_Last_Lap_Time_label" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="soft_First_Lap_Seconds" max="32767" attributes="0"/>
+                          <Component id="soft_Last_Lap_Seconds" pref="200" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="back_Button" min="-2" pref="73" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="next_Button" min="-2" pref="73" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTextField1" min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="soft_Tyres_Label" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="soft_First_Lap_Time_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="soft_First_Lap_Seconds" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="soft_Last_Lap_Time_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="soft_Last_Lap_Seconds" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="soft_Max_Laps_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="soft_Max_Laps" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="next_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="back_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JTextField" name="jTextField1">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" value="Please type in the according information for the following fields:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="soft_Tyres_Label">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Soft Tyres:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="soft_First_Lap_Time_label">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="First Lap-Time of stint (seconds): "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="soft_Last_Lap_Time_label">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Last Lap-Time of stint (seconds):"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="soft_Max_Laps_label">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Maximum amount of laps on tyre:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="soft_First_Lap_Seconds">
+    </Component>
+    <Component class="javax.swing.JTextField" name="soft_Last_Lap_Seconds">
+    </Component>
+    <Component class="javax.swing.JTextField" name="soft_Max_Laps">
+    </Component>
+    <Component class="javax.swing.JButton" name="next_Button">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Next"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="back_Button">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Back"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
