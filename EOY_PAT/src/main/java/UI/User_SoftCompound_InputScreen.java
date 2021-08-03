@@ -31,18 +31,29 @@ public class User_SoftCompound_InputScreen extends javax.swing.JFrame
     {
 
         jLabel11 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
         soft_Tyres_Label = new javax.swing.JLabel();
         soft_First_Lap_Time_label = new javax.swing.JLabel();
         soft_Last_Lap_Time_label = new javax.swing.JLabel();
         soft_Max_Laps_label = new javax.swing.JLabel();
-        soft_First_Lap_Seconds = new javax.swing.JTextField();
-        soft_Last_Lap_Seconds = new javax.swing.JTextField();
-        soft_Max_Laps = new javax.swing.JTextField();
+        soft_FirstLapTimeField = new javax.swing.JTextField();
+        soft_LastLapTimeField = new javax.swing.JTextField();
+        soft_MaxLapsField = new javax.swing.JTextField();
         next_Button = new javax.swing.JButton();
         back_Button = new javax.swing.JButton();
+        medium_LastLapSecondsField = new javax.swing.JTextField();
+        medium_FirstLapSecondsField = new javax.swing.JTextField();
+        medium_MaxLapsField = new javax.swing.JTextField();
+        hard_FirstLapTimeField = new javax.swing.JTextField();
+        hard_LastLapTimeField = new javax.swing.JTextField();
+        hard_MaxLapsField = new javax.swing.JTextField();
+        medium_Tyres_Label = new javax.swing.JLabel();
+        hard_Tyres_Label = new javax.swing.JLabel();
 
         jLabel11.setText("jLabel11");
+
+        jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("User Data Input Screen");
@@ -58,9 +69,52 @@ public class User_SoftCompound_InputScreen extends javax.swing.JFrame
 
         soft_Max_Laps_label.setText("Maximum amount of laps on tyre:");
 
+        soft_FirstLapTimeField.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                soft_FirstLapTimeFieldActionPerformed(evt);
+            }
+        });
+
         next_Button.setText("Next");
 
         back_Button.setText("Back");
+        back_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                back_ButtonActionPerformed(evt);
+            }
+        });
+
+        medium_FirstLapSecondsField.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                medium_FirstLapSecondsFieldActionPerformed(evt);
+            }
+        });
+
+        hard_FirstLapTimeField.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                hard_FirstLapTimeFieldActionPerformed(evt);
+            }
+        });
+
+        hard_MaxLapsField.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                hard_MaxLapsFieldActionPerformed(evt);
+            }
+        });
+
+        medium_Tyres_Label.setText("Medium Tyres:");
+
+        hard_Tyres_Label.setText("Hard Tyres:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,24 +123,41 @@ public class User_SoftCompound_InputScreen extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(soft_Max_Laps_label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(soft_Max_Laps))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(soft_Tyres_Label)
-                            .addComponent(soft_First_Lap_Time_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(soft_Last_Lap_Time_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(soft_First_Lap_Seconds)
-                            .addComponent(soft_Last_Lap_Seconds, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+                    .addComponent(jTextField1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(back_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(next_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(next_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(soft_Max_Laps_label)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(soft_First_Lap_Time_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(soft_Last_Lap_Time_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(soft_MaxLapsField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                                    .addComponent(soft_LastLapTimeField)
+                                    .addComponent(soft_FirstLapTimeField, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(medium_LastLapSecondsField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                                    .addComponent(medium_FirstLapSecondsField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(medium_MaxLapsField))
+                                .addGap(18, 30, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(hard_FirstLapTimeField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(hard_LastLapTimeField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(hard_MaxLapsField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(soft_Tyres_Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(medium_Tyres_Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(hard_Tyres_Label)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -94,20 +165,29 @@ public class User_SoftCompound_InputScreen extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(soft_Tyres_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(soft_Tyres_Label)
+                    .addComponent(medium_Tyres_Label)
+                    .addComponent(hard_Tyres_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(soft_First_Lap_Time_label)
-                    .addComponent(soft_First_Lap_Seconds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(soft_FirstLapTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(medium_FirstLapSecondsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hard_FirstLapTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(soft_Last_Lap_Time_label)
-                    .addComponent(soft_Last_Lap_Seconds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(soft_LastLapTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(medium_LastLapSecondsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hard_LastLapTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(soft_Max_Laps_label)
-                    .addComponent(soft_Max_Laps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(soft_MaxLapsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(medium_MaxLapsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hard_MaxLapsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(next_Button)
@@ -117,6 +197,32 @@ public class User_SoftCompound_InputScreen extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void soft_FirstLapTimeFieldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_soft_FirstLapTimeFieldActionPerformed
+    {//GEN-HEADEREND:event_soft_FirstLapTimeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_soft_FirstLapTimeFieldActionPerformed
+
+    private void hard_FirstLapTimeFieldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_hard_FirstLapTimeFieldActionPerformed
+    {//GEN-HEADEREND:event_hard_FirstLapTimeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hard_FirstLapTimeFieldActionPerformed
+
+    private void hard_MaxLapsFieldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_hard_MaxLapsFieldActionPerformed
+    {//GEN-HEADEREND:event_hard_MaxLapsFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hard_MaxLapsFieldActionPerformed
+
+    private void medium_FirstLapSecondsFieldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_medium_FirstLapSecondsFieldActionPerformed
+    {//GEN-HEADEREND:event_medium_FirstLapSecondsFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_medium_FirstLapSecondsFieldActionPerformed
+
+    private void back_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_back_ButtonActionPerformed
+    {//GEN-HEADEREND:event_back_ButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_back_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,14 +274,23 @@ public class User_SoftCompound_InputScreen extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back_Button;
+    private javax.swing.JTextField hard_FirstLapTimeField;
+    private javax.swing.JTextField hard_LastLapTimeField;
+    private javax.swing.JTextField hard_MaxLapsField;
+    private javax.swing.JLabel hard_Tyres_Label;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField medium_FirstLapSecondsField;
+    private javax.swing.JTextField medium_LastLapSecondsField;
+    private javax.swing.JTextField medium_MaxLapsField;
+    private javax.swing.JLabel medium_Tyres_Label;
     private javax.swing.JButton next_Button;
-    private javax.swing.JTextField soft_First_Lap_Seconds;
+    private javax.swing.JTextField soft_FirstLapTimeField;
     private javax.swing.JLabel soft_First_Lap_Time_label;
-    private javax.swing.JTextField soft_Last_Lap_Seconds;
+    private javax.swing.JTextField soft_LastLapTimeField;
     private javax.swing.JLabel soft_Last_Lap_Time_label;
-    private javax.swing.JTextField soft_Max_Laps;
+    private javax.swing.JTextField soft_MaxLapsField;
     private javax.swing.JLabel soft_Max_Laps_label;
     private javax.swing.JLabel soft_Tyres_Label;
     // End of variables declaration//GEN-END:variables

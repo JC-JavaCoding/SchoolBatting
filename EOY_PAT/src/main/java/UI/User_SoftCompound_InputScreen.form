@@ -7,6 +7,11 @@
         <Property name="text" type="java.lang.String" value="jLabel11"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JTextField" name="jTextField2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField2"/>
+      </Properties>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -34,28 +39,50 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTextField1" alignment="0" pref="382" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="soft_Max_Laps_label" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="soft_Max_Laps" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="soft_Tyres_Label" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="soft_First_Lap_Time_label" alignment="0" max="32767" attributes="0"/>
-                          <Component id="soft_Last_Lap_Time_label" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="soft_First_Lap_Seconds" max="32767" attributes="0"/>
-                          <Component id="soft_Last_Lap_Seconds" pref="200" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="back_Button" min="-2" pref="73" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="next_Button" min="-2" pref="73" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="soft_Max_Laps_label" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="soft_First_Lap_Time_label" alignment="0" max="32767" attributes="0"/>
+                              <Component id="soft_Last_Lap_Time_label" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="soft_MaxLapsField" alignment="0" pref="55" max="32767" attributes="0"/>
+                                  <Component id="soft_LastLapTimeField" max="32767" attributes="0"/>
+                                  <Component id="soft_FirstLapTimeField" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="medium_LastLapSecondsField" alignment="0" pref="55" max="32767" attributes="0"/>
+                                  <Component id="medium_FirstLapSecondsField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="medium_MaxLapsField" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" pref="30" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="hard_FirstLapTimeField" alignment="1" min="-2" pref="55" max="-2" attributes="0"/>
+                                  <Component id="hard_LastLapTimeField" alignment="1" min="-2" pref="55" max="-2" attributes="0"/>
+                                  <Component id="hard_MaxLapsField" alignment="1" min="-2" pref="55" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              <Component id="soft_Tyres_Label" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="medium_Tyres_Label" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="hard_Tyres_Label" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -67,22 +94,32 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jTextField1" min="-2" pref="31" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="soft_Tyres_Label" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="soft_Tyres_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="medium_Tyres_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="hard_Tyres_Label" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="soft_First_Lap_Time_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="soft_First_Lap_Seconds" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="soft_FirstLapTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="medium_FirstLapSecondsField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="hard_FirstLapTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="soft_Last_Lap_Time_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="soft_Last_Lap_Seconds" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="soft_LastLapTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="medium_LastLapSecondsField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="hard_LastLapTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="soft_Max_Laps_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="soft_Max_Laps" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="soft_MaxLapsField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="medium_MaxLapsField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="hard_MaxLapsField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -121,11 +158,14 @@
         <Property name="text" type="java.lang.String" value="Maximum amount of laps on tyre:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="soft_First_Lap_Seconds">
+    <Component class="javax.swing.JTextField" name="soft_FirstLapTimeField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="soft_FirstLapTimeFieldActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="soft_Last_Lap_Seconds">
+    <Component class="javax.swing.JTextField" name="soft_LastLapTimeField">
     </Component>
-    <Component class="javax.swing.JTextField" name="soft_Max_Laps">
+    <Component class="javax.swing.JTextField" name="soft_MaxLapsField">
     </Component>
     <Component class="javax.swing.JButton" name="next_Button">
       <Properties>
@@ -135,6 +175,40 @@
     <Component class="javax.swing.JButton" name="back_Button">
       <Properties>
         <Property name="text" type="java.lang.String" value="Back"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="back_ButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="medium_LastLapSecondsField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="medium_FirstLapSecondsField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="medium_FirstLapSecondsFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="medium_MaxLapsField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="hard_FirstLapTimeField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hard_FirstLapTimeFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="hard_LastLapTimeField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="hard_MaxLapsField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hard_MaxLapsFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="medium_Tyres_Label">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Medium Tyres:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="hard_Tyres_Label">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hard Tyres:"/>
       </Properties>
     </Component>
   </SubComponents>
