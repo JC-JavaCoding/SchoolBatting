@@ -9,15 +9,16 @@ package UI;
  *
  * @author jjaac
  */
-public class User_SoftCompound_InputScreen extends javax.swing.JFrame
+public class User_InputScreen extends javax.swing.JFrame
 {
 
     /**
      * Creates new form User_Data_Screen
      */
-    public User_SoftCompound_InputScreen()
+    public User_InputScreen()
     {
         initComponents();
+        
     }
 
     /**
@@ -166,10 +167,11 @@ public class User_SoftCompound_InputScreen extends javax.swing.JFrame
                 .addContainerGap()
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(soft_Tyres_Label)
-                    .addComponent(medium_Tyres_Label)
-                    .addComponent(hard_Tyres_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hard_Tyres_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(soft_Tyres_Label)
+                        .addComponent(medium_Tyres_Label)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(soft_First_Lap_Time_label)
@@ -227,7 +229,7 @@ public class User_SoftCompound_InputScreen extends javax.swing.JFrame
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])
+    public static void start(String args[])
     {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -246,17 +248,21 @@ public class User_SoftCompound_InputScreen extends javax.swing.JFrame
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(User_SoftCompound_InputScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(User_InputScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(User_SoftCompound_InputScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(User_InputScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(User_SoftCompound_InputScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(User_InputScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(User_SoftCompound_InputScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(User_InputScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -267,7 +273,7 @@ public class User_SoftCompound_InputScreen extends javax.swing.JFrame
         {
             public void run()
             {
-                new User_SoftCompound_InputScreen().setVisible(true);
+                new User_InputScreen().setVisible(true);
             }
         });
     }
@@ -294,4 +300,34 @@ public class User_SoftCompound_InputScreen extends javax.swing.JFrame
     private javax.swing.JLabel soft_Max_Laps_label;
     private javax.swing.JLabel soft_Tyres_Label;
     // End of variables declaration//GEN-END:variables
+
+    User_InputScreen()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    User_InputScreen()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    User_InputScreen()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    User_InputScreen()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    User_InputScreen()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void start()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

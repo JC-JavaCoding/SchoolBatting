@@ -95,10 +95,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jTextField1" min="-2" pref="31" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="soft_Tyres_Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="medium_Tyres_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="hard_Tyres_Label" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="soft_Tyres_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="medium_Tyres_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">

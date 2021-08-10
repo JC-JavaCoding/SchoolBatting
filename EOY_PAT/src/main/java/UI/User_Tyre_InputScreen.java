@@ -5,6 +5,9 @@
  */
 package UI;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 /**
  *
  * @author jjaac
@@ -234,10 +237,12 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         new HomeScreen().setVisible(true);
         dispose();
     }//GEN-LAST:event_back_ButtonActionPerformed
-    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt)
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) throws FileNotFoundException
     {
     	new User_Race_Pit_InputScreen().setVisible(true);
-    	
+    	PrintWriter info = new PrintWriter("info.txt");
+        //format: slap1#mlap1#hlap1#lastLap#maxLaps
+        info.print(soft_FirstLapTimeField.getText() +"#"+ medium_FirstLapSecondsField.getText() +"#"+ hard_FirstLapTimeField.getText() +"#"+ soft_LastLapTimeField.getText() +"#"+ medium_LastLapSecondsField.getText() +"#"+ hard_LastLapTimeField.getText() +"#"+ soft_MaxLapsField.getText() +"#"+ medium_MaxLapsField.getText() +"#"+ hard_MaxLapsField.getText());
     	dispose();
     }
 
