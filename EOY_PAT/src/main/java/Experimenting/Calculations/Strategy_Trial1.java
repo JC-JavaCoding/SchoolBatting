@@ -15,15 +15,15 @@ import java.util.concurrent.TimeUnit;
  */
 public class Strategy_Trial1
 {
-    public static void main(String[] args)
+    public void main(String[] args)
     {
         //Read values from string
-        String soft_Info = "#107.9#1.005", medium_Info = "#108.5#1.003", hard_Info = "#108.9#1.002";
+        String soft_Info, medium_Info, hard_Info;// = "#108.9#1.002#45";
         
-        String strategy = bestStrat(soft_Info, medium_Info, hard_Info);
+        readInfo(soft_Info, medium_Info, hard_Info);
         //System.out.println(lap1 + ", "+ lapAvg +", tyre compound: "+ tyreCompound);
     }
-    public static String calcTime(long seconds)
+    public String calcTime(long seconds)
     {
         long hours = TimeUnit.SECONDS.toHours(seconds);
         long minutes = TimeUnit.SECONDS.toMinutes(seconds) - TimeUnit.HOURS.toMinutes(hours);
@@ -31,7 +31,81 @@ public class Strategy_Trial1
         String time = hours +":"+ minutes +":"+ seconds;
         return time;
     }
-    public static String bestStrat(String softInfo, String mediumInfo, String hardInfo)
+    
+    public void readInfo(String softInfo, String mediumInfo, String hardInfo) 
+    {
+    	Scanner scanS = new Scanner(softInfo).useDelimiter("#");
+        scanS.useLocale(Locale.US);
+        double sLap1 = scanS.nextDouble();
+        double sLapDeg = scanS.nextDouble();
+        int sMaxLaps = scanS.nextInt();
+        double sFormula;
+        System.out.println("SOFTS: Lap1: "+ sLap1 +", lapAvg: "+ sLapDeg);
+        
+        //for medium tyre compound
+        Scanner scanM = new Scanner(mediumInfo).useDelimiter("#");
+        scanM.useLocale(Locale.US);
+        double mLap1 = scanM.nextDouble();
+        double mLapDeg = scanM.nextDouble();
+        int medMaxLaps = scanM.nextInt();
+        double mFormula;
+        System.out.println("Mediums: Lap1: "+ mLap1 +", lapAvg: "+ mLapDeg);
+        
+        //for hard tyre compound
+        Scanner scanH = new Scanner(hardInfo).useDelimiter("#");
+        scanH.useLocale(Locale.US);
+        double hLap1 = scanH.nextDouble();
+        double hLapDeg = scanH.nextDouble();
+        int hMaxLaps = scanH.nextInt();
+        double hFormula;
+        System.out.println("Hards: Lap1: "+ hLap1 +", lapAvg: "+ hLapDeg);
+        
+        calcStrat(sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg, sMaxLaps, medMaxLaps, hMaxLaps);
+    }
+    
+    public int getMaxLaps(int compound, int sMaxLaps, int mMaxLaps, int hMaxLaps)
+    {
+      int maxLaps = 0;
+      switch(compound)
+      {
+          case 0:
+              maxLaps = sMaxLaps;
+              break;
+          case 1:
+              maxLaps = mMaxLaps;
+              break;
+          case 2:
+              maxLaps = hMaxLaps;
+      }
+      return maxLaps;
+    }
+    
+    public double getFormulatedTime(
+    										int compound, int lap, 
+    										double sLap1, double mLap1, double hLap1,
+    	    								double sLapDeg, double mLapDeg, double hLapDeg
+    									)
+    {
+    	double formulatedTime = 0;
+    	switch(compound)
+        {
+            case 0:
+            	formulatedTime = sLap1 * ( Math.pow(sLapDeg, lap-1));
+                break;
+            case 1:
+                formulatedTime = mLap1 * ( Math.pow(mLapDeg, lap-1));
+                break;
+            case 2:
+            	formulatedTime = hLap1 * ( Math.pow(hLapDeg, lap-1));
+        }
+    	return formulatedTime;
+    }
+    
+    public void calcStrat(	
+    								double sLap1, double mLap1, double hLap1,
+    								double sLapDeg, double mLapDeg, double hLapDeg,
+    								int sMaxLaps, int mMaxLaps, int hMaxLaps
+    							) 	
     {
         String [] compounds = {"soft", "medium", "hard"};
         String bestStrategy = "";
@@ -42,39 +116,10 @@ public class Strategy_Trial1
         //second stint times:
         long secondTime;
         
-        //for soft tyre compound
-        Scanner scanS = new Scanner(softInfo).useDelimiter("#");
-        scanS.useLocale(Locale.US);
-        double sLap1 = scanS.nextDouble();
-        double sLapAvg = scanS.nextDouble();
-        double sFormula;
-        int sMaxLaps = 15;
-        System.out.println("SOFTS: Lap1: "+ sLap1 +", lapAvg: "+ sLapAvg);
-        
-        //for medium tyre compound
-        Scanner scanM = new Scanner(mediumInfo).useDelimiter("#");
-        scanM.useLocale(Locale.US);
-        double mLap1 = scanM.nextDouble();
-        double mLapAvg = scanM.nextDouble();
-        double mFormula;
-        int medMaxLaps = 30;
-        System.out.println("Mediums: Lap1: "+ mLap1 +", lapAvg: "+ mLapAvg);
-        
-        //for hard tyre compound
-        Scanner scanH = new Scanner(hardInfo).useDelimiter("#");
-        scanH.useLocale(Locale.US);
-        double hLap1 = scanH.nextDouble();
-        double hLapAvg = scanH.nextDouble();
-        double hFormula;
-        int hMaxLaps = 40;
-        System.out.println("Hards: Lap1: "+ hLap1 +", lapAvg: "+ hLapAvg);
-        
-//calculate the strategy:
-        String startCompound, currentStrategy = "#";
+        //calculate the strategy:
+        String startCompound, currentStrategy = "#", secondTyre = "";
         int maxLaps = 0, secondMax = 0;
-        String secondTyre = "";
-        int raceDistance = 54;
-        int lap = 1;
+        int raceDistance = 54, lap = 1;
         double timeFormula;
         
         for (int compound = 0; compound < 3; compound ++)//for each tyre compound
@@ -85,55 +130,23 @@ public class Strategy_Trial1
             currentStrategy += startCompound + "#";
             
             //apply maximum laps on tyre
-            switch(compound)
-            {
-                case 0:
-                    maxLaps = sMaxLaps;
-                    break;
-                case 1:
-                    maxLaps = medMaxLaps;
-                    break;
-                case 2:
-                    maxLaps = hMaxLaps;
-            }
+            maxLaps = getMaxLaps(compound, sMaxLaps, mMaxLaps, hMaxLaps);
             
             //stint 1:
             for (lap = 1; lap <= maxLaps; lap++)
             {
                 
                 //set formulas for first stint:
-                switch(compound)
-                {
-                    case 0:
-                        timeFormula = sLap1 * ( Math.pow(sLapAvg, lap-1));
-                        break;
-                    case 1:
-                        timeFormula = mLap1 * ( Math.pow(mLapAvg, lap-1));
-                        break;
-                    case 2:
-                        timeFormula = hLap1 * ( Math.pow(hLapAvg, lap-1));
-                }
-                
+            	timeFormula = getFormulatedTime(compound, lap, sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg);
+
                 seconds += (long) timeFormula;
                 secondTime = 0;
-                //System.out.println("1st stint: seconds(main) value: "+ seconds);
-                //System.out.println(startCompound +", lap: "+ lap +", time: "+ calcTime(seconds));
                 //set second stint tyre-type
                 for (int secCompound = 0; secCompound < 3; secCompound++)
                 {
-                    
                     secondTyre = compounds[secCompound];
-                    switch(secCompound)
-                    {
-                        case 0:
-                            secondMax = sMaxLaps;
-                            break;
-                        case 1:
-                            secondMax = medMaxLaps;
-                            break;
-                        case 2:
-                            secondMax = hMaxLaps;
-                    }
+                    secondMax = getMaxLaps(secCompound, sMaxLaps, mMaxLaps, hMaxLaps);
+                    
                     //if the race can be finished on the selected tyre:
                     if (lap + secondMax >= raceDistance && secCompound != compound)
                     {
@@ -141,40 +154,28 @@ public class Strategy_Trial1
                         for (int lapStint2 = lap+1; lapStint2 <= lap+secondMax; lapStint2++)
                         {
                             //select tyre formula for corresponding second stint tyre compound
-                            switch(secCompound)
-                            {
-                                case 0:
-                                    timeFormula = sLap1 * ( Math.pow(sLapAvg, lapStint2-1));
-                                    break;
-                                case 1:
-                                    timeFormula = mLap1 * ( Math.pow(mLapAvg, lapStint2-1));
-                                    break;
-                                case 2:
-                                    timeFormula = hLap1 * ( Math.pow(hLapAvg, lapStint2-1));
-                            }
-                            
+                            timeFormula = getFormulatedTime(secCompound, lapStint2, sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg);
                             secondTime += (long) timeFormula;
-                            
-                            //System.out.println("2nd stint: TimeFormula value: "+ timeFormula +", secondTime value: "+ secondTime +", Seconds(main): "+ seconds);
+
                             //on last lap of race distance:
                             if (lapStint2 == raceDistance)
                             {
-                                //System.out.println("second stint: "+ secondTyre +", lap: "+ lapStint2 +", time:"+ calcTime(seconds));
                                 break;
                             }
-                        }
+                        
+                        }//second stint for loop end brace
+                        
                         seconds += secondTime;
-                        System.out.println("1: "+ startCompound +", 2: "+ secondTyre +", time:"+ calcTime(seconds));
-                    }
+                        System.out.println("1: "+ startCompound +", LAP: "+ lap +", 2: "+ secondTyre +", time:"+ calcTime(seconds));
+                    
+                    }//if the race can be finished on the selected tyre: end brace
                     
                     seconds -= secondTime;
                     secondTime = 0;
-                }
-                seconds -= secondTime;
-                secondTime = 0;
-            }
-        }
-        
-        return bestStrategy;
+                }//set second stint compound end brace
+
+            }//stint one end brace
+            
+        }//first stint tyre compound end brace
     }
 }

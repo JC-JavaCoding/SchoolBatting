@@ -18,6 +18,7 @@ public class HomeScreen extends javax.swing.JFrame
     public HomeScreen()
     {
         initComponents();
+        setLocation(590, 360);
     }
 
     /**
@@ -37,6 +38,7 @@ public class HomeScreen extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Strategy Home Screen");
 
+        data_Input_Type.setEditable(false);
         data_Input_Type.setText("Do you want to use live F1 data or your own data?");
         data_Input_Type.addActionListener(new java.awt.event.ActionListener()
         {
@@ -101,11 +103,17 @@ public class HomeScreen extends javax.swing.JFrame
     private void live_Data_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_live_Data_ButtonActionPerformed
     {//GEN-HEADEREND:event_live_Data_ButtonActionPerformed
         // TODO add your handling code here:
+        F1Login loginS = new F1Login();
+        loginS.setVisible(true);
+        dispose();
     }//GEN-LAST:event_live_Data_ButtonActionPerformed
 
     private void user_Data_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_user_Data_ButtonActionPerformed
     {//GEN-HEADEREND:event_user_Data_ButtonActionPerformed
         // TODO add your handling code here:
+        User_Tyre_InputScreen uIS = new User_Tyre_InputScreen();
+        uIS.setVisible(true);
+        dispose();
     }//GEN-LAST:event_user_Data_ButtonActionPerformed
 
     /**
