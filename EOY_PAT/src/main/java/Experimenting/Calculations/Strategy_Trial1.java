@@ -15,10 +15,34 @@ import java.util.concurrent.TimeUnit;
  */
 public class Strategy_Trial1
 {
-    public void main(String[] args)
+    public static void readArrange()
+    {
+        Scanner info = new Scanner("info.txt").useDelimiter("#");
+        String soft_Info = "", medium_Info = "", hard_Info = "";
+        String interem;
+        
+        for (int i = 0; info.hasNext(); i++)
+        {
+            interem = info.next();
+            if (i == 0 || i == 3 || i == 6)
+            {
+                soft_Info += info.next();
+            }
+            else if (i == 1 || i == 4 || i == 7)
+            {
+                medium_Info += info.next();
+            }
+            else
+            {
+                hard_Info += info.next();
+            }
+        }
+    }
+    
+    public static void main(String[] args)
     {
         //Read values from string
-        String soft_Info, medium_Info, hard_Info;// = "#108.9#1.002#45";
+        //String soft_Info, medium_Info, hard_Info;// = "#108.9#1.002#45";
         
         readInfo(soft_Info, medium_Info, hard_Info);
         //System.out.println(lap1 + ", "+ lapAvg +", tyre compound: "+ tyreCompound);
@@ -32,7 +56,7 @@ public class Strategy_Trial1
         return time;
     }
     
-    public void readInfo(String softInfo, String mediumInfo, String hardInfo) 
+    public static void readInfo(String softInfo, String mediumInfo, String hardInfo) 
     {
     	Scanner scanS = new Scanner(softInfo).useDelimiter("#");
         scanS.useLocale(Locale.US);
