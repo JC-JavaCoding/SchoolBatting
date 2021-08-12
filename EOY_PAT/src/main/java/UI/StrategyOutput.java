@@ -43,7 +43,6 @@ public class StrategyOutput extends javax.swing.JFrame
 
         strategyOutputTextArea.setColumns(20);
         strategyOutputTextArea.setRows(5);
-        strategyOutputTextArea.setEditable(false);
         jScrollPane1.setViewportView(strategyOutputTextArea);
 
         back_Button.setText("Back");

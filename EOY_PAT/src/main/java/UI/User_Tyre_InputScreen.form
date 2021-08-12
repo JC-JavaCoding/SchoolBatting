@@ -36,55 +36,66 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="back_Button" min="-2" pref="73" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="next_Button" min="-2" pref="73" max="-2" attributes="0"/>
+                  <Component id="raceDistance_Label" alignment="0" pref="397" max="32767" attributes="0"/>
+                  <Component id="pitTime_Label" alignment="0" max="32767" attributes="0"/>
+                  <Component id="raceDistance_Field" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pitTime_Field" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jTextField1" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="soft_Max_Laps_label" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="soft_First_Lap_Time_label" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="soft_Last_Lap_Time_label" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                      <Component id="soft_Tyres_Label" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="medium_Tyres_Label" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="hard_Tyres_Label" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="soft_MaxLapsField" alignment="0" pref="55" max="32767" attributes="0"/>
+                                          <Component id="soft_LastLapTimeField" max="32767" attributes="0"/>
+                                          <Component id="soft_FirstLapTimeField" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="medium_LastLapSecondsField" alignment="0" pref="55" max="32767" attributes="0"/>
+                                          <Component id="medium_FirstLapSecondsField" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="medium_MaxLapsField" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="hard_LastLapTimeField" min="-2" pref="55" max="-2" attributes="0"/>
+                                          <Component id="hard_FirstLapTimeField" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
+                                          <Component id="hard_MaxLapsField" min="-2" pref="55" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="soft_Max_Laps_label" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="soft_First_Lap_Time_label" alignment="0" max="32767" attributes="0"/>
-                              <Component id="soft_Last_Lap_Time_label" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="soft_MaxLapsField" alignment="0" pref="55" max="32767" attributes="0"/>
-                                  <Component id="soft_LastLapTimeField" max="32767" attributes="0"/>
-                                  <Component id="soft_FirstLapTimeField" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="medium_LastLapSecondsField" alignment="0" pref="55" max="32767" attributes="0"/>
-                                  <Component id="medium_FirstLapSecondsField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="medium_MaxLapsField" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" pref="30" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="hard_FirstLapTimeField" alignment="1" min="-2" pref="55" max="-2" attributes="0"/>
-                                  <Component id="hard_LastLapTimeField" alignment="1" min="-2" pref="55" max="-2" attributes="0"/>
-                                  <Component id="hard_MaxLapsField" alignment="1" min="-2" pref="55" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Component id="soft_Tyres_Label" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="medium_Tyres_Label" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="hard_Tyres_Label" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="back_Button" min="-2" pref="73" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="calculate_Button" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="output_Field" pref="546" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -93,42 +104,56 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTextField1" min="-2" pref="31" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="hard_Tyres_Label" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="soft_Tyres_Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="medium_Tyres_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="output_Field" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jTextField1" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="hard_Tyres_Label" alignment="0" min="-2" pref="15" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="soft_Tyres_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="medium_Tyres_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="soft_First_Lap_Time_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="soft_FirstLapTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="medium_FirstLapSecondsField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="hard_FirstLapTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="soft_Last_Lap_Time_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="soft_LastLapTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="medium_LastLapSecondsField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="hard_LastLapTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="soft_Max_Laps_label" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="soft_MaxLapsField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="medium_MaxLapsField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="hard_MaxLapsField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="raceDistance_Label" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="raceDistance_Field" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="pitTime_Label" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="pitTime_Field" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="calculate_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="back_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="208" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="soft_First_Lap_Time_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="soft_FirstLapTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="medium_FirstLapSecondsField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="hard_FirstLapTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="soft_Last_Lap_Time_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="soft_LastLapTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="medium_LastLapSecondsField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="hard_LastLapTimeField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="soft_Max_Laps_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="soft_MaxLapsField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="medium_MaxLapsField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="hard_MaxLapsField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="next_Button" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="back_Button" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -139,6 +164,9 @@
         <Property name="editable" type="boolean" value="false"/>
         <Property name="text" type="java.lang.String" value="Please type in the according information for the following fields:"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="soft_Tyres_Label">
       <Properties>
@@ -169,10 +197,13 @@
     </Component>
     <Component class="javax.swing.JTextField" name="soft_MaxLapsField">
     </Component>
-    <Component class="javax.swing.JButton" name="next_Button">
+    <Component class="javax.swing.JButton" name="calculate_Button">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Next"/>
+        <Property name="text" type="java.lang.String" value="Calculate"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calculate_ButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="back_Button">
       <Properties>
@@ -212,6 +243,35 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Hard Tyres:"/>
       </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="output_Field">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="raceDistance_Label">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="How many laps does the race consist of?"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="raceDistance_Field">
+    </Component>
+    <Component class="javax.swing.JLabel" name="pitTime_Label">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Average pit-lane time?"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="pitTime_Field">
     </Component>
   </SubComponents>
 </Form>

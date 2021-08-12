@@ -5,6 +5,7 @@
  */
 package Experimenting.Calculations;
 
+import UI.StrategyOutput;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -15,28 +16,33 @@ import java.util.concurrent.TimeUnit;
  */
 public class Strategy_Trial1
 {
+    private static String strats;
     public static void readArrange()
     {
         Scanner info = new Scanner("info.txt").useDelimiter("#");
-        String soft_Info = "", medium_Info = "", hard_Info = "";
+        String soft_Info = "", medium_Info = "", hard_Info = "", raceLaps = "", pitTime = "";
         String interem;
         
         for (int i = 0; info.hasNext(); i++)
         {
             interem = info.next();
-            if (i == 0 || i == 3 || i == 6)
+            switch (i)
             {
-                soft_Info += info.next();
-            }
-            else if (i == 1 || i == 4 || i == 7)
-            {
-                medium_Info += info.next();
-            }
-            else
-            {
-                hard_Info += info.next();
+                case 0:case 3:case 6:
+                    soft_Info += interem;
+                    break;
+                case 1:case 4:case 7:
+                    medium_Info += interem;
+                    break;
+                case 2:case 5:case 8:
+                    hard_Info += interem;
+                    break;
+                default:
+                    raceLaps = interem;
+                    pitTime = info.next();
             }
         }
+        readInfo(soft_Info, medium_Info, hard_Info);
     }
     
     public static void main(String[] args)
@@ -44,10 +50,10 @@ public class Strategy_Trial1
         //Read values from string
         //String soft_Info, medium_Info, hard_Info;// = "#108.9#1.002#45";
         
-        readInfo(soft_Info, medium_Info, hard_Info);
+//        readInfo(soft_Info, medium_Info, hard_Info);
         //System.out.println(lap1 + ", "+ lapAvg +", tyre compound: "+ tyreCompound);
     }
-    public String calcTime(long seconds)
+    public static String calcTime(long seconds)
     {
         long hours = TimeUnit.SECONDS.toHours(seconds);
         long minutes = TimeUnit.SECONDS.toMinutes(seconds) - TimeUnit.HOURS.toMinutes(hours);
@@ -87,7 +93,7 @@ public class Strategy_Trial1
         calcStrat(sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg, sMaxLaps, medMaxLaps, hMaxLaps);
     }
     
-    public int getMaxLaps(int compound, int sMaxLaps, int mMaxLaps, int hMaxLaps)
+    public static int getMaxLaps(int compound, int sMaxLaps, int mMaxLaps, int hMaxLaps)
     {
       int maxLaps = 0;
       switch(compound)
@@ -104,11 +110,11 @@ public class Strategy_Trial1
       return maxLaps;
     }
     
-    public double getFormulatedTime(
-    										int compound, int lap, 
-    										double sLap1, double mLap1, double hLap1,
-    	    								double sLapDeg, double mLapDeg, double hLapDeg
-    									)
+    public static double getFormulatedTime(
+        					int compound, int lap, 
+   						double sLap1, double mLap1, double hLap1,
+        					double sLapDeg, double mLapDeg, double hLapDeg
+                                            )
     {
     	double formulatedTime = 0;
     	switch(compound)
@@ -124,12 +130,21 @@ public class Strategy_Trial1
         }
     	return formulatedTime;
     }
-    
-    public void calcStrat(	
-    								double sLap1, double mLap1, double hLap1,
-    								double sLapDeg, double mLapDeg, double hLapDeg,
-    								int sMaxLaps, int mMaxLaps, int hMaxLaps
-    							) 	
+    public static String getStrats()
+    {
+//        StrategyOutput so = new StrategyOutput();
+//        so.setVisible(true);
+//        so.strategyOutputTextArea()
+//        so.traceBack = "Input";
+        strats = "";
+        //calcStrat();
+        return strats;
+    }
+    public static void calcStrat(	
+                                    double sLap1, double mLap1, double hLap1,
+                                    double sLapDeg, double mLapDeg, double hLapDeg,
+                                    int sMaxLaps, int mMaxLaps, int hMaxLaps
+                                ) 	
     {
         String [] compounds = {"soft", "medium", "hard"};
         String bestStrategy = "";

@@ -5,6 +5,12 @@
  */
 package UI;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author jjaac
@@ -31,36 +37,36 @@ public class User_Race_Pit_InputScreen extends javax.swing.JFrame
     private void initComponents()
     {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        next_Button = new javax.swing.JButton();
+        back_Button = new javax.swing.JButton();
+        raceDistance_Label = new javax.swing.JLabel();
+        raceDistance_Field = new javax.swing.JTextField();
+        pitTime_Label = new javax.swing.JLabel();
+        pitTime_Field = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Next");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
+        next_Button.setText("Next");
+        next_Button.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton1ActionPerformed(evt);
+                next_ButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Back");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
+        back_Button.setText("Back");
+        back_Button.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton2ActionPerformed(evt);
+                back_ButtonActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("How many laps does the race consist of?");
+        raceDistance_Label.setText("How many laps does the race consist of?");
 
-        jLabel2.setText("Average pit-lane time?");
+        pitTime_Label.setText("Average pit-lane time?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,16 +75,16 @@ public class User_Race_Pit_InputScreen extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(raceDistance_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(back_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(next_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                            .addComponent(jTextField2))
+                            .addComponent(raceDistance_Field)
+                            .addComponent(pitTime_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                            .addComponent(pitTime_Field))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -86,38 +92,53 @@ public class User_Race_Pit_InputScreen extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(raceDistance_Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(raceDistance_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(pitTime_Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pitTime_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(next_Button)
+                    .addComponent(back_Button))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
+    private void back_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_back_ButtonActionPerformed
+    {//GEN-HEADEREND:event_back_ButtonActionPerformed
         // TODO add your handling code here:
         new User_Tyre_InputScreen().setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_back_ButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        StrategyOutput so = new StrategyOutput();
-        so.setVisible(true);
-        so.traceBack = "Input";
+    private void next_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_next_ButtonActionPerformed
+    {//GEN-HEADEREND:event_next_ButtonActionPerformed
+        String raceDist = raceDistance_Field.getText(), pitTime = pitTime_Field.getText();
+        
+        try
+        {
+            // TODO add your handling code here:
+            //to add info to the "info.txt" file
+            FileWriter info = new FileWriter("info.txt", true);
+            info.append("#"+ raceDist +"#"+ pitTime);
+            info.close();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(User_Race_Pit_InputScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //to go to output screen:
+//        StrategyOutput so = new StrategyOutput();
+//        so.setVisible(true);
+//        so.traceBack = "Input";
+        
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_next_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,11 +186,11 @@ public class User_Race_Pit_InputScreen extends javax.swing.JFrame
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton back_Button;
+    private javax.swing.JButton next_Button;
+    private javax.swing.JTextField pitTime_Field;
+    private javax.swing.JLabel pitTime_Label;
+    private javax.swing.JTextField raceDistance_Field;
+    private javax.swing.JLabel raceDistance_Label;
     // End of variables declaration//GEN-END:variables
 }

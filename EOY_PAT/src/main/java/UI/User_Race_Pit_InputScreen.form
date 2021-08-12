@@ -26,17 +26,17 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" max="32767" attributes="0"/>
+                  <Component id="raceDistance_Label" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="jButton2" min="-2" pref="73" max="-2" attributes="0"/>
+                      <Component id="back_Button" min="-2" pref="73" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="73" max="-2" attributes="0"/>
+                      <Component id="next_Button" min="-2" pref="73" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTextField1" max="32767" attributes="0"/>
-                          <Component id="jLabel2" pref="208" max="32767" attributes="0"/>
-                          <Component id="jTextField2" max="32767" attributes="0"/>
+                          <Component id="raceDistance_Field" max="32767" attributes="0"/>
+                          <Component id="pitTime_Label" pref="208" max="32767" attributes="0"/>
+                          <Component id="pitTime_Field" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -49,17 +49,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="raceDistance_Label" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+              <Component id="raceDistance_Field" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <Component id="pitTime_Label" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
+              <Component id="pitTime_Field" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="22" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="next_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="back_Button" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -67,35 +67,35 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="next_Button">
       <Properties>
         <Property name="text" type="java.lang.String" value="Next"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="next_ButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="back_Button">
       <Properties>
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="back_ButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="raceDistance_Label">
       <Properties>
         <Property name="text" type="java.lang.String" value="How many laps does the race consist of?"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="raceDistance_Field">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="pitTime_Label">
       <Properties>
         <Property name="text" type="java.lang.String" value="Average pit-lane time?"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="pitTime_Field">
     </Component>
   </SubComponents>
 </Form>
