@@ -18,7 +18,7 @@ public class HomeScreen extends javax.swing.JFrame
     public HomeScreen()
     {
         initComponents();
-        setLocation(590, 360);
+        setLocation(0, 0);
     }
 
     /**
@@ -34,9 +34,11 @@ public class HomeScreen extends javax.swing.JFrame
         data_Input_Type = new javax.swing.JTextField();
         live_Data_Button = new javax.swing.JButton();
         user_Data_Button = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Strategy Home Screen");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         data_Input_Type.setEditable(false);
         data_Input_Type.setText("Do you want to use live F1 data or your own data?");
@@ -47,6 +49,7 @@ public class HomeScreen extends javax.swing.JFrame
                 data_Input_TypeActionPerformed(evt);
             }
         });
+        getContentPane().add(data_Input_Type, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 510, -1, 49));
 
         live_Data_Button.setText("F1Live Data");
         live_Data_Button.addActionListener(new java.awt.event.ActionListener()
@@ -56,6 +59,7 @@ public class HomeScreen extends javax.swing.JFrame
                 live_Data_ButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(live_Data_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, 190, 130));
 
         user_Data_Button.setText("Personal Data");
         user_Data_Button.addActionListener(new java.awt.event.ActionListener()
@@ -65,32 +69,13 @@ public class HomeScreen extends javax.swing.JFrame
                 user_Data_ButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(user_Data_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(846, 585, 210, 130));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(live_Data_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(user_Data_Button))
-                    .addComponent(data_Input_Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(data_Input_Type, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(live_Data_Button)
-                    .addComponent(user_Data_Button))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjaac\\Pictures\\Screenshots\\F1Lights1.png")); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(100, 80));
+        jLabel1.setMinimumSize(new java.awt.Dimension(1, 1));
+        jLabel1.setPreferredSize(new java.awt.Dimension(100, 80));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 890));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -163,6 +148,7 @@ public class HomeScreen extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField data_Input_Type;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton live_Data_Button;
     private javax.swing.JButton user_Data_Button;
     // End of variables declaration//GEN-END:variables

@@ -3,22 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Experimenting.Calculations;
+package Backend;
 
-import UI.StrategyOutput;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
  *
- * @author Jcj
+ * @author jjaac
  */
-public class Strategy_Trial1
+public class Strategy
 {
     private static String strats;
-    public static void readArrange()
+    public static String readArrange()
     {
+        String stats = "";
+        
         Scanner info = new Scanner("info.txt").useDelimiter("#");
         String soft_Info = "", medium_Info = "", hard_Info = "", raceLaps = "", pitTime = "";
         String interem;
@@ -42,7 +43,8 @@ public class Strategy_Trial1
                     pitTime = info.next();
             }
         }
-        readInfo(soft_Info, medium_Info, hard_Info);
+        stats = readInfo(soft_Info, medium_Info, hard_Info);
+        return stats;
     }
     
     public static void main(String[] args)
@@ -62,45 +64,39 @@ public class Strategy_Trial1
         return time;
     }
     
-    public static void readInfo(String softInfo, String mediumInfo, String hardInfo) 
+    public static String readInfo(String softInfo, String mediumInfo, String hardInfo) 
     {
-//    	//refactor for file read:
-//        Scanner info  = new Scanner("info.txt").useDelimiter("#");
-//        for (int cycle = 1; info.hasNext(); cycle ++)
-//        {
-//            switch (cycle)
-//            {
-//                case 1: case 4: case 7:
-//                    soft_Info = 
-//            }
-//        }
+        String stats = "";
+        
         Scanner scanS = new Scanner(softInfo).useDelimiter("#");
         scanS.useLocale(Locale.US);
         double sLap1 = scanS.nextDouble();
-        double sLapDeg = scanS.nextDouble();
+        double sLastLap = scanS.nextDouble();
+        double sLapDeg = sLastLap/sLap1;
         int sMaxLaps = scanS.nextInt();
-        double sFormula;
-        System.out.println("SOFTS: Lap1: "+ sLap1 +", lapAvg: "+ sLapDeg);
+        //System.out.println("SOFTS: Lap1: "+ sLap1 +", lapAvg: "+ sLapDeg);
         
         //for medium tyre compound
         Scanner scanM = new Scanner(mediumInfo).useDelimiter("#");
         scanM.useLocale(Locale.US);
         double mLap1 = scanM.nextDouble();
-        double mLapDeg = scanM.nextDouble();
+        double mLastLap = scanM.nextDouble();
+        double mLapDeg = mLastLap/mLap1;
         int medMaxLaps = scanM.nextInt();
-        double mFormula;
-        System.out.println("Mediums: Lap1: "+ mLap1 +", lapAvg: "+ mLapDeg);
+        //System.out.println("Mediums: Lap1: "+ mLap1 +", lapAvg: "+ mLapDeg);
         
         //for hard tyre compound
         Scanner scanH = new Scanner(hardInfo).useDelimiter("#");
         scanH.useLocale(Locale.US);
         double hLap1 = scanH.nextDouble();
-        double hLapDeg = scanH.nextDouble();
+        double hLastLap = scanH.nextDouble();
+        double hLapDeg = hLastLap/hLap1;
         int hMaxLaps = scanH.nextInt();
-        double hFormula;
-        System.out.println("Hards: Lap1: "+ hLap1 +", lapAvg: "+ hLapDeg);
+        //System.out.println("Hards: Lap1: "+ hLap1 +", lapAvg: "+ hLapDeg);
         int raceLaps = 55;
-        calcStrat(sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg, sMaxLaps, medMaxLaps, hMaxLaps, raceLaps);
+        
+        stats = calcStrat(sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg, sMaxLaps, medMaxLaps, hMaxLaps, raceLaps);
+        return stats;
     }
     
     public static int getMaxLaps(int compound, int sMaxLaps, int mMaxLaps, int hMaxLaps)
@@ -140,22 +136,9 @@ public class Strategy_Trial1
         }
     	return formulatedTime;
     }
-    public static String getStrats(double sLap1, double mLap1, double hLap1,
-                                    double sLastLap, double mLastLap, double hLastLap,
-                                    int sMaxLaps, int mMaxLaps, int hMaxLaps,
-                                    int raceDist)
+    public static String getStrats()
     {
-//        StrategyOutput so = new StrategyOutput();
-//        so.setVisible(true);
-//        so.strategyOutputTextArea()
-//        so.traceBack = "Input";
-        double sLapDeg = sLastLap/sLap1;
-        double mLapDeg = mLastLap/mLap1;
-        double hLapDeg = hLastLap/hLap1;
-        
-        strats = calcStrat(sLap1, mLap1, hLap1,
-                           sLapDeg, mLapDeg, hLapDeg,
-                           sMaxLaps, mMaxLaps, hMaxLaps, raceDist);
+        strats = readArrange();
         return strats;
     }
     public static String calcStrat(	
