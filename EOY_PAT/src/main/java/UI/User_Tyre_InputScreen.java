@@ -23,7 +23,7 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
      */
     public User_Tyre_InputScreen()
     {
-        initComponents();
+        initComponents();//"C:\\Users\\jjaac\\Pictures\\Screenshots\\F1Lights2 (2).PNG");
         setLocation(0, 0);
     }
 
@@ -63,11 +63,10 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         raceDistance_Field = new javax.swing.JTextField();
         pitTime_Label = new javax.swing.JLabel();
         pitTime_Field = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
+        backgroundImage_Label = new javax.swing.JLabel();
 
         jTextField2.setText("jTextField2");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjaac\\Pictures\\Screenshots\\F1Lights2 (2).PNG")); // NOI18N
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -75,6 +74,8 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextField1.setEditable(false);
+        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField1.setForeground(new java.awt.Color(33, 33, 33));
         jTextField1.setText("Please type in the according information for the following fields:");
         jTextField1.addActionListener(new java.awt.event.ActionListener()
         {
@@ -186,10 +187,8 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         getContentPane().add(pitTime_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 720, 733, -1));
         getContentPane().add(pitTime_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 740, 690, -1));
 
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\jjaac\\Pictures\\Screenshots\\F1Lights2 (2).PNG")); // NOI18N
-        jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, -120, 1360, 1070));
+        backgroundImage_Label.setIcon(new javax.swing.ImageIcon("C:\\Images\\F1Lights2 (2).PNG")); // NOI18N
+        getContentPane().add(backgroundImage_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 870));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -261,13 +260,13 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back_Button;
+    private javax.swing.JLabel backgroundImage_Label;
     private javax.swing.JButton calculate_Button;
     private javax.swing.JTextField hard_FirstLapTimeField;
     private javax.swing.JTextField hard_LastLapTimeField;
     private javax.swing.JTextField hard_MaxLapsField;
     private javax.swing.JLabel hard_Tyres_Label;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField medium_FirstLapSecondsField;

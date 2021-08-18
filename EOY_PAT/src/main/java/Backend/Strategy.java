@@ -88,8 +88,8 @@ public class Strategy
         //for hard tyre compound
         Scanner scanH = new Scanner(hardInfo).useDelimiter("#");
         scanH.useLocale(Locale.US);
-        double hLap1 = scanH.nextDouble();
-        double hLastLap = scanH.nextDouble();
+        double hLap1 = Double.parseDouble(scanH.next());
+        double hLastLap = Double.parseDouble(scanH.next());
         double hLapDeg = hLastLap/hLap1;
         int hMaxLaps = scanH.nextInt();
         //System.out.println("Hards: Lap1: "+ hLap1 +", lapAvg: "+ hLapDeg);
