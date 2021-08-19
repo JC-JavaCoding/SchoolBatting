@@ -47,14 +47,14 @@ public class Strategy
         return stats;
     }
     
-    public static void main(String[] args)
-    {
-        //Read values from string
-        //String soft_Info, medium_Info, hard_Info;// = "#108.9#1.002#45";
-        
-//        readInfo(soft_Info, medium_Info, hard_Info);
-        //System.out.println(lap1 + ", "+ lapAvg +", tyre compound: "+ tyreCompound);
-    }
+//    /*public static void main(String[] args)
+//    {
+//        //Read values from string
+//        //String soft_Info, medium_Info, hard_Info;// = "#108.9#1.002#45";
+//
+////        readInfo(soft_Info, medium_Info, hard_Info);
+//        //System.out.println(lap1 + ", "+ lapAvg +", tyre compound: "+ tyreCompound);
+//    }*/
     public static String calcTime(long seconds)
     {
         long hours = TimeUnit.SECONDS.toHours(seconds);
@@ -214,7 +214,7 @@ public class Strategy
                         }
                         if (seconds < bestStrat)
                         {
-                            System.out.println("1: "+ startCompound +", LAP: "+ lap +", 2: "+ secondTyre +", time:"+ calcTime(seconds));
+                            //System.out.println("1: "+ startCompound +", LAP: "+ lap +", 2: "+ secondTyre +", time:"+ calcTime(seconds));
                             strategy += "1: "+ startCompound +", LAP: "+ lap +", "+ secondTyre +", time:"+ calcTime(seconds) +"\n";
                         }
                     }//if the race can be finished on the selected tyre: end brace
