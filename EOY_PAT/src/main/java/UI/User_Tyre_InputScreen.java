@@ -228,24 +228,30 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
             // TODO add your handling code here:
             info = new PrintWriter("info.txt");
             //format: slap1#mlap1#hlap1#lastLap#maxLaps
-            info.print(soft_FirstLapTimeField.getText() +"#"+ medium_FirstLapSecondsField.getText() +"#"+ hard_FirstLapTimeField.getText() +"#"+ soft_LastLapTimeField.getText() +"#"+ medium_LastLapSecondsField.getText() +"#"+ hard_LastLapTimeField.getText() +"#"+ soft_MaxLapsField.getText() +"#"+ medium_MaxLapsField.getText() +"#"+ hard_MaxLapsField.getText() +"#"+ raceDistance_Field.getText());
+            double sLap1 = Double.parseDouble(soft_FirstLapTimeField.getText() );
+            double mLap1 = Double.parseDouble(medium_FirstLapSecondsField.getText() );
+            double hLap1 = Double.parseDouble(hard_FirstLapTimeField.getText() );
+            double sLastLap = Double.parseDouble(soft_LastLapTimeField.getText() );
+            double mLastLap = Double.parseDouble(medium_LastLapSecondsField.getText());
+            double hLastLap = Double.parseDouble(hard_LastLapTimeField.getText());
+            int sMaxLaps = Integer.parseInt(soft_MaxLapsField.getText() );
+            int mMaxLaps = Integer.parseInt(medium_MaxLapsField.getText());
+            int hMaxLaps = Integer.parseInt(hard_MaxLapsField.getText());
+            int raceDist = Integer.parseInt(raceDistance_Field.getText());
+            info.print(sLap1 +"#"+ mLap1 +"#"+ hLap1 +"#"+ sLastLap +"#"+ mLastLap +"#"+ hLastLap +"#"+ sMaxLaps +"#"+ mMaxLaps +"#"+ hMaxLaps +"#"+ raceDist);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(User_Tyre_InputScreen.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             info.close();
         }
-//        double sLap1 = Double.parseDouble(soft_FirstLapTimeField.getText() );
-//        double mLap1 = Double.parseDouble(medium_FirstLapSecondsField.getText() );
-//        double hLap1 = Double.parseDouble(hard_FirstLapTimeField.getText() );
-//        double sLastLap = Double.parseDouble(soft_LastLapTimeField.getText() );
-//        double mLastLap = Double.parseDouble(medium_LastLapSecondsField.getText());
-//        double hLastLap = Double.parseDouble(hard_LastLapTimeField.getText());
-//        int sMaxLaps = Integer.parseInt(soft_MaxLapsField.getText() );
-//        int mMaxLaps = Integer.parseInt(medium_MaxLapsField.getText());
-//        int hMaxLaps = Integer.parseInt(hard_MaxLapsField.getText());
-//        int raceDist = Integer.parseInt(raceDistance_Field.getText());
-        
-        output_TextArea.setText(Strategy.getStrats());
+
+        try
+        {
+            output_TextArea.setText(Strategy.getStrats());
+        }catch(FileNotFoundException e)
+        {
+            
+        }
     }//GEN-LAST:event_calculate_ButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField1ActionPerformed
