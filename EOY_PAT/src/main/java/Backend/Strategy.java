@@ -53,7 +53,7 @@ public class Strategy
             strats = calcStrat(sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg, sMaxLaps, medMaxLaps, hMaxLaps, raceLaps);
             return strats;
         }
-        catch(FileNotFoundException e){
+        catch(FileNotFoundException e)
         {
             strats = "FileNotFoundException";
             return strats;
@@ -107,7 +107,7 @@ public class Strategy
                                     double sLapDeg, double mLapDeg, double hLapDeg,
                                     int sMaxLaps, int mMaxLaps, int hMaxLaps,
                                     int raceDist
-                                ) 	
+                                ) 	//transform to write to text file
     {
         String [] compounds = {"soft", "medium", "hard"};
         String strategy = "";
@@ -173,11 +173,11 @@ public class Strategy
                         {
                             bestStrat = seconds;
                         }
-                        if (seconds < bestStrat)
-                        {
-                            //System.out.println("1: "+ startCompound +", LAP: "+ lap +", 2: "+ secondTyre +", time:"+ calcTime(seconds));
-                            strategy += "1: "+ startCompound +", LAP: "+ lap +", "+ secondTyre +", time:"+ calcTime(seconds) +"\n";
-                        }
+//                        if (seconds < bestStrat)
+//                        {
+//                            System.out.println("1: "+ startCompound +", LAP: "+ lap +", 2: "+ secondTyre +", time:"+ calcTime(seconds));
+                            strategy += "1: "+ startCompound +", LAP: "+ lap +", "+ secondTyre +", time:"+ calcTime(seconds) + "\n";
+//                        }
                     }//if the race can be finished on the selected tyre: end brace
                     seconds -= secondTime;
                     secondTime = 0;

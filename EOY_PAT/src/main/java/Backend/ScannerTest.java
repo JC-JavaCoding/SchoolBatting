@@ -7,6 +7,7 @@ package Backend;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.Locale;
 
@@ -19,30 +20,29 @@ public class ScannerTest
     public static void main(String[] args)
     {
         
+    }
+    public static String testStratRead()
+    {
+        String str = "hgdxkjhgfckjhgfc";
         try
         {
             File info = new File("info.txt");
             Scanner sc = new Scanner(info).useDelimiter("#");
             sc.useLocale(Locale.US);
+            
+            //
             while(sc.hasNextDouble())
             {
-                System.out.println(""+ sc.nextDouble());
-                System.out.println("Hello");
+                //System.out.println(""+ sc.nextDouble());
+                str = "Hello";
+                sc.next();
             }
             sc.close();
         }
         catch (FileNotFoundException e)
         {
-                System.out.println("oh no...");
+            str = "oh no...";
         }
-//        Scanner sc = new Scanner("100.1#100.5").useDelimiter("#");
-//        sc.useLocale(Locale.US);
-//            
-//            while(sc.hasNextDouble())
-//            {
-//                System.out.println(""+ sc.nextDouble());
-//                System.out.println("Hello");
-//            }
-//            sc.close();
+        return str;
     }
 }
