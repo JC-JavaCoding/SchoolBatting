@@ -26,7 +26,8 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         initComponents();//"C:\\Users\\jjaac\\Pictures\\Screenshots\\F1Lights2 (2).PNG");
         setLocation(0, 0);
     }
-
+    
+    private double sLap1;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -171,6 +172,7 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         hard_Tyres_Label.setText("Hard Tyres:");
         getContentPane().add(hard_Tyres_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 550, -1, -1));
 
+        output_TextArea.setEditable(false);
         output_TextArea.setColumns(20);
         output_TextArea.setRows(5);
         output_Field.setViewportView(output_TextArea);
@@ -244,13 +246,14 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         } finally {
             info.close();
         }
-
         try
         {
-            output_TextArea.setText(Strategy.getStrats());
-        }catch(FileNotFoundException e)
+            String output = Strategy.getStrats();
+            output_TextArea.setText(output);
+        }
+        catch (FileNotFoundException exc)
         {
-            
+            output_TextArea.setText("Oh-oh, we've run into a problem :(");
         }
     }//GEN-LAST:event_calculate_ButtonActionPerformed
 

@@ -34,7 +34,7 @@ public class HomeScreen extends javax.swing.JFrame
         data_Input_Type = new javax.swing.JTextField();
         live_Data_Button = new javax.swing.JButton();
         user_Data_Button = new javax.swing.JButton();
-        BackgroundImage_Label = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Strategy Home Screen");
@@ -71,8 +71,8 @@ public class HomeScreen extends javax.swing.JFrame
         });
         getContentPane().add(user_Data_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(846, 585, 210, 130));
 
-        BackgroundImage_Label.setIcon(new javax.swing.ImageIcon("C:\\Images\\F1Lights1.png")); // NOI18N
-        getContentPane().add(BackgroundImage_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Images\\F1Lights1.png")); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -144,8 +144,8 @@ public class HomeScreen extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel BackgroundImage_Label;
     private javax.swing.JTextField data_Input_Type;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton live_Data_Button;
     private javax.swing.JButton user_Data_Button;
     // End of variables declaration//GEN-END:variables

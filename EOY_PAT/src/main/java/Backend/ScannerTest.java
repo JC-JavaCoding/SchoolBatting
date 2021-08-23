@@ -8,6 +8,7 @@ package Backend;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.Locale;
 
 /**
  *
@@ -17,18 +18,31 @@ public class ScannerTest
 {
     public static void main(String[] args)
     {
-        try{
-        Scanner sc = new Scanner(new File("info.txt")).useDelimiter("#");
-        while(sc.hasNextDouble()){
-            System.out.println(sc.nextDouble());
+        
+        try
+        {
+            File info = new File("info.txt");
+            Scanner sc = new Scanner(info).useDelimiter("#");
+            sc.useLocale(Locale.US);
+            while(sc.hasNextDouble())
+            {
+                System.out.println(""+ sc.nextDouble());
+                System.out.println("Hello");
+            }
+            sc.close();
         }
-        while(sc.hasNextInt()){
-            System.out.println(sc.nextInt());
+        catch (FileNotFoundException e)
+        {
+                System.out.println("oh no...");
         }
-        sc.close();
-        }
-        catch (FileNotFoundException e){
-            System.out.println("oh no...");
-        }
+//        Scanner sc = new Scanner("100.1#100.5").useDelimiter("#");
+//        sc.useLocale(Locale.US);
+//            
+//            while(sc.hasNextDouble())
+//            {
+//                System.out.println(""+ sc.nextDouble());
+//                System.out.println("Hello");
+//            }
+//            sc.close();
     }
 }

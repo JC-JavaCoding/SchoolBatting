@@ -18,45 +18,6 @@ import java.util.concurrent.TimeUnit;
 public class Strategy
 {
     private static String strats;
-//    public static String readArrange()
-//    {
-//        //String strats = "";
-//
-//        Scanner info = new Scanner("info.txt").useDelimiter("#");
-//        String soft_Info = "", medium_Info = "", hard_Info = "", raceLaps = "", pitTime = "";
-//        String interem;
-//        
-//        for (int i = 0; info.hasNext(); i++)
-//        {
-//            interem = info.next();
-//            switch (i)
-//            {
-//                case 0:case 3:case 6:
-//                    soft_Info += interem;
-//                    break;
-//                case 1:case 4:case 7:
-//                    medium_Info += interem;
-//                    break;
-//                case 2:case 5:case 8:
-//                    hard_Info += interem;
-//                    break;
-//                default:
-//                    raceLaps = interem;
-//                    pitTime = info.next();
-//            }
-//        }
-//        readInfo(soft_Info, medium_Info, hard_Info);
-//        return strats;
-//    }
-    
-//    /*public static void main(String[] args)
-//    {
-//        //Read values from string
-//        //String soft_Info, medium_Info, hard_Info;// = "#108.9#1.002#45";
-//
-////        readInfo(soft_Info, medium_Info, hard_Info);
-//        //System.out.println(lap1 + ", "+ lapAvg +", tyre compound: "+ tyreCompound);
-//    }*/
     public static String calcTime(long seconds)
     {
         long hours = TimeUnit.SECONDS.toHours(seconds);
@@ -65,65 +26,39 @@ public class Strategy
         String time = hours +":"+ minutes +":"+ seconds;
         return time;
     }
-    public static String interperetInfo() throws FileNotFoundException
+    public static String interperetInfo()
     {
-        Scanner info = new Scanner(new File("info.txt")).useDelimiter("#");
-        
-        double sLap1 = info.nextDouble();
-        double mLap1 = info.nextDouble();
-        double hLap1 = info.nextDouble();
-        
-        double sLastLap = info.nextDouble();
-        double mLastLap = info.nextDouble();
-        double hLastLap = info.nextDouble();
-        
-        double sLapDeg = sLastLap/sLap1;
-        double mLapDeg = mLastLap/mLap1;
-        double hLapDeg = hLastLap/hLap1;
-        
-        int sMaxLaps = info.nextInt();
-        int medMaxLaps = info.nextInt();
-        int hMaxLaps = info.nextInt();
-        
-        int raceLaps = info.nextInt();
-        
-        strats = calcStrat(sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg, sMaxLaps, medMaxLaps, hMaxLaps, raceLaps);
-        return strats;
+        try
+        {
+            Scanner info = new Scanner(new File("info.txt")).useDelimiter("#");
+            info.useLocale(Locale.US);
+            double sLap1 = info.nextDouble();
+            double mLap1 = info.nextDouble();
+            double hLap1 = info.nextDouble();
+
+            double sLastLap = info.nextDouble();
+            double mLastLap = info.nextDouble();
+            double hLastLap = info.nextDouble();
+
+            double sLapDeg = sLastLap/sLap1;
+            double mLapDeg = mLastLap/mLap1;
+            double hLapDeg = hLastLap/hLap1;
+
+            int sMaxLaps = info.nextInt();
+            int medMaxLaps = info.nextInt();
+            int hMaxLaps = info.nextInt();
+
+            int raceLaps = info.nextInt();
+            info.close();
+            strats = calcStrat(sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg, sMaxLaps, medMaxLaps, hMaxLaps, raceLaps);
+            return strats;
+        }
+        catch(FileNotFoundException e){
+        {
+            strats = "FileNotFoundException";
+            return strats;
+        }
     }
-//    public static String readInfo(String softInfo, String mediumInfo, String hardInfo) 
-//    {
-//        //String strats = "";
-//        
-//        Scanner scanS = new Scanner(softInfo).useDelimiter("#");
-//        scanS.useLocale(Locale.US);
-//        double sLap1 = scanS.nextDouble();
-//        double sLastLap = scanS.nextDouble();
-//        double sLapDeg = sLastLap/sLap1;
-//        int sMaxLaps = scanS.nextInt();
-//        //System.out.println("SOFTS: Lap1: "+ sLap1 +", lapAvg: "+ sLapDeg);
-//        
-//        //for medium tyre compound
-//        Scanner scanM = new Scanner(mediumInfo).useDelimiter("#");
-//        scanM.useLocale(Locale.US);
-//        double mLap1 = scanM.nextDouble();
-//        double mLastLap = scanM.nextDouble();
-//        double mLapDeg = mLastLap/mLap1;
-//        int medMaxLaps = scanM.nextInt();
-//        //System.out.println("Mediums: Lap1: "+ mLap1 +", lapAvg: "+ mLapDeg);
-//        
-//        //for hard tyre compound
-//        Scanner scanH = new Scanner(hardInfo).useDelimiter("#");
-//        scanH.useLocale(Locale.US);
-//        double hLap1 = Double.parseDouble(scanH.next());
-//        double hLastLap = Double.parseDouble(scanH.next());
-//        double hLapDeg = hLastLap/hLap1;
-//        int hMaxLaps = scanH.nextInt();
-//        //System.out.println("Hards: Lap1: "+ hLap1 +", lapAvg: "+ hLapDeg);
-////        int raceLaps = 55;
-//        
-//        strats = calcStrat(sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg, sMaxLaps, medMaxLaps, hMaxLaps, raceLaps);
-//        return strats;
-//    }
     
     public static int getMaxLaps(int compound, int sMaxLaps, int mMaxLaps, int hMaxLaps)
     {
