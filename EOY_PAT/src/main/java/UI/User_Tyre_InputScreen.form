@@ -54,7 +54,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="30" y="500" width="401" height="31"/>
+          <AbsoluteConstraints x="30" y="500" width="410" height="31"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -143,7 +143,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="640" y="770" width="-1" height="-1"/>
+          <AbsoluteConstraints x="360" y="770" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -190,14 +190,14 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="380" y="570" width="55" height="-1"/>
+          <AbsoluteConstraints x="380" y="570" width="60" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JTextField" name="hard_LastLapTimeField">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="380" y="600" width="55" height="-1"/>
+          <AbsoluteConstraints x="380" y="600" width="60" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -207,7 +207,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="380" y="630" width="55" height="-1"/>
+          <AbsoluteConstraints x="380" y="630" width="60" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -220,7 +220,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="280" y="550" width="-1" height="-1"/>
+          <AbsoluteConstraints x="290" y="550" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -233,7 +233,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="370" y="550" width="-1" height="-1"/>
+          <AbsoluteConstraints x="380" y="550" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -274,7 +274,7 @@
     <Component class="javax.swing.JTextField" name="raceDistance_Field">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="30" y="680" width="690" height="-1"/>
+          <AbsoluteConstraints x="30" y="680" width="410" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -294,7 +294,7 @@
     <Component class="javax.swing.JTextField" name="pitTime_Field">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="30" y="740" width="690" height="-1"/>
+          <AbsoluteConstraints x="30" y="740" width="410" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

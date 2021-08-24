@@ -85,7 +85,7 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
                 jTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 401, 31));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 410, 31));
 
         soft_Tyres_Label.setForeground(new java.awt.Color(33, 33, 33));
         soft_Tyres_Label.setText("Soft Tyres:");
@@ -122,7 +122,7 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
                 calculate_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(calculate_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 770, -1, -1));
+        getContentPane().add(calculate_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 770, -1, -1));
 
         back_Button.setText("Back");
         back_Button.addActionListener(new java.awt.event.ActionListener()
@@ -152,8 +152,8 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
                 hard_FirstLapTimeFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(hard_FirstLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 570, 55, -1));
-        getContentPane().add(hard_LastLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 600, 55, -1));
+        getContentPane().add(hard_FirstLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 570, 60, -1));
+        getContentPane().add(hard_LastLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 600, 60, -1));
 
         hard_MaxLapsField.addActionListener(new java.awt.event.ActionListener()
         {
@@ -162,15 +162,15 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
                 hard_MaxLapsFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(hard_MaxLapsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 630, 55, -1));
+        getContentPane().add(hard_MaxLapsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 630, 60, -1));
 
         medium_Tyres_Label.setForeground(new java.awt.Color(33, 33, 33));
         medium_Tyres_Label.setText("Medium Tyres:");
-        getContentPane().add(medium_Tyres_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 550, -1, -1));
+        getContentPane().add(medium_Tyres_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 550, -1, -1));
 
         hard_Tyres_Label.setForeground(new java.awt.Color(33, 33, 33));
         hard_Tyres_Label.setText("Hard Tyres:");
-        getContentPane().add(hard_Tyres_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 550, -1, -1));
+        getContentPane().add(hard_Tyres_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 550, -1, -1));
 
         output_TextArea.setEditable(false);
         output_TextArea.setColumns(20);
@@ -182,12 +182,12 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         raceDistance_Label.setForeground(new java.awt.Color(33, 33, 33));
         raceDistance_Label.setText("How many laps does the race consist of?");
         getContentPane().add(raceDistance_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, 733, -1));
-        getContentPane().add(raceDistance_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 680, 690, -1));
+        getContentPane().add(raceDistance_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 680, 410, -1));
 
         pitTime_Label.setForeground(new java.awt.Color(33, 33, 33));
         pitTime_Label.setText("Average pit-lane time?");
         getContentPane().add(pitTime_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 720, 733, -1));
-        getContentPane().add(pitTime_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 740, 690, -1));
+        getContentPane().add(pitTime_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 740, 410, -1));
 
         backgroundImage_Label.setIcon(new javax.swing.ImageIcon("C:\\Images\\F1Lights2 (2).PNG")); // NOI18N
         getContentPane().add(backgroundImage_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 870));
@@ -248,8 +248,13 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         }
         try
         {
+            PrintWriter outputFile = new PrintWriter("/data/output.txt");
             String output = Strategy.getStrats();
-            output_TextArea.setText(output);
+            outputFile.print(output);
+            
+            StrategyOutput so = new StrategyOutput();
+            so.setVisible(true);
+            dispose();
         }
         catch (FileNotFoundException exc)
         {

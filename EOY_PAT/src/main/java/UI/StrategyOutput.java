@@ -18,7 +18,7 @@ public class StrategyOutput extends javax.swing.JFrame
     public StrategyOutput()
     {
         initComponents();
-        setLocation(590, 360);
+        setLocation(null);
 
     }
     
@@ -34,16 +34,18 @@ public class StrategyOutput extends javax.swing.JFrame
     private void initComponents()
     {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        strategyOutputTextArea = new javax.swing.JTextArea();
         back_Button = new javax.swing.JButton();
         save_Button = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        outputList = new javax.swing.JList<>();
+        backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        strategyOutputTextArea.setColumns(20);
-        strategyOutputTextArea.setRows(5);
-        jScrollPane1.setViewportView(strategyOutputTextArea);
+        setMaximumSize(new java.awt.Dimension(1290, 1080));
+        setMinimumSize(new java.awt.Dimension(16, 9));
+        setPreferredSize(new java.awt.Dimension(1290, 1080));
+        setSize(new java.awt.Dimension(1920, 1080));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         back_Button.setText("Back");
         back_Button.addActionListener(new java.awt.event.ActionListener()
@@ -53,34 +55,21 @@ public class StrategyOutput extends javax.swing.JFrame
                 back_ButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 880, 73, -1));
 
         save_Button.setText("Save");
+        getContentPane().add(save_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 890, 73, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(back_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(save_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(back_Button)
-                    .addComponent(save_Button))
-                .addGap(13, 13, 13))
-        );
+        outputList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(outputList);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 540, 550, 370));
+
+        backgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jcj\\Documents\\NetBeansProjects\\PAT\\EOY_PAT\\src\\main\\resources\\images\\F1Lights3.png")); // NOI18N
+        backgroundLabel.setMaximumSize(new java.awt.Dimension(1290, 1080));
+        backgroundLabel.setMinimumSize(null);
+        backgroundLabel.setPreferredSize(new java.awt.Dimension(1290, 1080));
+        getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1240, 930));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -148,8 +137,9 @@ public class StrategyOutput extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back_Button;
+    private javax.swing.JLabel backgroundLabel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> outputList;
     private javax.swing.JButton save_Button;
-    private javax.swing.JTextArea strategyOutputTextArea;
     // End of variables declaration//GEN-END:variables
 }
