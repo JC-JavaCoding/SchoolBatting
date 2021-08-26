@@ -36,6 +36,8 @@ public class StrategyOutput extends javax.swing.JFrame
 
         back_Button = new javax.swing.JButton();
         save_Button = new javax.swing.JButton();
+        saveStratName_Label = new javax.swing.JLabel();
+        stratName_Field = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         outputList = new javax.swing.JList<>();
         backgroundLabel = new javax.swing.JLabel();
@@ -55,20 +57,23 @@ public class StrategyOutput extends javax.swing.JFrame
                 back_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 880, 73, -1));
+        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 840, 100, 60));
 
         save_Button.setText("Save");
-        getContentPane().add(save_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 890, 73, -1));
+        getContentPane().add(save_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(1133, 855, 90, 60));
+
+        saveStratName_Label.setForeground(new java.awt.Color(33, 33, 33));
+        saveStratName_Label.setText("What would you like to save your Strategy as?");
+        getContentPane().add(saveStratName_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 270, -1));
+        getContentPane().add(stratName_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, 240, -1));
 
         outputList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(outputList);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 540, 550, 370));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 520, 550, 370));
 
         backgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jcj\\Documents\\NetBeansProjects\\PAT\\EOY_PAT\\src\\main\\resources\\images\\F1Lights3.png")); // NOI18N
-        backgroundLabel.setMaximumSize(new java.awt.Dimension(1290, 1080));
         backgroundLabel.setMinimumSize(null);
-        backgroundLabel.setPreferredSize(new java.awt.Dimension(1290, 1080));
         getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1240, 930));
 
         pack();
@@ -140,6 +145,8 @@ public class StrategyOutput extends javax.swing.JFrame
     private javax.swing.JLabel backgroundLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> outputList;
+    private javax.swing.JLabel saveStratName_Label;
     private javax.swing.JButton save_Button;
+    private javax.swing.JTextField stratName_Field;
     // End of variables declaration//GEN-END:variables
 }

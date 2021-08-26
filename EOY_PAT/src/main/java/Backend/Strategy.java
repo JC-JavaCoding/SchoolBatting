@@ -7,6 +7,7 @@ package Backend;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -100,6 +101,11 @@ public class Strategy
     public static String getStrats() throws FileNotFoundException
     {
         strats = interperetInfo();
+        
+        PrintWriter outputFile = new PrintWriter("/data/output.txt");
+        String output = Strategy.getStrats();
+        outputFile.print(output);
+        
         return strats;
     }
     public static String calcStrat(	

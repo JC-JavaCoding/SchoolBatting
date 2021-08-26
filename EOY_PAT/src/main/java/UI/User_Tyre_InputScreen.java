@@ -246,20 +246,11 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         } finally {
             info.close();
         }
-        try
-        {
-            PrintWriter outputFile = new PrintWriter("/data/output.txt");
-            String output = Strategy.getStrats();
-            outputFile.print(output);
-            
-            StrategyOutput so = new StrategyOutput();
-            so.setVisible(true);
-            dispose();
-        }
-        catch (FileNotFoundException exc)
-        {
-            output_TextArea.setText("Oh-oh, we've run into a problem :(");
-        }
+        
+        StrategyOutput so = new StrategyOutput();
+        so.setVisible(true);
+        dispose();
+
     }//GEN-LAST:event_calculate_ButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField1ActionPerformed
