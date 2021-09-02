@@ -85,23 +85,23 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
                 jTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 410, 31));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 500, 410, 31));
 
         soft_Tyres_Label.setForeground(new java.awt.Color(33, 33, 33));
         soft_Tyres_Label.setText("Soft Tyres:");
-        getContentPane().add(soft_Tyres_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 550, -1, -1));
+        getContentPane().add(soft_Tyres_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 550, 60, -1));
 
         soft_First_Lap_Time_label.setForeground(new java.awt.Color(33, 33, 33));
         soft_First_Lap_Time_label.setText("First Lap-Time of stint (seconds): ");
-        getContentPane().add(soft_First_Lap_Time_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, -1, -1));
+        getContentPane().add(soft_First_Lap_Time_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 570, 170, -1));
 
         soft_Last_Lap_Time_label.setForeground(new java.awt.Color(33, 33, 33));
         soft_Last_Lap_Time_label.setText("Last Lap-Time of stint (seconds):");
-        getContentPane().add(soft_Last_Lap_Time_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, 170, -1));
+        getContentPane().add(soft_Last_Lap_Time_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 600, 170, -1));
 
         soft_Max_Laps_label.setForeground(new java.awt.Color(33, 33, 33));
         soft_Max_Laps_label.setText("Maximum amount of laps on tyre:");
-        getContentPane().add(soft_Max_Laps_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, -1, -1));
+        getContentPane().add(soft_Max_Laps_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 630, 160, -1));
 
         soft_FirstLapTimeField.addActionListener(new java.awt.event.ActionListener()
         {
@@ -110,9 +110,9 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
                 soft_FirstLapTimeFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(soft_FirstLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 570, 55, -1));
-        getContentPane().add(soft_LastLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 600, 55, -1));
-        getContentPane().add(soft_MaxLapsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 630, 55, -1));
+        getContentPane().add(soft_FirstLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 570, 60, -1));
+        getContentPane().add(soft_LastLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 600, 60, -1));
+        getContentPane().add(soft_MaxLapsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 630, 60, -1));
 
         calculate_Button.setText("Calculate");
         calculate_Button.addActionListener(new java.awt.event.ActionListener()
@@ -122,7 +122,7 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
                 calculate_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(calculate_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 770, -1, -1));
+        getContentPane().add(calculate_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 770, 80, -1));
 
         back_Button.setText("Back");
         back_Button.addActionListener(new java.awt.event.ActionListener()
@@ -132,8 +132,8 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
                 back_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 770, 73, -1));
-        getContentPane().add(medium_LastLapSecondsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 600, 55, -1));
+        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 770, 80, -1));
+        getContentPane().add(medium_LastLapSecondsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 60, -1));
 
         medium_FirstLapSecondsField.addActionListener(new java.awt.event.ActionListener()
         {
@@ -142,8 +142,8 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
                 medium_FirstLapSecondsFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(medium_FirstLapSecondsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 570, 55, -1));
-        getContentPane().add(medium_MaxLapsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 630, 55, -1));
+        getContentPane().add(medium_FirstLapSecondsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 570, 60, -1));
+        getContentPane().add(medium_MaxLapsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 630, 60, -1));
 
         hard_FirstLapTimeField.addActionListener(new java.awt.event.ActionListener()
         {
@@ -152,8 +152,8 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
                 hard_FirstLapTimeFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(hard_FirstLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 570, 60, -1));
-        getContentPane().add(hard_LastLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 600, 60, -1));
+        getContentPane().add(hard_FirstLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 570, 60, -1));
+        getContentPane().add(hard_LastLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 600, 60, -1));
 
         hard_MaxLapsField.addActionListener(new java.awt.event.ActionListener()
         {
@@ -162,32 +162,32 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
                 hard_MaxLapsFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(hard_MaxLapsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 630, 60, -1));
+        getContentPane().add(hard_MaxLapsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 630, 60, -1));
 
         medium_Tyres_Label.setForeground(new java.awt.Color(33, 33, 33));
         medium_Tyres_Label.setText("Medium Tyres:");
-        getContentPane().add(medium_Tyres_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 550, -1, -1));
+        getContentPane().add(medium_Tyres_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 550, 70, -1));
 
         hard_Tyres_Label.setForeground(new java.awt.Color(33, 33, 33));
         hard_Tyres_Label.setText("Hard Tyres:");
-        getContentPane().add(hard_Tyres_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 550, -1, -1));
+        getContentPane().add(hard_Tyres_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 550, 60, -1));
 
         output_TextArea.setEditable(false);
         output_TextArea.setColumns(20);
         output_TextArea.setRows(5);
         output_Field.setViewportView(output_TextArea);
 
-        getContentPane().add(output_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 500, 495, 292));
+        getContentPane().add(output_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 502, 430, 300));
 
         raceDistance_Label.setForeground(new java.awt.Color(33, 33, 33));
         raceDistance_Label.setText("How many laps does the race consist of?");
-        getContentPane().add(raceDistance_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, 733, -1));
-        getContentPane().add(raceDistance_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 680, 410, -1));
+        getContentPane().add(raceDistance_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 660, 410, -1));
+        getContentPane().add(raceDistance_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 680, 410, -1));
 
         pitTime_Label.setForeground(new java.awt.Color(33, 33, 33));
         pitTime_Label.setText("Average pit-lane time?");
-        getContentPane().add(pitTime_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 720, 733, -1));
-        getContentPane().add(pitTime_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 740, 410, -1));
+        getContentPane().add(pitTime_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 720, 410, -1));
+        getContentPane().add(pitTime_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 740, 410, -1));
 
         backgroundImage_Label.setIcon(new javax.swing.ImageIcon("C:\\Images\\F1Lights2 (2).PNG")); // NOI18N
         getContentPane().add(backgroundImage_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 870));
@@ -219,7 +219,7 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
     private void back_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_back_ButtonActionPerformed
     {//GEN-HEADEREND:event_back_ButtonActionPerformed
         // TODO add your handling code here:
-        new HomeScreen().setVisible(true);
+        new UserLogin().setVisible(true);
         dispose();
     }//GEN-LAST:event_back_ButtonActionPerformed
 

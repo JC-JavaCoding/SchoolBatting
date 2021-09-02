@@ -31,25 +31,14 @@ public class HomeScreen extends javax.swing.JFrame
     private void initComponents()
     {
 
-        data_Input_Type = new javax.swing.JTextField();
         live_Data_Button = new javax.swing.JButton();
         user_Data_Button = new javax.swing.JButton();
+        choosePath_Label = new javax.swing.JLabel();
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Strategy Home Screen");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        data_Input_Type.setEditable(false);
-        data_Input_Type.setText("Do you want to use live F1 data or your own data?");
-        data_Input_Type.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                data_Input_TypeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(data_Input_Type, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 510, -1, 49));
 
         live_Data_Button.setText("F1Live Data");
         live_Data_Button.addActionListener(new java.awt.event.ActionListener()
@@ -59,7 +48,7 @@ public class HomeScreen extends javax.swing.JFrame
                 live_Data_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(live_Data_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, 190, 130));
+        getContentPane().add(live_Data_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 690, 190, 130));
 
         user_Data_Button.setText("Personal Data");
         user_Data_Button.addActionListener(new java.awt.event.ActionListener()
@@ -69,18 +58,17 @@ public class HomeScreen extends javax.swing.JFrame
                 user_Data_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(user_Data_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(846, 585, 210, 130));
+        getContentPane().add(user_Data_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 700, 210, 130));
+
+        choosePath_Label.setForeground(new java.awt.Color(255, 255, 255));
+        choosePath_Label.setText("Do you want to use live F1 data or your own data?");
+        getContentPane().add(choosePath_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, 290, 20));
 
         backgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jcj\\Documents\\NetBeansProjects\\PAT\\EOY_PAT\\src\\main\\resources\\images\\F1Lights1.png")); // NOI18N
         getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void data_Input_TypeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_data_Input_TypeActionPerformed
-    {//GEN-HEADEREND:event_data_Input_TypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_data_Input_TypeActionPerformed
 
     private void live_Data_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_live_Data_ButtonActionPerformed
     {//GEN-HEADEREND:event_live_Data_ButtonActionPerformed
@@ -93,8 +81,8 @@ public class HomeScreen extends javax.swing.JFrame
     private void user_Data_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_user_Data_ButtonActionPerformed
     {//GEN-HEADEREND:event_user_Data_ButtonActionPerformed
         // TODO add your handling code here:
-        User_Tyre_InputScreen uIS = new User_Tyre_InputScreen();
-        uIS.setVisible(true);
+        UserLogin uL = new UserLogin();
+        uL.setVisible(true);
         dispose();
     }//GEN-LAST:event_user_Data_ButtonActionPerformed
 
@@ -145,7 +133,7 @@ public class HomeScreen extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backgroundLabel;
-    private javax.swing.JTextField data_Input_Type;
+    private javax.swing.JLabel choosePath_Label;
     private javax.swing.JButton live_Data_Button;
     private javax.swing.JButton user_Data_Button;
     // End of variables declaration//GEN-END:variables
