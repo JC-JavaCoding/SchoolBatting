@@ -7,6 +7,9 @@ package Backend;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.Scanner;
@@ -27,7 +30,7 @@ public class Strategy
         String time = hours +":"+ minutes +":"+ seconds;
         return time;
     }
-    public static String interperetInfo()
+    public static String interperetInfo() throws IOException
     {
         try
         {
@@ -98,26 +101,44 @@ public class Strategy
         }
     	return formulatedTime;
     }
-    public static String getStrats() throws FileNotFoundException
+    public static String getStrats() throws FileNotFoundException, IOException
     {
         strats = interperetInfo();
+        File file = new File("data/output.txt");
+        FileWriter outputStream = new FileWriter(file);
+        PrintWriter outputFile = new PrintWriter(outputStream);
         
-        PrintWriter outputFile = new PrintWriter("/data/output.txt");
-        String output = Strategy.getStrats();
-        outputFile.print(output);
+        outputFile.print(strats);
         
         return strats;
+    }
+    public static String [] getStratsAsArray() throws FileNotFoundException, IOException
+    {
+        String[] stratsAsArray = {""};
+        getStrats();
+        File strategies = new File("data/strategies.txt");
+        Scanner stratScanner = new Scanner(strategies);
+        
+        for(int i = 0; stratScanner.hasNextLine(); i++)
+        {
+            stratsAsArray[i] = stratScanner.nextLine();
+        }
+        
+        return stratsAsArray;
     }
     public static String calcStrat(	
                                     double sLap1, double mLap1, double hLap1,
                                     double sLapDeg, double mLapDeg, double hLapDeg,
                                     int sMaxLaps, int mMaxLaps, int hMaxLaps,
                                     int raceDist
-                                ) 	//transform to write to text file
+                                ) throws IOException	//transform to write to text file
     {
         String [] compounds = {"soft", "medium", "hard"};
         String strategy = "";
         
+        //output file for strategies
+        File strats = new File("data/strategies.txt");
+        PrintWriter pW = new PrintWriter(strats);
         //the first stint times:
         long seconds;
         
@@ -181,7 +202,7 @@ public class Strategy
                         }
 //                        if (seconds < bestStrat)
 //                        {
-//                            System.out.println("1: "+ startCompound +", LAP: "+ lap +", 2: "+ secondTyre +", time:"+ calcTime(seconds));
+                            pW.print("1: "+ startCompound +", LAP: "+ lap +", 2: "+ secondTyre +", time:"+ calcTime(seconds) +"\n");
                             strategy += "1: "+ startCompound +", LAP: "+ lap +", "+ secondTyre +", time:"+ calcTime(seconds) + "\n";
 //                        }
                     }//if the race can be finished on the selected tyre: end brace
