@@ -30,8 +30,7 @@ public class UserLogin extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         addUsers_Label = new javax.swing.JLabel();
         userPassword_Field = new javax.swing.JPasswordField();
@@ -50,10 +49,8 @@ public class UserLogin extends javax.swing.JFrame
         addUsers_Label.setText("Password");
         getContentPane().add(addUsers_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 610, -1, -1));
 
-        userPassword_Field.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        userPassword_Field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userPassword_FieldActionPerformed(evt);
             }
         });
@@ -66,20 +63,16 @@ public class UserLogin extends javax.swing.JFrame
         getContentPane().add(addUsers_Label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 510, -1, -1));
 
         login_Button.setText("Log In");
-        login_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        login_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 login_ButtonActionPerformed(evt);
             }
         });
         getContentPane().add(login_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 690, -1, -1));
 
         back_Button.setText("Back");
-        back_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        back_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 back_ButtonActionPerformed(evt);
             }
         });
@@ -89,16 +82,14 @@ public class UserLogin extends javax.swing.JFrame
         addUser_Button.setForeground(new java.awt.Color(33, 33, 33));
         addUser_Button.setText("Add new user");
         addUser_Button.setBorderPainted(false);
-        addUser_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        addUser_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addUser_ButtonActionPerformed(evt);
             }
         });
         getContentPane().add(addUser_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 740, -1, -1));
 
-        backgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jcj\\Documents\\NetBeansProjects\\PAT\\EOY_PAT\\src\\main\\resources\\images\\F1Lights1.png")); // NOI18N
+        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights2 (2).PNG"))); // NOI18N
         getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -100, -1, -1));
 
         pack();

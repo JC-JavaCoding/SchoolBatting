@@ -28,8 +28,7 @@ public class HomeScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         live_Data_Button = new javax.swing.JButton();
         user_Data_Button = new javax.swing.JButton();
@@ -41,20 +40,16 @@ public class HomeScreen extends javax.swing.JFrame
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         live_Data_Button.setText("F1Live Data");
-        live_Data_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        live_Data_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 live_Data_ButtonActionPerformed(evt);
             }
         });
         getContentPane().add(live_Data_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 690, 190, 130));
 
         user_Data_Button.setText("Personal Data");
-        user_Data_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        user_Data_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 user_Data_ButtonActionPerformed(evt);
             }
         });
@@ -64,7 +59,7 @@ public class HomeScreen extends javax.swing.JFrame
         choosePath_Label.setText("Do you want to use live F1 data or your own data?");
         getContentPane().add(choosePath_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, 290, 20));
 
-        backgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jcj\\Documents\\NetBeansProjects\\PAT\\EOY_PAT\\src\\main\\resources\\images\\F1Lights1.png")); // NOI18N
+        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights1.png"))); // NOI18N
         getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();

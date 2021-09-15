@@ -35,8 +35,7 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jTextField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -78,10 +77,8 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setForeground(new java.awt.Color(33, 33, 33));
         jTextField1.setText("Please type in the according information for the following fields:");
-        jTextField1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
@@ -103,10 +100,8 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         soft_Max_Laps_label.setText("Maximum amount of laps on tyre:");
         getContentPane().add(soft_Max_Laps_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 630, 160, -1));
 
-        soft_FirstLapTimeField.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        soft_FirstLapTimeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 soft_FirstLapTimeFieldActionPerformed(evt);
             }
         });
@@ -115,50 +110,40 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         getContentPane().add(soft_MaxLapsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 630, 60, -1));
 
         calculate_Button.setText("Calculate");
-        calculate_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        calculate_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calculate_ButtonActionPerformed(evt);
             }
         });
         getContentPane().add(calculate_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 770, 80, -1));
 
         back_Button.setText("Back");
-        back_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        back_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 back_ButtonActionPerformed(evt);
             }
         });
         getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 770, 80, -1));
         getContentPane().add(medium_LastLapSecondsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 60, -1));
 
-        medium_FirstLapSecondsField.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        medium_FirstLapSecondsField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 medium_FirstLapSecondsFieldActionPerformed(evt);
             }
         });
         getContentPane().add(medium_FirstLapSecondsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 570, 60, -1));
         getContentPane().add(medium_MaxLapsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 630, 60, -1));
 
-        hard_FirstLapTimeField.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        hard_FirstLapTimeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hard_FirstLapTimeFieldActionPerformed(evt);
             }
         });
         getContentPane().add(hard_FirstLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 570, 60, -1));
         getContentPane().add(hard_LastLapTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 600, 60, -1));
 
-        hard_MaxLapsField.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        hard_MaxLapsField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hard_MaxLapsFieldActionPerformed(evt);
             }
         });
@@ -189,7 +174,7 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         getContentPane().add(pitTime_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 720, 410, -1));
         getContentPane().add(pitTime_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 740, 410, -1));
 
-        backgroundImage_Label.setIcon(new javax.swing.ImageIcon("C:\\Images\\F1Lights2 (2).PNG")); // NOI18N
+        backgroundImage_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights3.png"))); // NOI18N
         getContentPane().add(backgroundImage_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 870));
 
         pack();

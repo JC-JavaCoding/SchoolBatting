@@ -301,7 +301,7 @@
     <Component class="javax.swing.JLabel" name="backgroundImage_Label">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Images\F1Lights2 (2).PNG"/>
+          <Image iconType="3" name="/images/F1Lights3.png"/>
         </Property>
       </Properties>
       <Constraints>

@@ -31,8 +31,7 @@ public class StrategyOutput extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         back_Button = new javax.swing.JButton();
         save_Button = new javax.swing.JButton();
@@ -50,10 +49,8 @@ public class StrategyOutput extends javax.swing.JFrame
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         back_Button.setText("Back");
-        back_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        back_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 back_ButtonActionPerformed(evt);
             }
         });
@@ -72,8 +69,7 @@ public class StrategyOutput extends javax.swing.JFrame
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 520, 550, 370));
 
-        backgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jcj\\Documents\\NetBeansProjects\\PAT\\EOY_PAT\\src\\main\\resources\\images\\F1Lights3.png")); // NOI18N
-        backgroundLabel.setMinimumSize(null);
+        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights4.png"))); // NOI18N
         getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1240, 930));
 
         pack();
