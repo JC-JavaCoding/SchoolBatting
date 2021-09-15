@@ -7,6 +7,7 @@ package Backend;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -17,13 +18,13 @@ public class LoginManager
 {
     private static String username = "", password = "";
     
+    public static File file = new File("data\\users.txt");
     public static boolean isValid(String userName, String passWord) //"main" method to see whether username and password are correct.
     {
         username = userName;
         password = passWord;
         try
         {
-            File file = new File("data\\users.txt");
             Scanner fileScanner = new Scanner(file);
 
             while (fileScanner.hasNextLine())
@@ -71,5 +72,18 @@ public class LoginManager
         }
         System.out.println("Password incorrect");
         return false;
+    }
+    
+    public static void addUser(String name, String passkey)
+    {
+        try
+        {
+            PrintWriter userFile = new PrintWriter(file);
+            userFile.print(name +"#"+ passkey);
+        }
+        catch(java.io.FileNotFoundException f)
+        {
+            System.out.println("File not found");
+        }
     }
 }

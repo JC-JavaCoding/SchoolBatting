@@ -104,7 +104,16 @@ public class UserLogin extends javax.swing.JFrame
     {//GEN-HEADEREND:event_login_ButtonActionPerformed
         // TODO add your handling code here:
         String username = username_Field.getText();
-        String password = Arrays.toString((userPassword_Field.getPassword()));
+         char [] arr = userPassword_Field.getPassword();
+        
+        //essentially a .toString method
+         String password = "";
+        for (int i = 0; i < arr.length; i++) 
+         {
+            password += arr[i];
+         }
+        //System.out.println(password);
+        //String password = Arrays.toString((userPassword_Field.getPassword()));
         
         if (LoginManager.isValid(username, password))
         {
@@ -128,6 +137,7 @@ public class UserLogin extends javax.swing.JFrame
     private void addUser_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addUser_ButtonActionPerformed
     {//GEN-HEADEREND:event_addUser_ButtonActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_addUser_ButtonActionPerformed
 
     /**
