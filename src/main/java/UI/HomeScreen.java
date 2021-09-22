@@ -18,7 +18,7 @@ public class HomeScreen extends javax.swing.JFrame
     public HomeScreen()
     {
         initComponents();
-        setLocation(0, 0);
+        setLocationRelativeTo(null);
     }
 
     /**

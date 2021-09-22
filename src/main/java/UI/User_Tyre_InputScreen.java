@@ -28,7 +28,7 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
     }
     
     private double sLap1;
-    public String  currUser;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

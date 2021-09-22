@@ -7,6 +7,8 @@ package UI;
 
 import Backend.StratManager;
 import Backend.Strategy;
+import java.io.File;
+import java.util.Scanner;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -16,12 +18,21 @@ import javax.swing.JOptionPane;
  */
 public class StrategyOutput extends javax.swing.JFrame
 {
-    public String currUser;
+    public static String currUser;
     /**
      * Creates new form StrategyOutput
      */
     public StrategyOutput()
     {
+        try
+        {
+            Scanner fileScanner = new Scanner(new File("data\\currentUser.txt"));
+            currUser =  fileScanner.next();
+        }
+        catch (java.io.FileNotFoundException e)
+        {
+            JOptionPane.showMessageDialog(this, "File Not Found Exception Dumbass");
+        }
         initComponents();
         setLocationRelativeTo(null);
         

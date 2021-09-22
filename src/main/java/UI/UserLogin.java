@@ -6,7 +6,11 @@
 package UI;
 
 import Backend.LoginManager;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,8 +25,9 @@ public class UserLogin extends javax.swing.JFrame
     public UserLogin()
     {
         initComponents();
+        setLocationRelativeTo(null);
     }
-    public String currUser;
+    public static String currUser;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,9 +123,29 @@ public class UserLogin extends javax.swing.JFrame
         if (LoginManager.isValid(currUser, password))
         {
             User_Tyre_InputScreen inputScreen = new User_Tyre_InputScreen();
-           inputScreen.setVisible(true);
-           inputScreen.currUser = currUser;
-            dispose();
+            inputScreen.setVisible(true);
+            
+            
+            //set current user in current user file
+//            try
+//            {
+                try
+                {
+                    PrintWriter currUser_File = new PrintWriter( new FileWriter( new File ("data\\currentUser.txt") ));
+                    currUser_File.print(currUser);
+                    
+                    currUser_File.close();
+                }
+                catch(java.io.IOException e)
+                {
+                    JOptionPane.showMessageDialog(this,"IOException");
+                }
+//            }
+//            catch (java.io.FileNotFoundException e)
+//            {
+//                JOptionPane.showMessageDialog(this, "File Not Found exception in \"currUser\"");
+//            }
+            dispose(); 
         }
         else 
         {
