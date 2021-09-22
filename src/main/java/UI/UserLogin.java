@@ -5,7 +5,7 @@
  */
 package UI;
 
-import Backend.LoginManager;
+import Backend.UserManager;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -120,38 +120,30 @@ public class UserLogin extends javax.swing.JFrame
         //System.out.println(password);
         //String password = Arrays.toString((userPassword_Field.getPassword()));
         
-        if (LoginManager.isValid(currUser, password))
+        if (UserManager.isValid(currUser, password))
         {
-            User_Tyre_InputScreen inputScreen = new User_Tyre_InputScreen();
-            inputScreen.setVisible(true);
-            
-            
             //set current user in current user file
-//            try
-//            {
-                try
-                {
-                    PrintWriter currUser_File = new PrintWriter( new FileWriter( new File ("data\\currentUser.txt") ));
-                    currUser_File.print(currUser);
-                    
-                    currUser_File.close();
-                }
-                catch(java.io.IOException e)
-                {
-                    JOptionPane.showMessageDialog(this,"IOException");
-                }
-//            }
-//            catch (java.io.FileNotFoundException e)
-//            {
-//                JOptionPane.showMessageDialog(this, "File Not Found exception in \"currUser\"");
-//            }
+
+            try
+            {
+                PrintWriter currUser_File = new PrintWriter( new FileWriter( new File ("data\\currentUser.txt") ));
+                currUser_File.print(currUser);
+
+                currUser_File.close();
+            }
+            catch(java.io.IOException e)
+            {
+                JOptionPane.showMessageDialog(this,"IOException");
+            }
+            
+            new PathChoice().setVisible(true);
+            
             dispose(); 
         }
         else 
         {
             System.out.println("Username Or Password Incorrect.");
-        }
-        
+        } 
     }//GEN-LAST:event_login_ButtonActionPerformed
 
     private void back_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_back_ButtonActionPerformed

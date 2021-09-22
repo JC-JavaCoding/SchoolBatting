@@ -134,7 +134,7 @@ public class Strategy
         //find out how many strategies there are for the array to be set to that number.
         Scanner numLinesScanner = new Scanner(strategies).useDelimiter("\n");
         int nrLines = 0;
-       while (numLinesScanner.hasNextLine() ) 
+        while (numLinesScanner.hasNextLine() ) 
         {
             System.out.println("Nr Lines: "+ nrLines);
             numLinesScanner.nextLine(); 
@@ -226,7 +226,7 @@ public class Strategy
 //                        if (seconds < bestStrat)
 //                        {
 //                            System.out.println("1: "+ startCompound +", LAP: "+ lap +", 2: "+ secondTyre +", time:"+ calcTime(seconds));
-                            strategy += numStrats + ": "+ startCompound +", LAP: "+ lap +", "+ secondTyre +", time:"+ calcTime(seconds) + "\n";
+                            strategy += "Lap1 - Lap"+ lap +": "+ startCompound +", LAP: "+ lap +", "+ secondTyre +", time:"+ calcTime(seconds) + "\n";
 //                        }
                     }//if the race can be finished on the selected tyre: end brace
                     seconds -= secondTime;

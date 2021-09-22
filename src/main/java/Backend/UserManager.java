@@ -15,18 +15,19 @@ import java.util.Scanner;
  *
  * @author Jcj
  */
-public class LoginManager
+public class UserManager
 {
     private static String username = "", password = "";
     
-    public static File file = new File("data\\users.txt");
+    public static File usersFile = new File("data\\users.txt");
+    public static File currentUser_File = new File("data\\currentUser.txt");
     public static boolean isValid(String userName, String passWord) //"main" method to see whether username and password are correct.
     {
         username = userName;
         password = passWord;
         try
         {
-            Scanner fileScanner = new Scanner(file);
+            Scanner fileScanner = new Scanner(usersFile);
 
             while (fileScanner.hasNextLine())
             {
@@ -78,7 +79,7 @@ public class LoginManager
     {
         try
         {
-            Scanner userScanner = new Scanner(file);
+            Scanner userScanner = new Scanner(usersFile);
             
             while (userScanner.hasNextLine())
             {
@@ -102,7 +103,7 @@ public class LoginManager
             
             try 
             {
-                FileWriter output = new FileWriter(file, true);
+                FileWriter output = new FileWriter(usersFile, true);
                 PrintWriter userFile = new PrintWriter(output);
                 userFile.print(name +"#"+ passkey);
                 System.out.println(name +"#"+ passkey);
@@ -122,7 +123,7 @@ public class LoginManager
         String users = "";
         try
         {
-            Scanner fileScanner = new Scanner(file);
+            Scanner fileScanner = new Scanner(usersFile);
             while (fileScanner.hasNextLine())
             {
                 Scanner lineScanner = new Scanner(fileScanner.nextLine()).useDelimiter("#");
@@ -134,5 +135,20 @@ public class LoginManager
             System.out.println("File not found");
         }
         return users;
+    }
+    public static String getCurrentUser()
+    {
+        String output = "";
+        
+        try
+        {
+            Scanner fileScanner = new Scanner(currentUser_File);
+            output = fileScanner.next();
+        }
+        catch(java.io.FileNotFoundException e)
+        {
+            System.out.println("File not found");
+        }
+        return output;
     }
 }

@@ -5,7 +5,7 @@
  */
 package UI;
 
-import Backend.LoginManager;
+import Backend.UserManager;
 
 /**
  *
@@ -20,8 +20,7 @@ public class AddUserScreen extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         currentUsers_TextArea.setText
-        (
-                LoginManager.getUsers()
+        (UserManager.getUsers()
         );
     }
     //Initialize variables:
@@ -137,11 +136,10 @@ public class AddUserScreen extends javax.swing.JFrame {
         username = username_Field.getText();
         if (  !(username == null && password == null) )
         {
-            LoginManager.addUser(username, password);
+            UserManager.addUser(username, password);
         }
         currentUsers_TextArea.setText
-        (
-                LoginManager.getUsers()
+        (UserManager.getUsers()
         );
     }//GEN-LAST:event_addUser_ButtonActionPerformed
 

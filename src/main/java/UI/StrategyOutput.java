@@ -125,16 +125,15 @@ public class StrategyOutput extends javax.swing.JFrame
         // TODO add your handling code here:
         
         //check whether a strategy is selected and a name for it has been entered:
-        if( outputList.getSelectedValue() != null && !stratName_Field.getText().isBlank())
+        if( outputList.getSelectedValue() != null && !stratName_Field.getText().isEmpty())
         {
             String theChosenOne = outputList.getSelectedValue(); //:D
             String stratName = stratName_Field.getText();
             System.out.println("You chose: "+ theChosenOne + "\nYou called it: "+ stratName);
             
             StratManager.addStrategy(currUser, stratName, theChosenOne);
-            System.out.println("added strategy");
-            
-        }
+            JOptionPane.showMessageDialog(this, "added strategy");
+         }
         else
         {
             JOptionPane.showMessageDialog(this, "The fileName is already in use.");
