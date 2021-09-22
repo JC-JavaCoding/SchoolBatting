@@ -119,10 +119,10 @@ public class StrategyOutput extends javax.swing.JFrame
             String theChosenOne = outputList.getSelectedValue(); //:D
             String stratName = stratName_Field.getText();
             System.out.println("You chose: "+ theChosenOne + "\nYou called it: "+ stratName);
-            if (StratManager.exists(stratName, theChosenOne))
-            {
-                StratManager.addStrategy(currUser, stratName, theChosenOne);
-            }
+            
+            StratManager.addStrategy(currUser, stratName, theChosenOne);
+            System.out.println("added strategy");
+            
         }
         else
         {

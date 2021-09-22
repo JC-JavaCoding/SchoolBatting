@@ -16,8 +16,8 @@ import java.util.Scanner;
  */
 public class StratManager
 {
-    private static File file = new File("data/saved.txt");
-    public static boolean exists(String nameToCheck, String username)
+    final static File file = new File("data\\saved.txt");
+    public static boolean strategyExists(String nameToCheck, String username)
     {
         try
         {
@@ -31,7 +31,8 @@ public class StratManager
                 String stratName = lineScanner.next();
                 if( username.equals(user) && stratName.equals(nameToCheck) )
                 {
-                   return true; 
+                    System.out.println("Strategy already exists");
+                    return true; 
                 }
             }
         }
@@ -46,12 +47,15 @@ public class StratManager
     {
         try
         {
-            FileWriter outputStream = new FileWriter(file);
-            PrintWriter stratFile = new PrintWriter(outputStream, true);
-            stratFile.print(username +"#"+ stratName +"#"+ strategy);
-            
-            outputStream.close();
-            stratFile.close();
+            if (strategyExists(strategy, username))
+            {
+                FileWriter outputStream = new FileWriter(file, true);
+                PrintWriter stratFile = new PrintWriter(outputStream);
+                stratFile.print(username +"#"+ stratName +"#"+ strategy);
+
+                outputStream.close();
+                stratFile.close();
+            }
         }
         catch(java.io.IOException e)
         {
