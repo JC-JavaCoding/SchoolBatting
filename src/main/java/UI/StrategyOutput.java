@@ -5,13 +5,18 @@
  */
 package UI;
 
+import Backend.StratManager;
+import Backend.Strategy;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jjaac
  */
 public class StrategyOutput extends javax.swing.JFrame
 {
-    
+    public String currUser;
     /**
      * Creates new form StrategyOutput
      */
@@ -19,7 +24,19 @@ public class StrategyOutput extends javax.swing.JFrame
     {
         initComponents();
         setLocationRelativeTo(null);
-
+        
+        System.out.println("Strategy output, before loop");//error checking
+        
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        String[] strategies = Strategy.getStratsAsArray();
+        for (String strategie : strategies) //iterating through the array, SUPER COOLLL
+        {
+            System.out.println("In for loop");
+            listModel.addElement(strategie);
+        }
+        outputList.setModel(listModel);
+        
+        System.out.println("Strategy output, after loop");//error checking
     }
     
     public String traceBack;
@@ -31,7 +48,8 @@ public class StrategyOutput extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         back_Button = new javax.swing.JButton();
         save_Button = new javax.swing.JButton();
@@ -49,25 +67,34 @@ public class StrategyOutput extends javax.swing.JFrame
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         back_Button.setText("Back");
-        back_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        back_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 back_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 840, 100, 60));
+        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 700, 100, 60));
 
         save_Button.setText("Save");
-        getContentPane().add(save_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(1133, 855, 90, 60));
+        save_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                save_ButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(save_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 700, 90, 60));
 
         saveStratName_Label.setForeground(new java.awt.Color(33, 33, 33));
         saveStratName_Label.setText("What would you like to save your Strategy as?");
-        getContentPane().add(saveStratName_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 270, -1));
-        getContentPane().add(stratName_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, 240, -1));
+        getContentPane().add(saveStratName_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 540, 270, -1));
+        getContentPane().add(stratName_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 570, 240, -1));
 
         outputList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(outputList);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 520, 550, 370));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 520, 550, 240));
 
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights4.png"))); // NOI18N
         getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1240, 930));
@@ -78,63 +105,35 @@ public class StrategyOutput extends javax.swing.JFrame
     private void back_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_back_ButtonActionPerformed
     {//GEN-HEADEREND:event_back_ButtonActionPerformed
         // TODO add your handling code here:
-    	
-    	
-    	if (traceBack.equals("login"))
-        {
-            new F1Login().setVisible(true);
-        }
-        else 
-        {
-            new User_Race_Pit_InputScreen().setVisible(true);
-        }
+        new  User_Tyre_InputScreen().setVisible(true);
         dispose();
     }//GEN-LAST:event_back_ButtonActionPerformed
+
+    private void save_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_save_ButtonActionPerformed
+    {//GEN-HEADEREND:event_save_ButtonActionPerformed
+        // TODO add your handling code here:
+        
+        //check whether a strategy is selected and a name for it has been entered:
+        if( outputList.getSelectedValue() != null && !stratName_Field.getText().isBlank())
+        {
+            String theChosenOne = outputList.getSelectedValue(); //:D
+            String stratName = stratName_Field.getText();
+            System.out.println("You chose: "+ theChosenOne + "\nYou called it: "+ stratName);
+            if (StratManager.exists(stratName, theChosenOne))
+            {
+                StratManager.addStrategy(currUser, stratName, theChosenOne);
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "The fileName is already in use.");
+        }
+    }//GEN-LAST:event_save_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[])
-//    {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try
-//        {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-//            {
-//                if ("Nimbus".equals(info.getName()))
-//                {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex)
-//        {
-//            java.util.logging.Logger.getLogger(StrategyOutput.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex)
-//        {
-//            java.util.logging.Logger.getLogger(StrategyOutput.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex)
-//        {
-//            java.util.logging.Logger.getLogger(StrategyOutput.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-//        {
-//            java.util.logging.Logger.getLogger(StrategyOutput.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable()
-//        {
-//            public void run()
-//            {
-//                new StrategyOutput().setVisible(true);
-//            }
-//        });
-//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back_Button;

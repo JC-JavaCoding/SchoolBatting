@@ -7,6 +7,7 @@ package Backend;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -73,17 +74,65 @@ public class LoginManager
         System.out.println("Password incorrect");
         return false;
     }
-    
-    public static void addUser(String name, String passkey)
+    public static boolean userExists(String username)
     {
         try
         {
-            PrintWriter userFile = new PrintWriter(file);
-            userFile.print(name +"#"+ passkey);
+            Scanner userScanner = new Scanner(file);
+            
+            while (userScanner.hasNextLine())
+            {
+                String line = userScanner.nextLine();
+                Scanner lineScanner = new Scanner (line);
+                String userInFile = lineScanner.next();
+                
+                if (userInFile.equals(username)) return true;
+            }
         }
-        catch(java.io.FileNotFoundException f)
+        catch(java.io.FileNotFoundException e)
+        {
+            System.out.println("File not found.");
+        }
+        return false;
+    }
+    public static void addUser(String name, String passkey)
+    {
+        if ( !userExists(name) )//check whether username exists
+        {
+            
+            try 
+            {
+                FileWriter output = new FileWriter(file, true);
+                PrintWriter userFile = new PrintWriter(output);
+                userFile.print(name +"#"+ passkey);
+                System.out.println(name +"#"+ passkey);
+                
+                userFile.close();
+                output.close();
+            }
+            catch(java.io.IOException e)
+            {
+                System.out.println("IOException");
+            }
+        }    
+    }
+    
+    public static String getUsers()
+    {
+        String users = "";
+        try
+        {
+            Scanner fileScanner = new Scanner(file);
+            while (fileScanner.hasNextLine())
+            {
+                Scanner lineScanner = new Scanner(fileScanner.nextLine()).useDelimiter("#");
+                users += lineScanner.next() +"\n";
+            }
+        }
+        catch(java.io.FileNotFoundException e)
         {
             System.out.println("File not found");
         }
+        return users;
     }
 }

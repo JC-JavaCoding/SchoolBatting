@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,7 +20,13 @@ import java.util.concurrent.TimeUnit;
  */
 public class Strategy
 {
-    private static String strats;
+//    public static void main(String[] args)
+//    {
+//        getStratsAsArray();
+//    }
+    
+    public static String strats;
+    private static int numStrats = 0;
     public static String calcTime(long seconds)
     {
         long hours = TimeUnit.SECONDS.toHours(seconds);
@@ -31,7 +39,7 @@ public class Strategy
     {
         try
         {
-            Scanner info = new Scanner(new File("info.txt")).useDelimiter("#");
+            Scanner info = new Scanner(new File("data\\info.txt")).useDelimiter("#");
             info.useLocale(Locale.US);
             double sLap1 = info.nextDouble();
             double mLap1 = info.nextDouble();
@@ -98,15 +106,50 @@ public class Strategy
         }
     	return formulatedTime;
     }
-    public static String getStrats() throws FileNotFoundException
+    public static String getStrats() 
     {
-        strats = interperetInfo();
-        
-        PrintWriter outputFile = new PrintWriter("/data/output.txt");
-        String output = Strategy.getStrats();
-        outputFile.print(output);
-        
+        PrintWriter outputFile = null;
+        try 
+        {
+            strats = interperetInfo();
+            outputFile = new PrintWriter("data/output.txt");
+//            String output = Strategy.getStrats();
+            outputFile.print(strats);
+            outputFile.close();
+        } 
+        catch (FileNotFoundException ex) 
+        {
+            System.out.println("File not found");
+        } 
         return strats;
+    }
+    public static String [] getStratsAsArray()
+    {
+        
+        System.out.println("Entered getStratsAsArray method.");
+        String strategies = getStrats();
+        System.out.println("Entered getStratsAsArray method.");
+        System.out.println("Strategies: \n"+ strategies);
+        
+        //find out how many strategies there are for the array to be set to that number.
+        Scanner numLinesScanner = new Scanner(strategies).useDelimiter("\n");
+        int nrLines = 0;
+       while (numLinesScanner.hasNextLine() ) 
+        {
+            System.out.println("Nr Lines: "+ nrLines);
+            numLinesScanner.nextLine(); 
+        }
+        
+        Scanner stratScanner = new Scanner(strategies);
+        String [] stratArr = new String[numStrats];
+        for (int i = 1; i < numStrats; i++)
+        {
+            String line  = stratScanner.nextLine();
+            System.out.println( "Line: "+ i +", "+  line  );
+            stratArr[i-1] = line;
+        }
+        System.out.println("End of getStratsAsArray method");
+        return stratArr;
     }
     public static String calcStrat(	
                                     double sLap1, double mLap1, double hLap1,
@@ -126,8 +169,8 @@ public class Strategy
         
         //calculate the strategy:
         String startCompound, currentStrategy = "#", secondTyre = "";
-        int maxLaps = 0, secondMax = 0;
-        int lap = 1;
+        int maxLaps, secondMax;
+        int lap;
         double timeFormula, bestStrat = 0;
         
         for (int compound = 0; compound < 3; compound ++)//for each tyre compound
@@ -160,6 +203,7 @@ public class Strategy
                     if (lap + secondMax >= raceDist && secCompound != compound)
                     {
                         //second stint
+                        numStrats ++;
                         for (int lapStint2 = lap+1; lapStint2 <= lap+secondMax; lapStint2++)
                         {
                             //select tyre formula for corresponding second stint tyre compound
@@ -182,7 +226,7 @@ public class Strategy
 //                        if (seconds < bestStrat)
 //                        {
 //                            System.out.println("1: "+ startCompound +", LAP: "+ lap +", 2: "+ secondTyre +", time:"+ calcTime(seconds));
-                            strategy += "1: "+ startCompound +", LAP: "+ lap +", "+ secondTyre +", time:"+ calcTime(seconds) + "\n";
+                            strategy += numStrats + ": "+ startCompound +", LAP: "+ lap +", "+ secondTyre +", time:"+ calcTime(seconds) + "\n";
 //                        }
                     }//if the race can be finished on the selected tyre: end brace
                     seconds -= secondTime;

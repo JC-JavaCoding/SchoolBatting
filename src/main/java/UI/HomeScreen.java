@@ -28,10 +28,10 @@ public class HomeScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
-        live_Data_Button = new javax.swing.JButton();
-        user_Data_Button = new javax.swing.JButton();
+        start_Button = new javax.swing.JButton();
         choosePath_Label = new javax.swing.JLabel();
         backgroundLabel = new javax.swing.JLabel();
 
@@ -39,21 +39,15 @@ public class HomeScreen extends javax.swing.JFrame
         setTitle("Strategy Home Screen");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        live_Data_Button.setText("F1Live Data");
-        live_Data_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                live_Data_ButtonActionPerformed(evt);
+        start_Button.setText("LET'S GO!");
+        start_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                start_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(live_Data_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 690, 190, 130));
-
-        user_Data_Button.setText("Personal Data");
-        user_Data_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                user_Data_ButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(user_Data_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 700, 210, 130));
+        getContentPane().add(start_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 690, 210, 130));
 
         choosePath_Label.setForeground(new java.awt.Color(255, 255, 255));
         choosePath_Label.setText("Do you want to use live F1 data or your own data?");
@@ -65,21 +59,13 @@ public class HomeScreen extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void live_Data_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_live_Data_ButtonActionPerformed
-    {//GEN-HEADEREND:event_live_Data_ButtonActionPerformed
-        // TODO add your handling code here:
-        F1Login loginS = new F1Login();
-        loginS.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_live_Data_ButtonActionPerformed
-
-    private void user_Data_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_user_Data_ButtonActionPerformed
-    {//GEN-HEADEREND:event_user_Data_ButtonActionPerformed
+    private void start_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_start_ButtonActionPerformed
+    {//GEN-HEADEREND:event_start_ButtonActionPerformed
         // TODO add your handling code here:
         UserLogin uL = new UserLogin();
         uL.setVisible(true);
         dispose();
-    }//GEN-LAST:event_user_Data_ButtonActionPerformed
+    }//GEN-LAST:event_start_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,7 +115,6 @@ public class HomeScreen extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backgroundLabel;
     private javax.swing.JLabel choosePath_Label;
-    private javax.swing.JButton live_Data_Button;
-    private javax.swing.JButton user_Data_Button;
+    private javax.swing.JButton start_Button;
     // End of variables declaration//GEN-END:variables
 }

@@ -22,7 +22,7 @@ public class UserLogin extends javax.swing.JFrame
     {
         initComponents();
     }
-
+    public String currUser;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,7 +103,7 @@ public class UserLogin extends javax.swing.JFrame
     private void login_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_login_ButtonActionPerformed
     {//GEN-HEADEREND:event_login_ButtonActionPerformed
         // TODO add your handling code here:
-        String username = username_Field.getText();
+         currUser = username_Field.getText();
          char [] arr = userPassword_Field.getPassword();
         
         //essentially a .toString method
@@ -115,9 +115,11 @@ public class UserLogin extends javax.swing.JFrame
         //System.out.println(password);
         //String password = Arrays.toString((userPassword_Field.getPassword()));
         
-        if (LoginManager.isValid(username, password))
+        if (LoginManager.isValid(currUser, password))
         {
-            new User_Tyre_InputScreen().setVisible(true);
+            User_Tyre_InputScreen inputScreen = new User_Tyre_InputScreen();
+           inputScreen.setVisible(true);
+           inputScreen.currUser = currUser;
             dispose();
         }
         else 
@@ -137,7 +139,8 @@ public class UserLogin extends javax.swing.JFrame
     private void addUser_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addUser_ButtonActionPerformed
     {//GEN-HEADEREND:event_addUser_ButtonActionPerformed
         // TODO add your handling code here:
-        
+        new AddUserScreen().setVisible(true);
+        dispose();
     }//GEN-LAST:event_addUser_ButtonActionPerformed
 
     /**
