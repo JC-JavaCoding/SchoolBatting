@@ -13,6 +13,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,10 +21,10 @@ import java.util.logging.Logger;
  */
 public class Strategy
 {
-//    public static void main(String[] args)
-//    {
-//        getStratsAsArray();
-//    }
+    public static void main(String[] args)
+    {
+        System.out.println(getStrats());
+    }
     
     public static String strats;
     private static int numStrats = 0;
@@ -41,6 +42,7 @@ public class Strategy
         {
             Scanner info = new Scanner(new File("data\\info.txt")).useDelimiter("#");
             info.useLocale(Locale.US);
+            
             double sLap1 = info.nextDouble();
             double mLap1 = info.nextDouble();
             double hLap1 = info.nextDouble();
@@ -58,8 +60,9 @@ public class Strategy
             int hMaxLaps = info.nextInt();
 
             int raceLaps = info.nextInt();
+            double pitTime = info.nextDouble();
             info.close();
-            strats = calcStrat(sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg, sMaxLaps, medMaxLaps, hMaxLaps, raceLaps);
+            strats = calcStrat(sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg, sMaxLaps, medMaxLaps, hMaxLaps, raceLaps, pitTime);
             return strats;
         }
         catch(FileNotFoundException e)
@@ -125,117 +128,129 @@ public class Strategy
     }
     public static String [] getStratsAsArray()
     {
-        
-        System.out.println("Entered getStratsAsArray method.");
         String strategies = getStrats();
-        System.out.println("Entered getStratsAsArray method.");
-        System.out.println("Strategies: \n"+ strategies);
-        
-        //find out how many strategies there are for the array to be set to that number.
-        Scanner numLinesScanner = new Scanner(strategies).useDelimiter("\n");
-        int nrLines = 0;
-        while (numLinesScanner.hasNextLine() ) 
-        {
-            System.out.println("Nr Lines: "+ nrLines);
-            numLinesScanner.nextLine(); 
-        }
         
         Scanner stratScanner = new Scanner(strategies);
         String [] stratArr = new String[numStrats];
         for (int i = 1; i < numStrats; i++)
         {
             String line  = stratScanner.nextLine();
-            System.out.println( "Line: "+ i +", "+  line  );
+            //System.out.println( "Line: "+ i +", "+  line  );
             stratArr[i-1] = line;
         }
-        System.out.println("End of getStratsAsArray method");
+        
         return stratArr;
     }
+    public static boolean inputsViable(String sLap1Str, String mLap1Str, String hLap1Str,
+                                    String sLastLapStr, String mLastLapStr, String hLastLapStr,
+                                    String sMaxLapsStr, String mMaxLapsStr, String hMaxLapsStr,
+                                    String raceDistStr, String pitTimeStr)
+    {
+        String [] arrToCheck = {sLap1Str, mLap1Str, hLap1Str, sLastLapStr, mLastLapStr, hLastLapStr, sMaxLapsStr, mMaxLapsStr, hMaxLapsStr, raceDistStr, pitTimeStr};
+        
+        //iterate through everey instance of the array,
+        for (String str : arrToCheck)
+        {
+            //check whether the char in the string is a number or a period else return false
+            for (int j = 0; j < str.length();j++)
+            {
+                char letter = str.charAt(j);
+                if (! (Character.isDigit(letter) || letter == '.'))
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter valid numbers into the allocated areas, using a periodt (\".\") for decimals.");
+                    return false;
+                } 
+            }
+        }
+        
+        return true;
+    }
     public static String calcStrat(	
-                                    double sLap1, double mLap1, double hLap1,
+                                   double sLap1, double mLap1, double hLap1,
                                     double sLapDeg, double mLapDeg, double hLapDeg,
                                     int sMaxLaps, int mMaxLaps, int hMaxLaps,
-                                    int raceDist
+                                    double raceDist, double pitTime
                                 ) 	//transform to write to text file
     {
         String [] compounds = {"soft", "medium", "hard"};
         String strategy = "";
-        
-        //the first stint times:
-        long seconds;
-        
-        //second stint times:
-        long secondTime;
-        
-        //calculate the strategy:
-        String startCompound, currentStrategy = "#", secondTyre = "";
-        int maxLaps, secondMax;
-        int lap;
-        double timeFormula, bestStrat = 0;
-        
-        for (int compound = 0; compound < 3; compound ++)//for each tyre compound
-        {
-            seconds = 0;
-            timeFormula = 0;
-            bestStrat = 0;
-            startCompound = compounds[compound];
-//            currentStrategy += startCompound + "#";
             
-            //apply maximum laps on tyre
-            maxLaps = getMaxLaps(compound, sMaxLaps, mMaxLaps, hMaxLaps);
-            
-            //stint 1:
-            for (lap = 1; lap <= maxLaps; lap++)
+    //the first stint times:
+            long seconds;
+
+            //second stint times:
+            long secondTime;
+
+            //calculate the strategy:
+            String startCompound, currentStrategy = "#", secondTyre = "";
+            int maxLaps, secondMax;
+            int lap;
+            double timeFormula, bestStrat = 0;
+
+            for (int compound = 0; compound < 3; compound ++)//for each tyre compound
             {
-                
-                //set formulas for first stint:
-            	timeFormula = getFormulatedTime(compound, lap, sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg);
+                seconds = 0;
+                timeFormula = 0;
+                bestStrat = 0;
+                startCompound = compounds[compound];
 
-                seconds += (long) timeFormula;
-                secondTime = 0;
-                //set second stint tyre-type
-                for (int secCompound = 0; secCompound < 3; secCompound++)
+                //apply maximum laps on tyre
+                maxLaps = getMaxLaps(compound, sMaxLaps, mMaxLaps, hMaxLaps);
+
+                //stint 1:
+                for (lap = 1; lap <= maxLaps; lap++)
                 {
-                    secondTyre = compounds[secCompound];
-                    secondMax = getMaxLaps(secCompound, sMaxLaps, mMaxLaps, hMaxLaps);
-                    int stratNr = 0;
-                    //if the race can be finished on the selected tyre:
-                    if (lap + secondMax >= raceDist && secCompound != compound)
-                    {
-                        //second stint
-                        numStrats ++;
-                        for (int lapStint2 = lap+1; lapStint2 <= lap+secondMax; lapStint2++)
-                        {
-                            //select tyre formula for corresponding second stint tyre compound
-                            timeFormula = getFormulatedTime(secCompound, lapStint2, sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg);
-                            secondTime += (long) timeFormula;
 
-                            //on last lap of race distance:
-                            if (lapStint2 == raceDist)
-                            {
-                                break;
-                            }
-                        }//second stint for loop end brace
-                        
-                        seconds += secondTime;
-                        stratNr +=1;
-                        if (stratNr == 1)
-                        {
-                            bestStrat = seconds;
-                        }
-//                        if (seconds < bestStrat)
-//                        {
-//                            System.out.println("1: "+ startCompound +", LAP: "+ lap +", 2: "+ secondTyre +", time:"+ calcTime(seconds));
-                            strategy += "Lap1 - Lap"+ lap +": "+ startCompound +", LAP: "+ lap +", "+ secondTyre +", time:"+ calcTime(seconds) + "\n";
-//                        }
-                    }//if the race can be finished on the selected tyre: end brace
-                    seconds -= secondTime;
+                    //set formulas for first stint:
+                    timeFormula = getFormulatedTime(compound, lap, sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg);
+
+                    seconds += (long) timeFormula;
                     secondTime = 0;
-                }//set second stint compound end brace
+                    //set second stint tyre-type
+                    for (int secCompound = 0; secCompound < 3; secCompound++)
+                    {
+                        secondTyre = compounds[secCompound];
+                        secondMax = getMaxLaps(secCompound, sMaxLaps, mMaxLaps, hMaxLaps);
+                        int stratNr = 0;
+                        //if the race can be finished on the selected tyre:
+                        if (lap + secondMax >= raceDist && secCompound != compound)
+                        {
+                            //second stint
+                            secondTime += pitTime;
+                            numStrats ++;
+                            for (int lapStint2 = lap+1; lapStint2 <= lap+secondMax; lapStint2++)
+                            {
+                                //select tyre formula for corresponding second stint tyre compound
+                                timeFormula = getFormulatedTime(secCompound, lapStint2, sLap1, mLap1, hLap1, sLapDeg, mLapDeg, hLapDeg);
+                                secondTime += (long) timeFormula;
 
-            }//stint one end brace
-            
-        }//first stint tyre compound end brace
+                                //on last lap of race distance:
+                                if (lapStint2 == raceDist)
+                                {
+                                    break;
+                                }
+                            }//second stint for loop end brace
+
+                            seconds += secondTime;
+                            stratNr +=1;
+                            if (stratNr == 1)
+                            {
+                                bestStrat = seconds;
+                            }
+    //                        if (seconds < bestStrat)
+    //                        {
+    //                            System.out.println("1: "+ startCompound +", LAP: "+ lap +", 2: "+ secondTyre +", time:"+ calcTime(seconds));
+                                strategy += "Lap1 - Lap"+ lap +": "+ startCompound +", LAP: "+ lap +", "+ secondTyre +", time:"+ calcTime(seconds) + "\n";
+    //                        }
+                        }//if the race can be finished on the selected tyre: end brace
+                        seconds -= secondTime;
+                        secondTime = 0;
+                    }//set second stint compound end brace
+
+                }//stint one end brace
+
+            }//first stint tyre compound end brace
+        
         return strategy;
     }
 }

@@ -9,6 +9,7 @@ import Backend.StratManager;
 import Backend.Strategy;
 import Backend.UserManager;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,14 +24,30 @@ public class UserStrategies extends javax.swing.JFrame
     public UserStrategies()
     {
         initComponents();
+        setLocationRelativeTo(null);
+        
         DefaultListModel<String> listModel = new DefaultListModel<>();
         String[] savedStrategies = StratManager.getStrategiesAsArray( UserManager.getCurrentUser());
-        for (String strategie : savedStrategies) //iterating through the array, SUPER COOLLL
+        
+        for(int i = 0; i < savedStrategies.length; i++)
         {
-            System.out.println("In UserStrats for loop");
-            System.out.println(strategie);
-            listModel.addElement(strategie);
+            System.out.println(savedStrategies[i]);
         }
+        //if the array is not empty:
+        if(savedStrategies.length != 0)
+        {
+            System.out.println("In If Statement: USERSTRATEGIES");
+            for (String strategie : savedStrategies) //iterating through the array, SUPER COOLLL
+            {
+                listModel.addElement(strategie);
+            }
+        }
+        else
+        {
+            //JOptionPane.showMessageDialog(this, "No Strategies found");
+            listModel.addElement("No Strategies Available");
+        }
+        System.out.println("After if-else");
         savedStrats_List.setModel(listModel);
 //        userStrategies_TextArea.setText( StratManager.getSavedStrategies( UserManager.getCurrentUser() ) );//set the textArea as the saved strategies for the current user
     }
@@ -42,8 +59,7 @@ public class UserStrategies extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         home_Button = new javax.swing.JButton();
         savedStrats_Label = new javax.swing.JLabel();
@@ -57,11 +73,9 @@ public class UserStrategies extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        home_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1-logo.png"))); // NOI18N
-        home_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        home_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Logo.png"))); // NOI18N
+        home_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 home_ButtonActionPerformed(evt);
             }
         });
@@ -74,21 +88,17 @@ public class UserStrategies extends javax.swing.JFrame
 
         back_Button.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         back_Button.setText("BACK");
-        back_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        back_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 back_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 780, 100, -1));
+        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 750, 100, -1));
 
         addStrat_Button.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         addStrat_Button.setText("ADD");
-        addStrat_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        addStrat_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addStrat_ButtonActionPerformed(evt);
             }
         });
@@ -96,18 +106,15 @@ public class UserStrategies extends javax.swing.JFrame
 
         deleteStratButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         deleteStratButton.setText("DELETE");
-        deleteStratButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        deleteStratButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteStratButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(deleteStratButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 690, 100, -1));
+        getContentPane().add(deleteStratButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 680, 100, -1));
 
         savedStrats_List.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        savedStrats_List.setModel(new javax.swing.AbstractListModel<String>()
-        {
+        savedStrats_List.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -115,10 +122,13 @@ public class UserStrategies extends javax.swing.JFrame
         savedStrats_List.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(savedStrats_List);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 610, 410, 210));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 610, 410, 180));
 
-        background_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights4.png"))); // NOI18N
-        getContentPane().add(background_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(-230, 0, 1020, -1));
+        background_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights4 - Copy.png"))); // NOI18N
+        background_Label.setMaximumSize(new java.awt.Dimension(1290, 1080));
+        background_Label.setMinimumSize(new java.awt.Dimension(1290, 1080));
+        background_Label.setPreferredSize(new java.awt.Dimension(1290, 1080));
+        getContentPane().add(background_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(-235, 0, 1025, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

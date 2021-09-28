@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
  */
 public class StratManager
 {
+    
+    private static int numSavedStrats = 0;
     final static File file = new File("data\\saved.txt");
     public static boolean strategyExists(String nameToCheck, String username)
     {
@@ -27,12 +29,12 @@ public class StratManager
             {
                 String line = fileScanner.nextLine();
                 Scanner lineScanner = new Scanner(line).useDelimiter("#");
-                
                 String user = lineScanner.next();
                 String stratName = lineScanner.next();
+                System.out.println("Username: "+ user +", username to check: "+ username +", strategy name: "+ stratName +", strategy name to check: "+ nameToCheck);
                 if( username.equals(user) && stratName.equals(nameToCheck) )
                 {
-                    System.out.println("Strategy already exists");
+                    JOptionPane.showMessageDialog(null, "Strategy already exists");
                     return true; 
                 }
             }
@@ -48,13 +50,13 @@ public class StratManager
     {
         try
         {
-            if (!strategyExists(strategy, username))
+            if (strategyExists(stratName, username) == false)
             {
-                FileWriter outputStream = new FileWriter(file, true);
-                PrintWriter stratFile = new PrintWriter(outputStream);
-                stratFile.print(username +"#"+ stratName +"#"+ strategy);
+                //FileWriter outputStream = new FileWriter(file, true);
+                PrintWriter stratFile = new PrintWriter(new FileWriter(file, true));
+                stratFile.print(username +"#"+ stratName +"#"+ strategy +"\n");
 
-                outputStream.close();
+                //outputStream.close();
                 stratFile.close();
             }
         }
@@ -82,6 +84,7 @@ public class StratManager
                 {
                     String stratName = lineScanner.next();
                     String savedStrat = lineScanner.next();
+                    numSavedStrats ++;
                     output += stratName +": "+ savedStrat +"" + "\n";
                 }
             }
@@ -96,41 +99,29 @@ public class StratManager
     public static String [] getStrategiesAsArray(String user)
     {
         String savedStrats = getSavedStrategies(user);
-        
-        Scanner numLinesScanner = new Scanner(savedStrats).useDelimiter("\n");
-        int nrLines = 0;
-        while (numLinesScanner.hasNextLine() ) 
-        {
-            System.out.println("Nr Lines: "+ nrLines);
-            numLinesScanner.nextLine(); 
-            nrLines ++;
-        }
-        
+        //System.out.println("number saved strats: "+numSavedStrats);
         Scanner stratScanner = new Scanner(savedStrats);
-        String [] stratArr = new String[nrLines];
-        for (int i = 1; i < nrLines; i++)
+        String [] stratArr = new String[numSavedStrats];
+        for (int i = 0; i < numSavedStrats; i++)
         {
             String line  = stratScanner.nextLine();
-            Scanner lineScanner = new Scanner(line);
-            System.out.println( "Line: "+ i +", "+  line  );
-            
-            if (lineScanner.next().equals(user))
-            {
-                stratArr[i-1] = line;
-            }
+            //System.out.println( "Line: "+ i +", "+  line  );
+            stratArr[i] = line;
         }
+        //System.out.println("End of getStratsAsArray method");
+        numSavedStrats = 0;
         return stratArr;
     }
                 
-    public static void deleteStrategy(String stratNameToDelete, String currUser)
+    public static void deleteStrategy(String stratToDelete, String currUser)
     {
+        Scanner selectedScanner = new Scanner(stratToDelete).useDelimiter(":");
+        String stratNameToDelete = selectedScanner.next();
         try
         {
-            FileWriter outputStream = new FileWriter(file, false);
-            PrintWriter stratFile = new PrintWriter(outputStream);
             Scanner fileScanner = new Scanner(file); 
             
-            String output ="";
+            String output = "";
             while (fileScanner.hasNextLine())
             {
                 String line = fileScanner.nextLine();
@@ -138,13 +129,31 @@ public class StratManager
                 
                 String username = lineScanner.next();
                 String stratName = lineScanner.next();
-               
-                if (!(currUser.equals(username) && stratName.equals(stratNameToDelete)))
+                /*ERROR CHECKING*/
+                System.out.println("username: "+username+", strategy name: "+stratName);
+                System.out.println("current user: "+currUser+", strategy to delete: "+stratNameToDelete);
+                /**/
+                if (!(currUser.equals(username)) )
                 {
                     output += line +"\n";
+                    /*ERROR CHECKING*/
+                    System.out.println(line);
+                    /**/
+                }
+                else
+                {
+                    if (!stratName.equals(stratNameToDelete))
+                    {
+                        output += line +"\n";
+                        /*ERROR CHECKING*/
+                        System.out.println(line);
+                        /**/
+                    }
                 }
             }
-            outputStream.close();
+            PrintWriter stratFile = new PrintWriter(file);
+            stratFile.print(output);
+            //outputStream.close();
             stratFile.close();
         }
         catch(java.io.IOException e)
@@ -152,4 +161,5 @@ public class StratManager
             System.out.println("IOException in StratManager class");
         }
     }
+    
 }

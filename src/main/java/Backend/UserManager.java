@@ -5,11 +5,13 @@
  */
 package Backend;
 
+import UI.UserStrategies;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -84,9 +86,9 @@ public class UserManager
             while (userScanner.hasNextLine())
             {
                 String line = userScanner.nextLine();
-                Scanner lineScanner = new Scanner (line);
+                Scanner lineScanner = new Scanner (line).useDelimiter("#");
                 String userInFile = lineScanner.next();
-                
+                System.out.println("userInfile: "+ userInFile +", username to check: "+username);
                 if (userInFile.equals(username)) return true;
             }
         }
@@ -96,26 +98,36 @@ public class UserManager
         }
         return false;
     }
-    public static void addUser(String name, String passkey)
+    public static void addUser(String name, String passkey, String confirmPasskey)
     {
-        if ( !userExists(name) )//check whether username exists
+        //if the confirm passkey is the same as the first password entered
+        if(passkey.equals(confirmPasskey))
         {
-            
-            try 
+            if ( !userExists(name) )//check whether username exists
             {
-                FileWriter output = new FileWriter(usersFile, true);
-                PrintWriter userFile = new PrintWriter(output);
-                userFile.print(name +"#"+ passkey);
-                System.out.println(name +"#"+ passkey);
-                
-                userFile.close();
-                output.close();
+                try 
+                {
+                    FileWriter output = new FileWriter(usersFile, true);
+                    PrintWriter userFile = new PrintWriter(output);
+                    userFile.print(name +"#"+ passkey);
+                    
+                    userFile.close();
+                    output.close();
+                }
+                catch(java.io.IOException e)
+                {
+                    System.out.println("IOException");
+                }
             }
-            catch(java.io.IOException e)
+            else 
             {
-                System.out.println("IOException");
+                JOptionPane.showMessageDialog(null, "Username already exists");
             }
-        }    
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Confirm Password differs from password entered");
+        }
     }
     
     public static String getUsers()

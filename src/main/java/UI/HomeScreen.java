@@ -28,33 +28,32 @@ public class HomeScreen extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         start_Button = new javax.swing.JButton();
         choosePath_Label = new javax.swing.JLabel();
         backgroundLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Strategy Home Screen");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         start_Button.setText("LET'S GO!");
-        start_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        start_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 start_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(start_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 690, 210, 130));
+        getContentPane().add(start_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 600, 210, 130));
 
         choosePath_Label.setForeground(new java.awt.Color(255, 255, 255));
         choosePath_Label.setText("Do you want to use live F1 data or your own data?");
-        getContentPane().add(choosePath_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, 290, 20));
+        getContentPane().add(choosePath_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 290, 20));
 
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights1.png"))); // NOI18N
-        getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-250, 0, 1040, 900));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, -20, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,6 +114,7 @@ public class HomeScreen extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backgroundLabel;
     private javax.swing.JLabel choosePath_Label;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton start_Button;
     // End of variables declaration//GEN-END:variables
 }

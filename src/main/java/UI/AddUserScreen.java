@@ -6,6 +6,7 @@
 package UI;
 
 import Backend.UserManager;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,18 +39,23 @@ public class AddUserScreen extends javax.swing.JFrame {
         currentUsers_TextArea = new javax.swing.JTextArea();
         currUsers_Label = new javax.swing.JLabel();
         confirmPassword_Label = new javax.swing.JLabel();
-        confirmPasskey_Field = new javax.swing.JTextField();
+        confirmPasskey_Field = new javax.swing.JPasswordField();
         username_Field = new javax.swing.JTextField();
         username_Label = new javax.swing.JLabel();
         userPassword_Label = new javax.swing.JLabel();
         userPassword_Field = new javax.swing.JTextField();
         addUser_Button = new javax.swing.JButton();
         back_Button = new javax.swing.JButton();
+        home_Button = new javax.swing.JButton();
         backgroundImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1290, 1080));
+        setMinimumSize(new java.awt.Dimension(1290, 1080));
+        setPreferredSize(new java.awt.Dimension(1290, 1080));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        currentUsers_TextArea.setEditable(false);
         currentUsers_TextArea.setColumns(20);
         currentUsers_TextArea.setRows(5);
         jScrollPane1.setViewportView(currentUsers_TextArea);
@@ -65,12 +71,6 @@ public class AddUserScreen extends javax.swing.JFrame {
         confirmPassword_Label.setForeground(new java.awt.Color(68, 68, 68));
         confirmPassword_Label.setText("Confirm Your Password:");
         getContentPane().add(confirmPassword_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 670, -1, -1));
-
-        confirmPasskey_Field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmPasskey_FieldActionPerformed(evt);
-            }
-        });
         getContentPane().add(confirmPasskey_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 700, 260, -1));
         getContentPane().add(username_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 580, 260, -1));
 
@@ -109,15 +109,19 @@ public class AddUserScreen extends javax.swing.JFrame {
         });
         getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 770, -1, -1));
 
-        backgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights4.png"))); // NOI18N
-        getContentPane().add(backgroundImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(-250, 0, 1010, 930));
+        home_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Logo.png"))); // NOI18N
+        home_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                home_ButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(home_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 50, 30));
+
+        backgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights3.png"))); // NOI18N
+        getContentPane().add(backgroundImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(-250, 0, 1040, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void confirmPasskey_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmPasskey_FieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confirmPasskey_FieldActionPerformed
 
     private void userPassword_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userPassword_FieldActionPerformed
         // TODO add your handling code here:
@@ -132,16 +136,34 @@ public class AddUserScreen extends javax.swing.JFrame {
 
     private void addUser_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUser_ButtonActionPerformed
         // TODO add your handling code here:
+        char [] arr = confirmPasskey_Field.getPassword();
+        
+        //essentially a .toString method
+        String confirmPassword = "";
+        for (int i = 0; i < arr.length; i++) 
+        {
+           confirmPassword += arr[i];
+        }
         password = userPassword_Field.getText();
         username = username_Field.getText();
-        if (  !(username == null && password == null) )
+        if (  !(username.isBlank() && !password.isBlank()) && !confirmPassword.isBlank())
         {
-            UserManager.addUser(username, password);
+            UserManager.addUser(username, password, confirmPassword);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Please fill in all of the cells.");
         }
         currentUsers_TextArea.setText
         (UserManager.getUsers()
         );
     }//GEN-LAST:event_addUser_ButtonActionPerformed
+
+    private void home_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_home_ButtonActionPerformed
+        // TODO add your handling code here:
+        new HomeScreen().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_home_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,10 +173,11 @@ public class AddUserScreen extends javax.swing.JFrame {
     private javax.swing.JButton addUser_Button;
     private javax.swing.JButton back_Button;
     private javax.swing.JLabel backgroundImage;
-    private javax.swing.JTextField confirmPasskey_Field;
+    private javax.swing.JPasswordField confirmPasskey_Field;
     private javax.swing.JLabel confirmPassword_Label;
     private javax.swing.JLabel currUsers_Label;
     private javax.swing.JTextArea currentUsers_TextArea;
+    private javax.swing.JButton home_Button;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField userPassword_Field;
     private javax.swing.JLabel userPassword_Label;

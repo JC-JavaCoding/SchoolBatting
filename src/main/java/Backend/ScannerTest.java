@@ -19,23 +19,23 @@ public class ScannerTest
 {
     public static void main(String[] args)
     {
-        
+        testStratRead();
     }
     public static String testStratRead()
     {
         String str = "hgdxkjhgfckjhgfc";
         try
         {
-            File info = new File("info.txt");
+            File info = new File("data\\info.txt");
             Scanner sc = new Scanner(info).useDelimiter("#");
             sc.useLocale(Locale.US);
             
             //
             while(sc.hasNextDouble())
             {
-                //System.out.println(""+ sc.nextDouble());
+                System.out.println(""+ sc.nextDouble());
                 str = "Hello";
-                sc.next();
+                //sc.next();
             }
             sc.close();
         }

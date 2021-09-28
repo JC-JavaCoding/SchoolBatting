@@ -52,20 +52,20 @@ public class UserLogin extends javax.swing.JFrame
         addUsers_Label.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         addUsers_Label.setForeground(new java.awt.Color(33, 33, 33));
         addUsers_Label.setText("Password");
-        getContentPane().add(addUsers_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 610, -1, -1));
+        getContentPane().add(addUsers_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 620, -1, -1));
 
         userPassword_Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userPassword_FieldActionPerformed(evt);
             }
         });
-        getContentPane().add(userPassword_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 640, 610, -1));
-        getContentPane().add(username_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 550, 610, -1));
+        getContentPane().add(userPassword_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 650, 610, -1));
+        getContentPane().add(username_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 560, 610, -1));
 
         addUsers_Label1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         addUsers_Label1.setForeground(new java.awt.Color(33, 33, 33));
         addUsers_Label1.setText("User");
-        getContentPane().add(addUsers_Label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 510, -1, -1));
+        getContentPane().add(addUsers_Label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, -1, -1));
 
         login_Button.setText("Log In");
         login_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +73,7 @@ public class UserLogin extends javax.swing.JFrame
                 login_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(login_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 690, -1, -1));
+        getContentPane().add(login_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 700, -1, -1));
 
         back_Button.setText("Back");
         back_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +81,7 @@ public class UserLogin extends javax.swing.JFrame
                 back_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 690, -1, -1));
+        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 700, -1, -1));
 
         addUser_Button.setBackground(new java.awt.Color(102, 255, 255));
         addUser_Button.setForeground(new java.awt.Color(33, 33, 33));
@@ -92,10 +92,10 @@ public class UserLogin extends javax.swing.JFrame
                 addUser_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(addUser_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 740, -1, -1));
+        getContentPane().add(addUser_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 750, -1, -1));
 
-        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights2 (2).PNG"))); // NOI18N
-        getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -100, -1, -1));
+        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights2 (2) - Copy.PNG"))); // NOI18N
+        getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-230, 0, 1020, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -142,7 +142,7 @@ public class UserLogin extends javax.swing.JFrame
         }
         else 
         {
-            System.out.println("Username Or Password Incorrect.");
+            JOptionPane.showMessageDialog(this, "Username Or Password Incorrect.");
         } 
     }//GEN-LAST:event_login_ButtonActionPerformed
 

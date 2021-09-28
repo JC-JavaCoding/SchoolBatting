@@ -36,7 +36,7 @@ public class StrategyOutput extends javax.swing.JFrame
         initComponents();
         setLocationRelativeTo(null);
         
-        System.out.println("Strategy output, before loop");//error checking
+        //System.out.println("Strategy output, before loop");//error checking
         
         DefaultListModel<String> listModel = new DefaultListModel<>();
         String[] strategies = Strategy.getStratsAsArray();
@@ -47,7 +47,7 @@ public class StrategyOutput extends javax.swing.JFrame
         }
         outputList.setModel(listModel);
         
-        System.out.println("Strategy output, after loop");//error checking
+        //System.out.println("Strategy output, after loop");//error checking
     }
     
     public String traceBack;
@@ -59,15 +59,16 @@ public class StrategyOutput extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         back_Button = new javax.swing.JButton();
         save_Button = new javax.swing.JButton();
         saveStratName_Label = new javax.swing.JLabel();
         stratName_Field = new javax.swing.JTextField();
+        viewStrats_Button = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         outputList = new javax.swing.JList<>();
+        home_Button = new javax.swing.JButton();
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,38 +78,53 @@ public class StrategyOutput extends javax.swing.JFrame
         setSize(new java.awt.Dimension(1920, 1080));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        back_Button.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         back_Button.setText("Back");
-        back_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        back_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 back_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 700, 100, 60));
+        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 70, 40));
 
+        save_Button.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         save_Button.setText("Save");
-        save_Button.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        save_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 save_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(save_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 700, 90, 60));
+        getContentPane().add(save_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 630, 70, 40));
 
         saveStratName_Label.setForeground(new java.awt.Color(33, 33, 33));
         saveStratName_Label.setText("What would you like to save your Strategy as?");
-        getContentPane().add(saveStratName_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 540, 270, -1));
-        getContentPane().add(stratName_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 570, 240, -1));
+        getContentPane().add(saveStratName_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 270, -1));
+        getContentPane().add(stratName_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 240, -1));
+
+        viewStrats_Button.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        viewStrats_Button.setText("My Strategies");
+        viewStrats_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewStrats_ButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(viewStrats_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 730, -1, -1));
 
         outputList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(outputList);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 520, 550, 240));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, 430, 240));
 
-        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights4.png"))); // NOI18N
-        getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1240, 930));
+        home_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Logo.png"))); // NOI18N
+        home_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                home_ButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(home_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 50, 30));
+
+        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights5 - Copy.png"))); // NOI18N
+        getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-235, 0, 1025, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -125,20 +141,32 @@ public class StrategyOutput extends javax.swing.JFrame
         // TODO add your handling code here:
         
         //check whether a strategy is selected and a name for it has been entered:
-        if( outputList.getSelectedValue() != null && !stratName_Field.getText().isEmpty())
+        if( outputList.getSelectedValue() != null && !stratName_Field.getText().isBlank())
         {
             String theChosenOne = outputList.getSelectedValue(); //:D
             String stratName = stratName_Field.getText();
-            System.out.println("You chose: "+ theChosenOne + "\nYou called it: "+ stratName);
+            //System.out.println("You chose: "+ theChosenOne + "\nYou called it: "+ stratName);
             
             StratManager.addStrategy(currUser, stratName, theChosenOne);
-            JOptionPane.showMessageDialog(this, "added strategy");
+            //JOptionPane.showMessageDialog(this, "Added strategy \""+theChosenOne+"\"");
          }
         else
         {
             JOptionPane.showMessageDialog(this, "The fileName is already in use.");
         }
     }//GEN-LAST:event_save_ButtonActionPerformed
+
+    private void viewStrats_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewStrats_ButtonActionPerformed
+        // TODO add your handling code here:
+        new UserStrategies().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_viewStrats_ButtonActionPerformed
+
+    private void home_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_home_ButtonActionPerformed
+        // TODO add your handling code here:
+        new HomeScreen().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_home_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,10 +176,12 @@ public class StrategyOutput extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back_Button;
     private javax.swing.JLabel backgroundLabel;
+    private javax.swing.JButton home_Button;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> outputList;
     private javax.swing.JLabel saveStratName_Label;
     private javax.swing.JButton save_Button;
     private javax.swing.JTextField stratName_Field;
+    private javax.swing.JButton viewStrats_Button;
     // End of variables declaration//GEN-END:variables
 }
