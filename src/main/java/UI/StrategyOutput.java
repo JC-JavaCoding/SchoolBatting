@@ -6,7 +6,7 @@
 package UI;
 
 import Backend.StratManager;
-import Backend.Strategy;
+import Backend.StrategyCalculator;
 import java.io.File;
 import java.util.Scanner;
 import javax.swing.DefaultListModel;
@@ -31,23 +31,18 @@ public class StrategyOutput extends javax.swing.JFrame
         }
         catch (java.io.FileNotFoundException e)
         {
-            JOptionPane.showMessageDialog(this, "File Not Found Exception Dumbass");
+            JOptionPane.showMessageDialog(this, "File Not Found Exception");
         }
         initComponents();
         setLocationRelativeTo(null);
         
-        //System.out.println("Strategy output, before loop");//error checking
-        
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        String[] strategies = Strategy.getStratsAsArray();
+        String[] strategies = StrategyCalculator.getStratsAsArray();
         for (String strategie : strategies) //iterating through the array, SUPER COOLLL
         {
-            System.out.println("In for loop");
             listModel.addElement(strategie);
         }
         outputList.setModel(listModel);
-        
-        //System.out.println("Strategy output, after loop");//error checking
     }
     
     public String traceBack;
@@ -59,7 +54,8 @@ public class StrategyOutput extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         back_Button = new javax.swing.JButton();
         save_Button = new javax.swing.JButton();
@@ -80,8 +76,10 @@ public class StrategyOutput extends javax.swing.JFrame
 
         back_Button.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         back_Button.setText("Back");
-        back_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        back_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 back_ButtonActionPerformed(evt);
             }
         });
@@ -89,8 +87,10 @@ public class StrategyOutput extends javax.swing.JFrame
 
         save_Button.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         save_Button.setText("Save");
-        save_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        save_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 save_ButtonActionPerformed(evt);
             }
         });
@@ -103,8 +103,10 @@ public class StrategyOutput extends javax.swing.JFrame
 
         viewStrats_Button.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         viewStrats_Button.setText("My Strategies");
-        viewStrats_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        viewStrats_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 viewStrats_ButtonActionPerformed(evt);
             }
         });
@@ -116,8 +118,10 @@ public class StrategyOutput extends javax.swing.JFrame
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, 430, 240));
 
         home_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Logo.png"))); // NOI18N
-        home_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        home_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 home_ButtonActionPerformed(evt);
             }
         });

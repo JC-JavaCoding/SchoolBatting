@@ -5,7 +5,7 @@
  */
 package UI;
 
-import Backend.Strategy;
+import Backend.StrategyCalculator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -29,7 +29,7 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
         setLocationRelativeTo(null);
     }
     public static String traceback = "";
-    private double sLap1;
+    private String sLap1;
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -251,42 +251,35 @@ public class User_Tyre_InputScreen extends javax.swing.JFrame
 
     private void calculate_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_calculate_ButtonActionPerformed
     {//GEN-HEADEREND:event_calculate_ButtonActionPerformed
-        PrintWriter info = null;
-        try {
-            // TODO add your handling code here:
-            //format: slap1#mlap1#hlap1#lastLap#maxLaps
-            //check whether any of the cells are empty
-            if ((soft_FirstLapTimeField.getText().isBlank() || soft_LastLapTimeField.getText().isBlank() || soft_MaxLapsField.getText().isBlank()
-                || medium_FirstLapSecondsField.getText().isBlank() || medium_LastLapSecondsField.getText().isBlank() || medium_MaxLapsField.getText().isBlank()
-                || hard_FirstLapTimeField.getText().isBlank() || hard_LastLapTimeField.getText().isBlank() || hard_MaxLapsField.getText().isBlank()
-                    || raceDistance_Field.getText().isBlank()) || !Strategy.inputsViable(soft_FirstLapTimeField.getText(), medium_FirstLapSecondsField.getText(), hard_FirstLapTimeField.getText(), soft_LastLapTimeField.getText(), medium_LastLapSecondsField.getText(), hard_LastLapTimeField.getText(), soft_MaxLapsField.getText(), medium_MaxLapsField.getText(), hard_MaxLapsField.getText(), raceDistance_Field.getText(), pitTime_Field.getText()))
+        // TODO add your handling code here:
+        //format: slap1#mlap1#hlap1#lastLap#maxLaps
+        String sLap1Str = soft_FirstLapTimeField.getText() ;
+        String mLap1Str = medium_FirstLapSecondsField.getText();
+        String hLap1Str = hard_FirstLapTimeField.getText();
+        String sLastLapStr = soft_LastLapTimeField.getText();
+        String mLastLapStr = medium_LastLapSecondsField.getText();
+        String hLastLapStr = hard_LastLapTimeField.getText();
+        String sMaxLapsStr = soft_MaxLapsField.getText();
+        String mMaxLapsStr = medium_MaxLapsField.getText();
+        String hMaxLapsStr = hard_MaxLapsField.getText();
+        String raceDistStr = raceDistance_Field.getText();
+        String pitTimeStr = pitTime_Field.getText();
+
+            //check whether any of the cells are empty and whether they are filled with the incorrect data
+            if ((sLap1Str.isBlank() || sLastLapStr.isBlank() || sMaxLapsStr.isBlank()
+                || mLap1Str.isBlank() || mLastLapStr.isBlank() || mMaxLapsStr.isBlank()
+                || hLap1Str.isBlank() || hLastLapStr.isBlank() || hMaxLapsStr.isBlank()
+                    || raceDistStr.isBlank() || pitTimeStr.isBlank()) || !StrategyCalculator.inputsViable(sLap1Str, mLap1Str, hLap1Str, sLastLapStr, mLastLapStr, hLastLapStr, sMaxLapsStr, mMaxLapsStr, hMaxLapsStr, raceDistStr, pitTimeStr))
             {
                 JOptionPane.showMessageDialog(this, "Please Fill ALL the above cells with valid information :)");
             }
             else
             {
-                info = new PrintWriter(new File("data\\info.txt"));
-                double sLap1 = Double.parseDouble(soft_FirstLapTimeField.getText() );
-                double mLap1 = Double.parseDouble(medium_FirstLapSecondsField.getText() );
-                double hLap1 = Double.parseDouble(hard_FirstLapTimeField.getText() );
-                double sLastLap = Double.parseDouble(soft_LastLapTimeField.getText() );
-                double mLastLap = Double.parseDouble(medium_LastLapSecondsField.getText());
-                double hLastLap = Double.parseDouble(hard_LastLapTimeField.getText());
-                int sMaxLaps = Integer.parseInt(soft_MaxLapsField.getText() );
-                int mMaxLaps = Integer.parseInt(medium_MaxLapsField.getText());
-                int hMaxLaps = Integer.parseInt(hard_MaxLapsField.getText());
-                int raceDist = Integer.parseInt(raceDistance_Field.getText());
-                double pitTime = Double.parseDouble(pitTime_Field.getText());
-                info.print(sLap1 +"#"+ mLap1 +"#"+ hLap1 +"#"+ sLastLap +"#"+ mLastLap +"#"+ hLastLap +"#"+ sMaxLaps +"#"+ mMaxLaps +"#"+ hMaxLaps +"#"+ raceDist +"#"+ pitTime);
-                info.close();
+                StrategyCalculator.printInfo(sLap1Str, mLap1Str, hLap1Str, sLastLapStr, mLastLapStr, hLastLapStr, sMaxLapsStr, mMaxLapsStr, hMaxLapsStr, raceDistStr, pitTimeStr);
                 new StrategyOutput().setVisible(true);
                 dispose();
             }
-        } catch (FileNotFoundException ex) {
-            System.out.println("File not found exception");
-        } 
-        finally
-        {info.close();}
+        
     }//GEN-LAST:event_calculate_ButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField1ActionPerformed

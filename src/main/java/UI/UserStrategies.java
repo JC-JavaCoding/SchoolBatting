@@ -6,7 +6,7 @@
 package UI;
 
 import Backend.StratManager;
-import Backend.Strategy;
+import Backend.StrategyCalculator;
 import Backend.UserManager;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -29,14 +29,9 @@ public class UserStrategies extends javax.swing.JFrame
         DefaultListModel<String> listModel = new DefaultListModel<>();
         String[] savedStrategies = StratManager.getStrategiesAsArray( UserManager.getCurrentUser());
         
-        for(int i = 0; i < savedStrategies.length; i++)
-        {
-            System.out.println(savedStrategies[i]);
-        }
         //if the array is not empty:
         if(savedStrategies.length != 0)
         {
-            System.out.println("In If Statement: USERSTRATEGIES");
             for (String strategie : savedStrategies) //iterating through the array, SUPER COOLLL
             {
                 listModel.addElement(strategie);
@@ -47,9 +42,7 @@ public class UserStrategies extends javax.swing.JFrame
             //JOptionPane.showMessageDialog(this, "No Strategies found");
             listModel.addElement("No Strategies Available");
         }
-        System.out.println("After if-else");
         savedStrats_List.setModel(listModel);
-//        userStrategies_TextArea.setText( StratManager.getSavedStrategies( UserManager.getCurrentUser() ) );//set the textArea as the saved strategies for the current user
     }
 
     /**
@@ -59,7 +52,8 @@ public class UserStrategies extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         home_Button = new javax.swing.JButton();
         savedStrats_Label = new javax.swing.JLabel();
@@ -74,8 +68,10 @@ public class UserStrategies extends javax.swing.JFrame
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         home_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Logo.png"))); // NOI18N
-        home_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        home_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 home_ButtonActionPerformed(evt);
             }
         });
@@ -88,8 +84,10 @@ public class UserStrategies extends javax.swing.JFrame
 
         back_Button.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         back_Button.setText("BACK");
-        back_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        back_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 back_ButtonActionPerformed(evt);
             }
         });
@@ -97,8 +95,10 @@ public class UserStrategies extends javax.swing.JFrame
 
         addStrat_Button.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         addStrat_Button.setText("ADD");
-        addStrat_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addStrat_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addStrat_ButtonActionPerformed(evt);
             }
         });
@@ -106,15 +106,18 @@ public class UserStrategies extends javax.swing.JFrame
 
         deleteStratButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         deleteStratButton.setText("DELETE");
-        deleteStratButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteStratButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteStratButtonActionPerformed(evt);
             }
         });
         getContentPane().add(deleteStratButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 680, 100, -1));
 
         savedStrats_List.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        savedStrats_List.setModel(new javax.swing.AbstractListModel<String>() {
+        savedStrats_List.setModel(new javax.swing.AbstractListModel<String>()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
@@ -157,9 +160,35 @@ public class UserStrategies extends javax.swing.JFrame
     private void deleteStratButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteStratButtonActionPerformed
     {//GEN-HEADEREND:event_deleteStratButtonActionPerformed
         // TODO add your handling code here:
-        String stratSelected = savedStrats_List.getSelectedValue();
-        StratManager.deleteStrategy(stratSelected, UserManager.getCurrentUser());
-        
+        //if the user has selected a strategy:
+        if (savedStrats_List.getSelectedValue() != null)
+        {
+            String stratSelected = savedStrats_List.getSelectedValue();
+            StratManager.deleteStrategy(stratSelected, UserManager.getCurrentUser());
+
+            //setting the outputlist as the one was now deleted.
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            String[] savedStrategies = StratManager.getStrategiesAsArray( UserManager.getCurrentUser());
+
+            for(int i = 0; i < savedStrategies.length; i++)
+            {
+                System.out.println(savedStrategies[i]);
+            }
+            //if the array is not empty:
+            if(savedStrategies.length != 0)
+            {
+                System.out.println("In If Statement: USERSTRATEGIES");
+                for (String strategie : savedStrategies) //iterating through the array, SUPER COOLLL
+                {
+                    listModel.addElement(strategie);
+                }
+            }
+            else
+            {
+                listModel.addElement("No Strategies Available");
+            }
+            savedStrats_List.setModel(listModel);
+        }
     }//GEN-LAST:event_deleteStratButtonActionPerformed
 
     /**

@@ -1,6 +1,6 @@
 Ammara#Yello12#Lap 1-Lap 7: hard, LAP 7: medium 1:22:3
 Ammara#Coolbeans Soft#Lap1 - Lap9: soft, LAP: 9, hard, time:1:8:20
-JC#Austria SPEED#Lap1 - Lap1: soft, LAP: 1, hard, time:0:59:14
-JC#Caller#Lap1 - Lap6: soft, LAP: 6, hard, time:1:20:59
-JC#Medium#Lap1 - Lap7: medium, LAP: 7, hard, time:0:48:50
 JC#Trial#Lap1 - Lap8: soft, LAP: 8, medium, time:0:2:21
+JC#Monoco SH#Lap1 - Lap20: soft, LAP: 20, hard, time:2:17:37
+JC#Azerbaijing GP Medium Early#Lap1 - Lap2: medium, LAP: 2, hard, time:1:9:12
+JC#Qualifying#Lap1 - Lap1: medium, LAP: 1, hard, time:0:0:59

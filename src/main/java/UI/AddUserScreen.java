@@ -33,7 +33,8 @@ public class AddUserScreen extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         currentUsers_TextArea = new javax.swing.JTextArea();
@@ -84,8 +85,10 @@ public class AddUserScreen extends javax.swing.JFrame {
         userPassword_Label.setText("Enter Your Password:");
         getContentPane().add(userPassword_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 610, -1, -1));
 
-        userPassword_Field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        userPassword_Field.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 userPassword_FieldActionPerformed(evt);
             }
         });
@@ -93,32 +96,38 @@ public class AddUserScreen extends javax.swing.JFrame {
 
         addUser_Button.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         addUser_Button.setText("ADD USER");
-        addUser_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addUser_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addUser_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(addUser_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 770, -1, -1));
+        getContentPane().add(addUser_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 750, -1, -1));
 
         back_Button.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         back_Button.setText("BACK");
-        back_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        back_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 back_ButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 770, -1, -1));
+        getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 750, -1, -1));
 
         home_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Logo.png"))); // NOI18N
-        home_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        home_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 home_ButtonActionPerformed(evt);
             }
         });
         getContentPane().add(home_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 50, 30));
 
         backgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights3.png"))); // NOI18N
-        getContentPane().add(backgroundImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(-250, 0, 1040, 900));
+        getContentPane().add(backgroundImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(-245, 0, 1035, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -149,6 +158,8 @@ public class AddUserScreen extends javax.swing.JFrame {
         if (  !(username.isBlank() && !password.isBlank()) && !confirmPassword.isBlank())
         {
             UserManager.addUser(username, password, confirmPassword);
+//            new PathChoice().setVisible(true);
+//            dispose();
         }
         else
         {

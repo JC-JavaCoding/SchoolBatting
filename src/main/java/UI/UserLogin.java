@@ -123,18 +123,7 @@ public class UserLogin extends javax.swing.JFrame
         if (UserManager.isValid(currUser, password))
         {
             //set current user in current user file
-
-            try
-            {
-                PrintWriter currUser_File = new PrintWriter( new FileWriter( new File ("data\\currentUser.txt") ));
-                currUser_File.print(currUser);
-
-                currUser_File.close();
-            }
-            catch(java.io.IOException e)
-            {
-                JOptionPane.showMessageDialog(this,"IOException");
-            }
+            UserManager.addCurrentUser(currUser);
             
             new PathChoice().setVisible(true);
             

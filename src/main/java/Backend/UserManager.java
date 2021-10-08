@@ -5,6 +5,7 @@
  */
 package Backend;
 
+import static UI.UserLogin.currUser;
 import UI.UserStrategies;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -52,31 +53,6 @@ public class UserManager
         }
         return false;
     }
-//    public static void setValues(String userName, String passWord)//set the username and password, check if it matches
-//    {
-//        username = userName;
-//        password = passWord;
-//    }
-
-    public static boolean userValid(String currentName)
-    {
-        if (currentName.equals(username))
-        {
-            System.out.println("Username correct");
-            return true;
-        }
-        return false;
-    }
-    public static boolean passwordValid(String currentPassword)
-    {
-        if (currentPassword.equals(password))
-        {
-            System.out.println("Password correct");
-            return true;
-        }
-        System.out.println("Password incorrect");
-        return false;
-    }
     public static boolean userExists(String username)
     {
         try
@@ -97,6 +73,30 @@ public class UserManager
             System.out.println("File not found.");
         }
         return false;
+    }
+    public static boolean passwordValid(String currentPassword)
+    {
+        if (currentPassword.equals(password))
+        {
+            System.out.println("Password correct");
+            return true;
+        }
+        System.out.println("Password incorrect");
+        return false;
+    }
+    public static void addCurrentUser(String user)
+    {
+        try
+            {
+                PrintWriter currUser_File = new PrintWriter( new FileWriter( currentUser_File ));
+                currUser_File.print(user);
+
+                currUser_File.close();
+            }
+            catch(java.io.IOException e)
+            {
+                JOptionPane.showMessageDialog(null,"IOException");
+            }
     }
     public static void addUser(String name, String passkey, String confirmPasskey)
     {
@@ -129,7 +129,6 @@ public class UserManager
             JOptionPane.showMessageDialog(null, "Confirm Password differs from password entered");
         }
     }
-    
     public static String getUsers()
     {
         String users = "";

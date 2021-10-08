@@ -28,13 +28,14 @@ public class PathChoice extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         choiceHeading_Label = new javax.swing.JLabel();
         addStrat_Button = new javax.swing.JButton();
         userStrats_Button = new javax.swing.JButton();
-        home_Button = new javax.swing.JButton();
         back_Button = new javax.swing.JButton();
+        home_Button1 = new javax.swing.JButton();
         background_Label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,8 +48,10 @@ public class PathChoice extends javax.swing.JFrame
 
         addStrat_Button.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addStrat_Button.setText("Add Strategy");
-        addStrat_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addStrat_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addStrat_ButtonActionPerformed(evt);
             }
         });
@@ -56,24 +59,35 @@ public class PathChoice extends javax.swing.JFrame
 
         userStrats_Button.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         userStrats_Button.setText("My Strategies");
-        userStrats_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        userStrats_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 userStrats_ButtonActionPerformed(evt);
             }
         });
         getContentPane().add(userStrats_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 610, 130, 100));
 
-        home_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Logo.png"))); // NOI18N
-        home_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                home_ButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(home_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, -60, 50, 30));
-
         back_Button.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         back_Button.setText("Back");
+        back_Button.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                back_ButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(back_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 690, -1, -1));
+
+        home_Button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Logo.png"))); // NOI18N
+        home_Button1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                home_Button1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(home_Button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 50, 30));
 
         background_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/F1Lights3.png"))); // NOI18N
         getContentPane().add(background_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(-250, 0, 1040, 900));
@@ -97,11 +111,19 @@ public class PathChoice extends javax.swing.JFrame
         dispose();
     }//GEN-LAST:event_addStrat_ButtonActionPerformed
 
-    private void home_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_home_ButtonActionPerformed
+    private void back_ButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_back_ButtonActionPerformed
+    {//GEN-HEADEREND:event_back_ButtonActionPerformed
+       // TODO add your handling code here:
+        new UserLogin().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_back_ButtonActionPerformed
+
+    private void home_Button1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_home_Button1ActionPerformed
+    {//GEN-HEADEREND:event_home_Button1ActionPerformed
         // TODO add your handling code here:
         new HomeScreen().setVisible(true);
         dispose();
-    }//GEN-LAST:event_home_ButtonActionPerformed
+    }//GEN-LAST:event_home_Button1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,7 +134,7 @@ public class PathChoice extends javax.swing.JFrame
     private javax.swing.JButton back_Button;
     private javax.swing.JLabel background_Label;
     private javax.swing.JLabel choiceHeading_Label;
-    private javax.swing.JButton home_Button;
+    private javax.swing.JButton home_Button1;
     private javax.swing.JButton userStrats_Button;
     // End of variables declaration//GEN-END:variables
 }
