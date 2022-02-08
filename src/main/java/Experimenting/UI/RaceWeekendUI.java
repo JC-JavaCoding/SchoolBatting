@@ -114,7 +114,7 @@ public class RaceWeekendUI extends javax.swing.JFrame
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
-        File f = new File("resources/"+ jTextField1.getText());
+        File f = new File("data\\"+ jTextField1.getText() +".txt");
         
         
         //next screen
@@ -164,7 +164,7 @@ public class RaceWeekendUI extends javax.swing.JFrame
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable()
-        {
+        { 
             public void run()
             {
                 new RaceWeekendUI().setVisible(true);

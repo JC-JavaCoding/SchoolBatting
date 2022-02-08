@@ -78,9 +78,6 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\janch.DESKTOP-S2DQ716\Downloads\add-addition-create-new-plus-plus-sign-icon-163327.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Add New"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
