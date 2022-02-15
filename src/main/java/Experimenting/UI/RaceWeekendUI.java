@@ -6,6 +6,7 @@
 package Experimenting.UI;
 
 import java.io.File;
+import java.io.PrintWriter;
 
 /**
  *
@@ -35,12 +36,11 @@ public class RaceWeekendUI extends javax.swing.JFrame
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        raceWeekendName_Field = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\janch.DESKTOP-S2DQ716\\Downloads\\add-addition-create-new-plus-plus-sign-icon-163327.png")); // NOI18N
         jButton2.setText("Add New");
         jButton2.setBorder(null);
         jButton2.setBorderPainted(false);
@@ -73,11 +73,11 @@ public class RaceWeekendUI extends javax.swing.JFrame
 
         jScrollPane1.setViewportView(jPanel2);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener()
+        raceWeekendName_Field.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jTextField1ActionPerformed(evt);
+                raceWeekendName_FieldActionPerformed(evt);
             }
         });
 
@@ -93,7 +93,7 @@ public class RaceWeekendUI extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
+                    .addComponent(raceWeekendName_Field)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -103,7 +103,7 @@ public class RaceWeekendUI extends javax.swing.JFrame
                 .addContainerGap(52, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(raceWeekendName_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
@@ -114,18 +114,30 @@ public class RaceWeekendUI extends javax.swing.JFrame
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
-        File f = new File("data\\"+ jTextField1.getText() +".txt");
+        String filePath = "data\\"+ raceWeekendName_Field.getText() ;
+        //make folder
+        new File(filePath).mkdir();
         
+        try
+        {
+            PrintWriter pw = new PrintWriter(new File("data/currFolder.txt"));
+            pw.append(raceWeekendName_Field.getText());
+            pw.close();
+        }
+        catch(java.io.FileNotFoundException e)
+        {
+            System.out.println("FileNotFOund exception at: ln120 at RaceWeekendUi.java");
+        }
         
         //next screen
-        new Stint().setVisible(true);
+        new Stint2().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField1ActionPerformed
-    {//GEN-HEADEREND:event_jTextField1ActionPerformed
+    private void raceWeekendName_FieldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_raceWeekendName_FieldActionPerformed
+    {//GEN-HEADEREND:event_raceWeekendName_FieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_raceWeekendName_FieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,6 +189,6 @@ public class RaceWeekendUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField raceWeekendName_Field;
     // End of variables declaration//GEN-END:variables
 }
