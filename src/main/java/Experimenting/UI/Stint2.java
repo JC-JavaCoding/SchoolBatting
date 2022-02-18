@@ -472,7 +472,7 @@ public class Stint2 extends javax.swing.JFrame
         
         fuelload = Double.parseDouble(lapFuelLoad_Field.getText());
         stintLaps ++; //asuming ther appropriate values have been input by the user
-        tyreAge += stintLaps;
+        tyreAge ++;
         //add laptime, fuelload, numlaps to stint file
         try 
         {
