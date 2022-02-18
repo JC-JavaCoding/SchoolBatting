@@ -19,7 +19,11 @@ import java.util.logging.Logger;
  */
 public class Stint2 extends javax.swing.JFrame
 {
-    public static String folderName;
+    public static String folderName, stintFilePath;
+    private String stintType, stintCompound;
+    private double fuelload, laptime;
+    private int tyreAge, stintLaps = 0;
+    private FileWriter fw;
     /**
      * Creates new form Stint2
      */
@@ -46,19 +50,21 @@ public class Stint2 extends javax.swing.JFrame
         stintCompound_Label = new javax.swing.JLabel();
         tyreCompoundComboBox = new javax.swing.JComboBox<>();
         stintType_Label = new javax.swing.JLabel();
-        fuelLoad_Label = new javax.swing.JLabel();
-        fuelLoadSpinner = new javax.swing.JSpinner();
         stintType_ComboBox = new javax.swing.JComboBox<>();
+        fuelLoad_Label = new javax.swing.JLabel();
+        startFuelLoad_Field = new javax.swing.JTextField();
+        tyreAgeLabel = new javax.swing.JLabel();
+        tyreAgeSpinner = new javax.swing.JSpinner();
         createStintButton = new javax.swing.JButton();
         lapDataPane = new javax.swing.JPanel();
         panelHeader_Label = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        lapsDataTable = new javax.swing.JTable();
         lapDataFuelLoad_label = new javax.swing.JLabel();
-        fuelLoadSpinner1 = new javax.swing.JSpinner();
+        lapFuelLoad_Field = new javax.swing.JTextField();
         lapTime_Label = new javax.swing.JLabel();
         laptime_Field = new javax.swing.JTextField();
         addLapButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lapsDataTable = new javax.swing.JTable();
         overview_Pane = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         lapsDataTableOverview = new javax.swing.JTable();
@@ -100,15 +106,25 @@ public class Stint2 extends javax.swing.JFrame
         stintType_Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         stintType_Label.setText("Stint Type");
 
-        fuelLoad_Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        fuelLoad_Label.setText("Fuel Load (kg)");
-
         stintType_ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Qualifying", "Race Pace", "Development" }));
         stintType_ComboBox.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 stintType_ComboBoxActionPerformed(evt);
+            }
+        });
+
+        fuelLoad_Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fuelLoad_Label.setText("Fuel Load (kg)");
+
+        tyreAgeLabel.setText("Tyre Age (laps)");
+
+        tyreAgeSpinner.addChangeListener(new javax.swing.event.ChangeListener()
+        {
+            public void stateChanged(javax.swing.event.ChangeEvent evt)
+            {
+                tyreAgeSpinnerStateChanged(evt);
             }
         });
 
@@ -126,25 +142,29 @@ public class Stint2 extends javax.swing.JFrame
         stintInfo_PaneLayout.setHorizontalGroup(
             stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(stintInfo_PaneLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(stintName_Field)
-                    .addComponent(provideInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(stintInfo_PaneLayout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(createStintButton))
-                    .addGroup(stintInfo_PaneLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tyreCompoundComboBox, 0, 96, Short.MAX_VALUE)
-                            .addComponent(stintCompound_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(66, 66, 66)
-                        .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fuelLoad_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fuelLoadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(stintType_Label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(stintType_ComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(stintName_Field)
+                            .addComponent(provideInfo_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                            .addGroup(stintInfo_PaneLayout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(fuelLoad_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tyreCompoundComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(startFuelLoad_Field)
+                                    .addComponent(stintCompound_Label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(stintType_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tyreAgeSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                                    .addComponent(stintType_ComboBox, 0, 1, Short.MAX_VALUE)
+                                    .addComponent(tyreAgeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(54, 54, 54))))
+                    .addGroup(stintInfo_PaneLayout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(createStintButton)))
                 .addContainerGap(55, Short.MAX_VALUE))
             .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(stintInfo_PaneLayout.createSequentialGroup()
@@ -159,28 +179,30 @@ public class Stint2 extends javax.swing.JFrame
                 .addComponent(stintName_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(provideInfo_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stintCompound_Label)
+                    .addComponent(tyreAgeLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tyreCompoundComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tyreAgeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fuelLoad_Label)
+                    .addComponent(stintType_Label))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(stintType_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startFuelLoad_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, stintInfo_PaneLayout.createSequentialGroup()
-                        .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fuelLoad_Label)
-                            .addComponent(stintCompound_Label)
-                            .addComponent(stintType_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fuelLoadSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(stintType_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, stintInfo_PaneLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(tyreCompoundComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(createStintButton)
-                .addGap(94, 94, 94))
+                .addGap(103, 103, 103))
             .addGroup(stintInfo_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(stintInfo_PaneLayout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(stintName_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(344, Short.MAX_VALUE)))
+                    .addContainerGap(345, Short.MAX_VALUE)))
         );
 
         jTabbedPane2.addTab("Stint information", stintInfo_Pane);
@@ -188,15 +210,6 @@ public class Stint2 extends javax.swing.JFrame
         panelHeader_Label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         panelHeader_Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         panelHeader_Label.setText("Add Lap Data to System");
-
-        lapsDataTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {},
-            new String []
-            {
-                "Lap", "Time"
-            }
-        ));
-        jScrollPane2.setViewportView(lapsDataTable);
 
         lapDataFuelLoad_label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lapDataFuelLoad_label.setText("Fuel Load (kg)");
@@ -220,6 +233,15 @@ public class Stint2 extends javax.swing.JFrame
             }
         });
 
+        lapsDataTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {},
+            new String []
+            {
+                "Lap", "Time"
+            }
+        ));
+        jScrollPane2.setViewportView(lapsDataTable);
+
         javax.swing.GroupLayout lapDataPaneLayout = new javax.swing.GroupLayout(lapDataPane);
         lapDataPane.setLayout(lapDataPaneLayout);
         lapDataPaneLayout.setHorizontalGroup(
@@ -227,20 +249,20 @@ public class Stint2 extends javax.swing.JFrame
             .addGroup(lapDataPaneLayout.createSequentialGroup()
                 .addGroup(lapDataPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lapDataPaneLayout.createSequentialGroup()
-                        .addGap(91, 91, 91)
+                        .addGap(90, 90, 90)
                         .addGroup(lapDataPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fuelLoadSpinner1)
-                            .addComponent(lapDataFuelLoad_label, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
-                        .addGap(132, 132, 132)
+                            .addComponent(lapDataFuelLoad_label, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                            .addComponent(lapFuelLoad_Field))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                         .addGroup(lapDataPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(laptime_Field, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lapTime_Label, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(lapDataPaneLayout.createSequentialGroup()
                         .addGap(206, 206, 206)
                         .addComponent(addLapButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(90, 90, 90))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lapDataPaneLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(lapDataPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(panelHeader_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
@@ -250,15 +272,15 @@ public class Stint2 extends javax.swing.JFrame
             lapDataPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lapDataPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelHeader_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(panelHeader_Label, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(lapDataPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lapTime_Label)
                     .addComponent(lapDataFuelLoad_label))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(lapDataPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fuelLoadSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(laptime_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(lapDataPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(laptime_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lapFuelLoad_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(addLapButton1)
                 .addGap(18, 18, 18)
@@ -349,7 +371,7 @@ public class Stint2 extends javax.swing.JFrame
                 .addGroup(overview_PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirmStrat_Button)
                     .addComponent(back_Button))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Overview", overview_Pane);
@@ -382,6 +404,7 @@ public class Stint2 extends javax.swing.JFrame
     private void stintType_ComboBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_stintType_ComboBoxActionPerformed
     {//GEN-HEADEREND:event_stintType_ComboBoxActionPerformed
         // TODO add your handling code here:
+        stintType = stintType_ComboBox.getSelectedItem().toString();
     }//GEN-LAST:event_stintType_ComboBoxActionPerformed
 
     private void createStintButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_createStintButtonActionPerformed
@@ -400,31 +423,83 @@ public class Stint2 extends javax.swing.JFrame
         //System.out.println(folderName + "\\"+ stintName_Field.getText() +".txt");
         
         //create file
-        File dataFile = new File( "data\\"+ folderName +"\\"+ stintName_Field.getText() +".txt");
+        stintFilePath = "data\\"+ folderName +"\\"+ stintName_Field.getText() +".txt";
+        File dataFile = new File(stintFilePath);
         
         //addInfo to data file
+        tyreAge = Integer.parseInt(tyreAgeSpinner.getValue().toString());
         try
         {
-            PrintWriter pw = new PrintWriter(dataFile);
-            //String tyre = tyreCompoundComboBox.getItemAt(WIDTH)
+            fw = new FileWriter(dataFile, true);
             
-            pw.close();
+            /*the data to save in the stint file:
+            - MAIN INFORMATION -
+            * compoundType
+            * stintType
+            
+            - CHANGING INFORMATION -
+            * fuelLoad
+            * laptime
+            * tyreAge
+            * lapsInStint
+            
+            + FORMAT +
+            compound#stintType#
+            fuelLoad#laptime#tyreAge#lapsNr
+            fuelLoad#laptime#tyreAge#lapsNr
+            */
+            
+            String introData = stintCompound +"#"+ stintType +"\n";
+            fw.append(introData);
+            
+            fw.close();
         }
-        catch(java.io.FileNotFoundException e)
+        catch(java.io.IOException e)
         {
-            System.out.println("java.io.FileNotFoundException at 408, Stint2");
+            System.out.println("java.io.FileNotFoundException at 463, Stint2");
         }
     }//GEN-LAST:event_createStintButtonActionPerformed
 
     private void addLapButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addLapButton1ActionPerformed
     {//GEN-HEADEREND:event_addLapButton1ActionPerformed
         // TODO add your handling code here:
+        laptime = Double.parseDouble(laptime_Field.getText());
+        /*NOTE exception handling for users needed*/
+        
+        
+        fuelload = Double.parseDouble(lapFuelLoad_Field.getText());
+        stintLaps ++; //asuming ther appropriate values have been input by the user
+        tyreAge += stintLaps;
+        //add laptime, fuelload, numlaps to stint file
+        try 
+        {
+            fw = new FileWriter(new File(stintFilePath), true);
+            
+            //unnecessary but for readability: 
+            // Format fuelLoad#laptime#tyreAge#lapsNr
+            String lapInformation = fuelload +"#"+ laptime +"#"+ tyreAge +"#"+ stintLaps +"\n";
+            fw.append(lapInformation);
+            
+            fw.close();
+        }
+        catch(java.io.IOException e)
+        {
+            System.out.println("java.io.FileNotFoundException at 463, Stint2");
+        }
     }//GEN-LAST:event_addLapButton1ActionPerformed
 
     private void laptime_FieldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_laptime_FieldActionPerformed
     {//GEN-HEADEREND:event_laptime_FieldActionPerformed
         // TODO add your handling code here:
+        /*REDUNDANT*/
     }//GEN-LAST:event_laptime_FieldActionPerformed
+
+    private void tyreAgeSpinnerStateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_tyreAgeSpinnerStateChanged
+    {//GEN-HEADEREND:event_tyreAgeSpinnerStateChanged
+        /*every time the button is clicked, update tyreAge*/
+//        Spinner mySpinner = (Spinner)findViewById()
+//        tyreAge = Integer.parseInt(tyreAgeSpinner.getName());
+    }//GEN-LAST:event_tyreAgeSpinnerStateChanged
 
     /**
      * @param args the command line arguments
@@ -476,14 +551,13 @@ public class Stint2 extends javax.swing.JFrame
     private javax.swing.JButton back_Button;
     private javax.swing.JButton confirmStrat_Button;
     private javax.swing.JButton createStintButton;
-    private javax.swing.JSpinner fuelLoadSpinner;
-    private javax.swing.JSpinner fuelLoadSpinner1;
     private javax.swing.JLabel fuelLoad_Label;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lapDataFuelLoad_label;
     private javax.swing.JPanel lapDataPane;
+    private javax.swing.JTextField lapFuelLoad_Field;
     private javax.swing.JLabel lapTime_Label;
     public javax.swing.JTable lapsDataTable;
     public javax.swing.JTable lapsDataTableOverview;
@@ -494,6 +568,7 @@ public class Stint2 extends javax.swing.JFrame
     private javax.swing.JPanel overview_Pane;
     private javax.swing.JLabel panelHeader_Label;
     private javax.swing.JLabel provideInfo_Label;
+    private javax.swing.JTextField startFuelLoad_Field;
     private javax.swing.JTextField startingFuel_DisplayField;
     private javax.swing.JLabel startingFuel_Label;
     private javax.swing.JLabel stintCompound_Label;
@@ -503,6 +578,8 @@ public class Stint2 extends javax.swing.JFrame
     private javax.swing.JLabel stintName_Label;
     private javax.swing.JComboBox<String> stintType_ComboBox;
     private javax.swing.JLabel stintType_Label;
+    private javax.swing.JLabel tyreAgeLabel;
+    private javax.swing.JSpinner tyreAgeSpinner;
     private javax.swing.JComboBox<String> tyreCompoundComboBox;
     // End of variables declaration//GEN-END:variables
 }
