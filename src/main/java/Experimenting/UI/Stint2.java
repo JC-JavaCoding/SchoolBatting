@@ -399,12 +399,13 @@ public class Stint2 extends javax.swing.JFrame
     private void tyreCompoundComboBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_tyreCompoundComboBoxActionPerformed
     {//GEN-HEADEREND:event_tyreCompoundComboBoxActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_tyreCompoundComboBoxActionPerformed
 
     private void stintType_ComboBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_stintType_ComboBoxActionPerformed
     {//GEN-HEADEREND:event_stintType_ComboBoxActionPerformed
         // TODO add your handling code here:
-        stintType = stintType_ComboBox.getSelectedItem().toString();
+        
     }//GEN-LAST:event_stintType_ComboBoxActionPerformed
 
     private void createStintButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_createStintButtonActionPerformed
@@ -427,6 +428,8 @@ public class Stint2 extends javax.swing.JFrame
         File dataFile = new File(stintFilePath);
         
         //addInfo to data file
+        stintCompound = tyreCompoundComboBox.getSelectedItem().toString();
+        stintType = stintType_ComboBox.getSelectedItem().toString();
         tyreAge = Integer.parseInt(tyreAgeSpinner.getValue().toString());
         try
         {
