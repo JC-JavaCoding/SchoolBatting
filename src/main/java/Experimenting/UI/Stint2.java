@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,12 +26,15 @@ public class Stint2 extends javax.swing.JFrame
     private double fuelload, laptime;
     private int tyreAge, stintLaps = 0;
     private FileWriter fw;
+    private DefaultTableModel tableModel, overviewTableModel ;
     /**
      * Creates new form Stint2
      */
     public Stint2()
     {
         initComponents();
+        tableModel = (DefaultTableModel) lapsDataTable.getModel();
+        overviewTableModel = (DefaultTableModel) lapsDataTableOverview.getModel();
     }
 
     /**
@@ -396,6 +401,13 @@ public class Stint2 extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*this is basically backend stuffs but as this class is in the experimenting folder im not gonna work it into the backend yet*/
+    private void setTable()
+    {
+         tableModel.addRow(new Object[]{"" + fuelload, "" + laptime});
+         overviewTableModel.addRow(new Object[]{"" + fuelload, "" + laptime});
+    }
+    
     private void tyreCompoundComboBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_tyreCompoundComboBoxActionPerformed
     {//GEN-HEADEREND:event_tyreCompoundComboBoxActionPerformed
         // TODO add your handling code here:
@@ -482,6 +494,9 @@ public class Stint2 extends javax.swing.JFrame
             // Format fuelLoad#laptime#tyreAge#lapsNr
             String lapInformation = fuelload +"#"+ laptime +"#"+ tyreAge +"#"+ stintLaps +"\n";
             fw.append(lapInformation);
+            
+//add lap data to table:
+            setTable();
             
             fw.close();
         }

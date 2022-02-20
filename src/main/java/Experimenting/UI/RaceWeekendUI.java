@@ -7,6 +7,8 @@ package Experimenting.UI;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.Scanner;
+import javax.swing.JButton;
 
 /**
  *
@@ -21,8 +23,9 @@ public class RaceWeekendUI extends javax.swing.JFrame
     public RaceWeekendUI()
     {
         initComponents();
+        addRaces();
     }
-
+//
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,17 +115,44 @@ public class RaceWeekendUI extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addRaces()
+    {
+        try
+        {
+            Scanner raceScanner = new Scanner(new File("data/raceWeekends.txt"));
+            while (raceScanner.hasNext())
+            {
+                String weekendName = raceScanner.next();
+                
+                //after retrieving name add button
+                jPanel2.add(new JButton(weekendName));
+            }
+        }
+        catch(java.io.FileNotFoundException e)
+        {
+            System.out.println("Error");
+        }
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
         String filePath = "data\\"+ raceWeekendName_Field.getText() ;
-        //make folder
-        new File(filePath).mkdir();
+        String racesFilePath = "data\\RaceWeekends.txt";
         
+        //make folder for race weekend and add to raceweekends file
+        new File(filePath).mkdir();
+        PrintWriter pw1;
+        PrintWriter pw2;
         try
         {
-            PrintWriter pw = new PrintWriter(new File("data/currFolder.txt"));
-            pw.append(raceWeekendName_Field.getText());
-            pw.close();
+            //for current raceWeekend
+            // AND for raceweekends
+            pw1= new PrintWriter(new File("data/currFolder.txt"));
+            pw2 = new PrintWriter(new File(racesFilePath));
+            pw1.append(raceWeekendName_Field.getText());
+            pw2.append(raceWeekendName_Field.getText());
+            pw1.close();
+            pw2.close();
         }
         catch(java.io.FileNotFoundException e)
         {
@@ -130,7 +160,7 @@ public class RaceWeekendUI extends javax.swing.JFrame
         }
         
         //next screen
-        new Stint2().setVisible(true);
+        new WeekendStints().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
