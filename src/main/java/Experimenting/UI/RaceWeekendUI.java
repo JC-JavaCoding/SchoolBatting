@@ -6,6 +6,7 @@
 package Experimenting.UI;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import javax.swing.JButton;
@@ -141,20 +142,20 @@ public class RaceWeekendUI extends javax.swing.JFrame
         
         //make folder for race weekend and add to raceweekends file
         new File(filePath).mkdir();
-        PrintWriter pw1;
-        PrintWriter pw2;
+        FileWriter fw1;
+        FileWriter fw2;
         try
         {
             //for current raceWeekend
             // AND for raceweekends
-            pw1= new PrintWriter(new File("data/currFolder.txt"));
-            pw2 = new PrintWriter(new File(racesFilePath));
-            pw1.append(raceWeekendName_Field.getText());
-            pw2.append(raceWeekendName_Field.getText());
-            pw1.close();
-            pw2.close();
+            fw1= new FileWriter(new File("data/currFolder.txt"), true);
+            fw2 = new FileWriter(new File(racesFilePath), true);
+            fw1.append(raceWeekendName_Field.getText());
+            fw2.append(raceWeekendName_Field.getText());
+            fw1.close();
+            fw2.close();
         }
-        catch(java.io.FileNotFoundException e)
+        catch(java.io.IOException e)
         {
             System.out.println("FileNotFOund exception at: ln120 at RaceWeekendUi.java");
         }
