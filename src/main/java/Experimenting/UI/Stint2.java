@@ -471,7 +471,8 @@ public class Stint2 extends javax.swing.JFrame
         }
         catch(java.io.IOException e)
         {
-            System.out.println("java.io.FileNotFoundException at 463, Stint2");
+            System.out.println("File not found");
+            e.printStackTrace();
         }
     }//GEN-LAST:event_createStintButtonActionPerformed
 

@@ -148,7 +148,7 @@ public class RaceWeekendUI extends javax.swing.JFrame
         {
             //for current raceWeekend
             // AND for raceweekends
-            fw1= new FileWriter(new File("data/currFolder.txt"), true);
+            fw1= new FileWriter(new File("data\\currFolder.txt"), false);
             fw2 = new FileWriter(new File(racesFilePath), true);
             fw1.append(raceWeekendName_Field.getText());
             fw2.append(raceWeekendName_Field.getText());
