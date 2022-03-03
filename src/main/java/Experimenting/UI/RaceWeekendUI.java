@@ -124,10 +124,25 @@ public class RaceWeekendUI extends javax.swing.JFrame
             while (raceScanner.hasNext())
             {
                 String weekendName = raceScanner.next();
-                
+                JButton n = new JButton(weekendName);
                 //after retrieving name add button
-                jPanel2.add(new JButton(weekendName));
+                n.setText("Add New");
+                n.setBorder(null);
+                n.setBorderPainted(false);
+                n.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+                n.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+//                jButton2.addActionListener(new java.awt.event.ActionListener()
+//                {
+//                    public void actionPerformed(java.awt.event.ActionEvent evt)
+//                    {
+//                        jButton2ActionPerformed(evt);
+//                    }
+//                });
+                jPanel2.add(n);
+                //how did it go?
+                pack();
             }
+            raceScanner.close();
         }
         catch(java.io.FileNotFoundException e)
         {
@@ -151,7 +166,7 @@ public class RaceWeekendUI extends javax.swing.JFrame
             fw1= new FileWriter(new File("data\\currFolder.txt"), false);
             fw2 = new FileWriter(new File(racesFilePath), true);
             fw1.append(raceWeekendName_Field.getText());
-            fw2.append(raceWeekendName_Field.getText());
+            fw2.append(raceWeekendName_Field.getText() +"\n");
             fw1.close();
             fw2.close();
         }
