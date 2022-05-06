@@ -4,6 +4,7 @@
  */
 package BackendTesting;
 
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,14 +19,14 @@ public class TeacherBattingTest
         {false, true, false, false, true}
     };
     private static boolean [][] t2 = {
-        {true, false, false, true, false},
         {false, true, true, false, true},
-        {false, true, false, false, true}
+        {true, true, true, true, false},
+        {true, false, true, false, true}
     };
     private static boolean [][] t3 = {
-        {true, false, false, true, false},
-        {false, true, true, false, true},
-        {false, true, false, false, true}
+        {false, true, true, true, true},
+        {true, true, false, true, true},
+        {true, false, true, false, true}
     };
     
     boolean [][][] teachers = {t1,t2,t3};
@@ -49,15 +50,15 @@ public class TeacherBattingTest
        
        for(int period = 0; period < 5; period ++)
        {
-             if( ! t1[battingDay][lesson]) battingList[lesson] = "t1";
-            else if ( ! t2[battingDay][lesson])battingList[lesson] = "t2";
-            else if ( ! t3[battingDay][lesson])battingList[lesson] = "t3";
-            else battingList[lesson] = "N/A";
+             if( ! t1[battingDay][period]) battingList[period] = "t1";
+            else if ( ! t2[battingDay][period])battingList[period] = "t2";
+            else if ( ! t3[battingDay][period])battingList[period] = "t3";
+            else battingList[period] = "N/A";
        }
        
        //check which teacher depending on timetable
         
-        System.out.println("Teacher: "+ battingTeacher);
+        System.out.println("Teacher batting list:\n"+ Arrays.toString(battingList));
     }
     
 }
