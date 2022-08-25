@@ -20,7 +20,7 @@ public class DatabaseManager
 {
 
     private static final String driver = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "jdbc:mysql://102.130.115.69:3306/testTable";
+    private static final String url = "jdbc:mysql://102.130.115.69:3306/jcjDB";
     private static final String user = "jcj";
     private static final String pass = "Reddam2021";
     

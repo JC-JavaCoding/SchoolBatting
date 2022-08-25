@@ -5,6 +5,7 @@
  */
 package BackendTesting;
 import Backend.*;
+import java.sql.ResultSet;
 /**
  *
  * @author janch
@@ -16,7 +17,12 @@ public class NewClass
         DatabaseManager db = new DatabaseManager();
         try
         {
-            db.query("Select * FROM testTable;");
+            ResultSet dbResult = db.query("select * from testTable;");
+            while (dbResult.next())
+            {
+                String line = dbResult.getString(1) +", "+ dbResult.getString(2) +", "+ dbResult.getString(3) +", "+ dbResult.getString(4);
+                System.out.println(line);
+            }
         }catch (java.sql.SQLException e)
         {
             e.printStackTrace();
