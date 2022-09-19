@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -76,7 +78,15 @@ public class DatabaseManager
 
         return resultSet;
     }
-
+    public TableModel getTimeTableModel(String fullName)
+    {
+        DefaultTableModel outputModel;// = new DefaultTableModel(data, columnNames);
+        
+        String query = "SELECT * FROM jcjDB.tblTimetables"
+                                + "WHERE tblTimetables.id = (SELECT id FROM jcjDB.tblTeachers"
+                                                                                +"WHERE tblTeachers.fullName = \""+ fullName +"\")";
+        ResultSetMetaData meta  = resultSet.
+    }
     //process a SPECIFIC query
     public String processBookRequest(ResultSet rs)
     {
