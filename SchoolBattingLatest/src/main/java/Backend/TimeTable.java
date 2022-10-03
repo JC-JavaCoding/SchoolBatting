@@ -19,7 +19,18 @@ public class TimeTable
     {
         return timeTable;
     }
-    
+    public int getNumFrees()
+    {
+        int count = 0;
+        for (boolean bArr[]: timeTable)
+        {
+            for (boolean b : bArr)
+            {
+                count += (b? 0: 1);
+            }
+        }
+        return count;
+    }
     public String toString()
     {
         String output = "[";

@@ -12,19 +12,23 @@ package Backend;
 public class Teacher
 {
     private final TimeTable timeTable;
-    public YearTimeTableArr ytt;
-    public int numBattings ;
-    public String fullName ;
+    private int numBattings, numFrees, extraMuralHours;
+    private boolean hasRegisterClass;
+    private String fullName ;
 
-    public Teacher(TimeTable timeTable, YearTimeTableArr yTT, int numBattings, String fullName)
+    public Teacher(TimeTable timeTable, int numFrees, int numBattings, int extraMuralHours, String fullName, boolean hasRegisterClass)
     {
         this.timeTable = timeTable;
-        this.ytt =  yTT;
+        this.numFrees = numFrees;
         this.numBattings = numBattings;
+        this.extraMuralHours = extraMuralHours;
+        this.hasRegisterClass = hasRegisterClass;
         this.fullName = fullName;
     }
-    
-    
+    public double getBattingWeight()
+    {
+        return (numFrees * 0.3 + numBattings * 0.3 + extraMuralHours * 0.3 + (hasRegisterClass? 1: 0 * 0.1)) ;
+    }
     @Override
     public String toString()
     {

@@ -5,7 +5,9 @@
  */
 package BackendTesting;
 import Backend.*;
+import java.sql.Array;
 import java.sql.ResultSet;
+import java.util.Arrays;
 /**
  *
  * @author janch
@@ -14,18 +16,17 @@ public class NewClass
 {
     public static void main(String[] args)
     {
-        DatabaseManager db = new DatabaseManager();
-        try
+        int [][] iArr = {
+            {1,1,1,0,1,0},
+            {1,2,1,0,1,0},
+            {1,3,1,0,1,0}
+        };
+        
+        String output = "";
+        for (int [] arr : iArr)
         {
-            ResultSet dbResult = db.query("select * from testTable;");
-            while (dbResult.next())
-            {
-                String line = dbResult.getString(1) +", "+ dbResult.getString(2) +", "+ dbResult.getString(3) +", "+ dbResult.getString(4);
-                System.out.println(line);
-            }
-        }catch (java.sql.SQLException e)
-        {
-            e.printStackTrace();
+            output += "" + Arrays.toString(iArr);
         }
+        System.out.println(Arrays.deepToString(iArr));
     }
 }
