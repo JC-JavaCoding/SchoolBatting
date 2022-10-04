@@ -7,14 +7,20 @@ package UI;
 import Backend.Cell;
 import Backend.DatabaseManager;
 import Backend.Teacher;
+import Backend.TeacherManager;
 import Backend.TimeTable;
 import com.formdev.flatlaf.ui.FlatArrowButton;
 import com.formdev.flatlaf.ui.FlatComboBoxUI;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
@@ -40,8 +46,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         headerPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -61,7 +66,8 @@ public class TeacherScreen1 extends javax.swing.JFrame
         confirmEditsButton = new javax.swing.JButton();
  confirmEditsButton.setVisible(false);
         jScrollPane30 = new javax.swing.JScrollPane();
-        tblTeacherTimeTable = new javax.swing.JTable();
+        tblViewTimeTable = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
         findBatter_Panel = new javax.swing.JPanel();
         findBatter_HeaderPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -173,13 +179,6 @@ public class TeacherScreen1 extends javax.swing.JFrame
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
         setSize(new java.awt.Dimension(1980, 1080));
-        addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
-        {
-            public void mouseDragged(java.awt.event.MouseEvent evt)
-            {
-                formMouseDragged(evt);
-            }
-        });
 
         headerPanel.setBackground(new java.awt.Color(255, 255, 255));
         headerPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -195,10 +194,8 @@ public class TeacherScreen1 extends javax.swing.JFrame
         jButton1.setIconTextGap(0);
         jButton1.setMaximumSize(new java.awt.Dimension(20, 20));
         jButton1.setMinimumSize(new java.awt.Dimension(1, 1));
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
@@ -231,6 +228,11 @@ public class TeacherScreen1 extends javax.swing.JFrame
         jTabbedPane.setPreferredSize(new java.awt.Dimension(1849, 761));
 
         ManageTeachers_Panel.setBackground(new java.awt.Color(255, 255, 255));
+        ManageTeachers_Panel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ManageTeachers_PanelFocusGained(evt);
+            }
+        });
 
         manageT_HeaderPanel.setBackground(jTabbedPane.getBackground());
 
@@ -257,10 +259,8 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
 
         editableButton.setText("editable");
-        editableButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        editableButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editableButtonActionPerformed(evt);
             }
         });
@@ -271,24 +271,21 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         extramuralsLabel.setText("Extramurals:");
 
-        teacherComboBox.setUI(new FlatComboBoxUI()
-        {
+        teacherComboBox.setUI(new FlatComboBoxUI(){
             @Override
-            protected JButton createArrowButton()
-            {
+            protected FlatArrowButton createArrowButton() {
                 //---style arrow button anyway you like
-                JButton result = new JButton();
-                result.setBorder(null);
-                result.setBorderPainted(false);
-                result.setText("V");
-                result.setBackground(Color.getHSBColor(213, 89, 90));//---button's color
-                return result;
+                FlatArrowButton arrowButton = new FlatArrowButton(3, "Default", Color.lightGray, Color.lightGray, Color.lightGray, chooseDayLabel.getForeground(), chooseDayLabel.getForeground().brighter(), chooseDayLabel.getForeground().brighter());
+                arrowButton.setBorder(null);
+                arrowButton.setBorderPainted(false);
+                arrowButton.setBackground(chooseDayLabel.getForeground());//---button's color
+                return arrowButton;
             }
         });
         //get values
         try
         {
-            teacherComboBox.setModel(new DefaultComboBoxModel<> (dbm.getTeacherNames()));
+            teacherComboBox.setModel(new DefaultComboBoxModel<> (tm.getTeacherNames()));
         } catch(java.sql.SQLException e)
         {
             e.printStackTrace();
@@ -296,16 +293,19 @@ public class TeacherScreen1 extends javax.swing.JFrame
         teacherComboBox.setBackground(ManageTeachers_Panel.getBackground());
         teacherComboBox.setBorder(new javax.swing.border.LineBorder(chooseTeacherButton.getBackground(), 1, true));
         teacherComboBox.setOpaque(true);
+        teacherComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teacherComboBoxActionPerformed(evt);
+            }
+        });
 
         batWeightField.setEditable(false);
         batWeightField.setBackground(getBackground());
 
         registerClassOutput_Field.setEditable(false);
         registerClassOutput_Field.setBackground(getBackground());
-        registerClassOutput_Field.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        registerClassOutput_Field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerClassOutput_FieldActionPerformed(evt);
             }
         });
@@ -320,117 +320,129 @@ public class TeacherScreen1 extends javax.swing.JFrame
         confirmEditsButton.setBorder(null);
         confirmEditsButton.setBorderPainted(false);
         confirmEditsButton.setOpaque(true);
+        confirmEditsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                confirmEditsButtonMouseClicked(evt);
+            }
+        });
 
-        tblTeacherTimeTable.setBackground(new java.awt.Color(255, 255, 255));
-        tblTeacherTimeTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+        tblViewTimeTable.setBackground(new java.awt.Color(255, 255, 255));
+        tblViewTimeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
                 {"Monday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Tuesday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Wednesday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Thursday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Friday", null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Day", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L10", "L11", "L12", "L13", "L14"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblTeacherTimeTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
-        tblTeacherTimeTable.setCellSelectionEnabled(true);
-        tblTeacherTimeTable.setEnabled(false);
-        tblTeacherTimeTable.setOpaque(false);
-        tblTeacherTimeTable.setRowHeight(105);
-        tblTeacherTimeTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblTeacherTimeTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblTeacherTimeTable.setShowGrid(true);
-        tblTeacherTimeTable.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                tblTeacherTimeTableMouseClicked(evt);
+        tblViewTimeTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        tblViewTimeTable.setCellSelectionEnabled(true);
+        tblViewTimeTable.setEnabled(false);
+        tblViewTimeTable.setOpaque(false);
+        tblViewTimeTable.setRowHeight(105);
+        tblViewTimeTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblViewTimeTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblViewTimeTable.setShowGrid(true);
+        tblViewTimeTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblViewTimeTableMouseClicked(evt);
             }
         });
-        jScrollPane30.setViewportView(tblTeacherTimeTable);
-        tblTeacherTimeTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane30.setViewportView(tblViewTimeTable);
+        tblViewTimeTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        jLabel5.setBackground(getBackground());
+        jLabel5.setForeground(new java.awt.Color(25, 117, 229));
+        jLabel5.setText("Teacher Name");
 
         javax.swing.GroupLayout ManageTeachers_PanelLayout = new javax.swing.GroupLayout(ManageTeachers_Panel);
         ManageTeachers_Panel.setLayout(ManageTeachers_PanelLayout);
         ManageTeachers_PanelLayout.setHorizontalGroup(
             ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
-                .addComponent(manageT_HeaderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(teacherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
-                        .addComponent(battingWeightLabel)
+                        .addGap(92, 92, 92)
+                        .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
+                                .addComponent(battingWeightLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(batWeightField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(198, 198, 198)
+                                .addComponent(registerClassLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(registerClassOutput_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(teacherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(47, 47, 47)
+                        .addComponent(extramuralsLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(batWeightField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(198, 198, 198)
-                        .addComponent(registerClassLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(registerClassOutput_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(extramuralsLabel)
-                .addGap(18, 18, 18)
-                .addComponent(extraMuralsNr_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109)
-                .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editableButton)
-                    .addComponent(confirmEditsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
-            .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane30)
-                .addContainerGap())
+                        .addComponent(extraMuralsNr_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(109, 109, 109)
+                        .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editableButton)
+                            .addComponent(confirmEditsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(manageT_HeaderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane30))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ManageTeachers_PanelLayout.setVerticalGroup(
             ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
                 .addComponent(manageT_HeaderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(teacherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(editableButton))
-                .addGap(18, 18, 18)
-                .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(battingWeightLabel)
-                        .addComponent(batWeightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(registerClassLabel)
-                        .addComponent(registerClassOutput_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(extraMuralsNr_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(extramuralsLabel)
-                        .addComponent(confirmEditsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane30, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(teacherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(battingWeightLabel)
+                            .addComponent(batWeightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(registerClassLabel)
+                            .addComponent(registerClassOutput_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editableButton)
+                        .addGap(18, 18, 18)
+                        .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(extraMuralsNr_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(extramuralsLabel)
+                            .addComponent(confirmEditsButton))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane30, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
+
+        try {
+            selectedTeacher = tm.getTeacher((String)teacherComboBox.getSelectedItem());
+        }catch(java.sql.SQLException e)
+        {
+            e.printStackTrace();
+        }
+        setViewValues();
 
         jTabbedPane.addTab("Manage Teachers", ManageTeachers_Panel);
 
@@ -458,7 +470,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
             findBatter_HeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(findBatter_HeaderPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -476,36 +488,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         lessonInputTable.setBackground(new java.awt.Color(255, 255, 255));
         lessonInputTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"Monday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Tuesday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Wednesday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Thursday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Friday", null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Day", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L10", "L11", "L12", "L13", "L14"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -544,36 +549,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar5.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar5.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -581,8 +579,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar5.setGridColor(new java.awt.Color(102, 102, 102));
         tblCalendar5.getTableHeader().setReorderingAllowed(false);
         jScrollPane9.setViewportView(tblCalendar5);
-        if (tblCalendar5.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar5.getColumnModel().getColumnCount() > 0) {
             tblCalendar5.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar5.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar5.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -592,7 +589,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksJanuary.setLayout(weeksJanuaryLayout);
         weeksJanuaryLayout.setHorizontalGroup(
             weeksJanuaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         weeksJanuaryLayout.setVerticalGroup(
             weeksJanuaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -608,36 +605,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar1.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar1.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -645,8 +635,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar1.setGridColor(new java.awt.Color(102, 102, 102));
         tblCalendar1.getTableHeader().setReorderingAllowed(false);
         jScrollPane5.setViewportView(tblCalendar1);
-        if (tblCalendar1.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar1.getColumnModel().getColumnCount() > 0) {
             tblCalendar1.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar1.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar1.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -656,7 +645,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksFebruary.setLayout(weeksFebruaryLayout);
         weeksFebruaryLayout.setHorizontalGroup(
             weeksFebruaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         weeksFebruaryLayout.setVerticalGroup(
             weeksFebruaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -672,36 +661,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar6.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar6.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar6.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -709,8 +691,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar6.setGridColor(new java.awt.Color(102, 102, 102));
         tblCalendar6.getTableHeader().setReorderingAllowed(false);
         jScrollPane10.setViewportView(tblCalendar6);
-        if (tblCalendar6.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar6.getColumnModel().getColumnCount() > 0) {
             tblCalendar6.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar6.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar6.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -720,7 +701,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksMarch.setLayout(weeksMarchLayout);
         weeksMarchLayout.setHorizontalGroup(
             weeksMarchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         weeksMarchLayout.setVerticalGroup(
             weeksMarchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -736,36 +717,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar7.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar7.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar7.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -773,8 +747,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar7.setGridColor(new java.awt.Color(102, 102, 102));
         tblCalendar7.getTableHeader().setReorderingAllowed(false);
         jScrollPane11.setViewportView(tblCalendar7);
-        if (tblCalendar7.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar7.getColumnModel().getColumnCount() > 0) {
             tblCalendar7.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar7.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar7.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -784,7 +757,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksApril.setLayout(weeksAprilLayout);
         weeksAprilLayout.setHorizontalGroup(
             weeksAprilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         weeksAprilLayout.setVerticalGroup(
             weeksAprilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -800,36 +773,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar16.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar16.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar16.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -837,8 +803,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar16.setGridColor(new java.awt.Color(102, 102, 102));
         tblCalendar16.getTableHeader().setReorderingAllowed(false);
         jScrollPane20.setViewportView(tblCalendar16);
-        if (tblCalendar16.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar16.getColumnModel().getColumnCount() > 0) {
             tblCalendar16.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar16.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar16.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -848,7 +813,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksMay.setLayout(weeksMayLayout);
         weeksMayLayout.setHorizontalGroup(
             weeksMayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane20, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(jScrollPane20, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         weeksMayLayout.setVerticalGroup(
             weeksMayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -864,36 +829,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar17.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar17.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar17.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -901,8 +859,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar17.setGridColor(new java.awt.Color(102, 102, 102));
         tblCalendar17.getTableHeader().setReorderingAllowed(false);
         jScrollPane21.setViewportView(tblCalendar17);
-        if (tblCalendar17.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar17.getColumnModel().getColumnCount() > 0) {
             tblCalendar17.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar17.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar17.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -912,7 +869,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksJune.setLayout(weeksJuneLayout);
         weeksJuneLayout.setHorizontalGroup(
             weeksJuneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane21, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(jScrollPane21, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         weeksJuneLayout.setVerticalGroup(
             weeksJuneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -928,36 +885,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar18.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar18.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar18.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -965,8 +915,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar18.setGridColor(new java.awt.Color(102, 102, 102));
         tblCalendar18.getTableHeader().setReorderingAllowed(false);
         jScrollPane22.setViewportView(tblCalendar18);
-        if (tblCalendar18.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar18.getColumnModel().getColumnCount() > 0) {
             tblCalendar18.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar18.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar18.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -976,7 +925,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksJuly.setLayout(weeksJulyLayout);
         weeksJulyLayout.setHorizontalGroup(
             weeksJulyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane22, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(jScrollPane22, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         weeksJulyLayout.setVerticalGroup(
             weeksJulyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -992,36 +941,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar19.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar19.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar19.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1029,8 +971,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar19.setGridColor(new java.awt.Color(102, 102, 102));
         tblCalendar19.getTableHeader().setReorderingAllowed(false);
         jScrollPane23.setViewportView(tblCalendar19);
-        if (tblCalendar19.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar19.getColumnModel().getColumnCount() > 0) {
             tblCalendar19.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar19.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar19.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1040,7 +981,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksAugust.setLayout(weeksAugustLayout);
         weeksAugustLayout.setHorizontalGroup(
             weeksAugustLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         weeksAugustLayout.setVerticalGroup(
             weeksAugustLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1056,36 +997,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar20.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar20.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar20.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1093,8 +1027,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar20.setGridColor(new java.awt.Color(102, 102, 102));
         tblCalendar20.getTableHeader().setReorderingAllowed(false);
         jScrollPane24.setViewportView(tblCalendar20);
-        if (tblCalendar20.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar20.getColumnModel().getColumnCount() > 0) {
             tblCalendar20.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar20.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar20.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1104,7 +1037,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksSeptember.setLayout(weeksSeptemberLayout);
         weeksSeptemberLayout.setHorizontalGroup(
             weeksSeptemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane24, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(jScrollPane24, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         weeksSeptemberLayout.setVerticalGroup(
             weeksSeptemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1120,36 +1053,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar21.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar21.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar21.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1157,8 +1083,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar21.setGridColor(new java.awt.Color(102, 102, 102));
         tblCalendar21.getTableHeader().setReorderingAllowed(false);
         jScrollPane25.setViewportView(tblCalendar21);
-        if (tblCalendar21.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar21.getColumnModel().getColumnCount() > 0) {
             tblCalendar21.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar21.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar21.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1168,7 +1093,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksOctober.setLayout(weeksOctoberLayout);
         weeksOctoberLayout.setHorizontalGroup(
             weeksOctoberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane25, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(jScrollPane25, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         weeksOctoberLayout.setVerticalGroup(
             weeksOctoberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1184,36 +1109,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar22.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar22.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar22.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1221,8 +1139,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar22.setGridColor(new java.awt.Color(102, 102, 102));
         tblCalendar22.getTableHeader().setReorderingAllowed(false);
         jScrollPane26.setViewportView(tblCalendar22);
-        if (tblCalendar22.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar22.getColumnModel().getColumnCount() > 0) {
             tblCalendar22.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar22.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar22.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1232,7 +1149,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksNovember.setLayout(weeksNovemberLayout);
         weeksNovemberLayout.setHorizontalGroup(
             weeksNovemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane26, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(jScrollPane26, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         weeksNovemberLayout.setVerticalGroup(
             weeksNovemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1248,36 +1165,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar23.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar23.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar23.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1285,8 +1195,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar23.setGridColor(new java.awt.Color(102, 102, 102));
         tblCalendar23.getTableHeader().setReorderingAllowed(false);
         jScrollPane27.setViewportView(tblCalendar23);
-        if (tblCalendar23.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar23.getColumnModel().getColumnCount() > 0) {
             tblCalendar23.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar23.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar23.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1296,7 +1205,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksDecember.setLayout(weeksDecemberLayout);
         weeksDecemberLayout.setHorizontalGroup(
             weeksDecemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane27, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+            .addComponent(jScrollPane27, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
         );
         weeksDecemberLayout.setVerticalGroup(
             weeksDecemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1341,33 +1250,33 @@ public class TeacherScreen1 extends javax.swing.JFrame
             .addGroup(lessonInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lessonInputPanelLayout.createSequentialGroup()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(chooseLessonLAbel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lessonInputPanelLayout.createSequentialGroup()
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(chooseDayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3)
                     .addGroup(lessonInputPanelLayout.createSequentialGroup()
                         .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tblBatWeek, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lessonInputPanelLayout.createSequentialGroup()
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17)
-                                .addComponent(chooseLessonLAbel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lessonInputPanelLayout.createSequentialGroup()
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17)
-                                .addComponent(chooseDayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane4)
-                            .addComponent(jScrollPane3))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lessonInputPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lessonInputPanelLayout.createSequentialGroup()
-                                .addComponent(findTeacherButton)
-                                .addGap(17, 17, 17))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lessonInputPanelLayout.createSequentialGroup()
-                                .addComponent(chooseTeacherButton)
-                                .addGap(285, 285, 285))))))
+                            .addComponent(tblBatWeek, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(lessonInputPanelLayout.createSequentialGroup()
+                .addGap(232, 232, 232)
+                .addComponent(chooseTeacherButton)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lessonInputPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(findTeacherButton)
+                .addGap(212, 212, 212))
         );
         lessonInputPanelLayout.setVerticalGroup(
             lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1406,7 +1315,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
                         .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(chooseLessonLAbel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(chooseTeacherButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1422,36 +1331,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1461,8 +1363,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar.setRowSelectionAllowed(false);
         tblCalendar.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblCalendar);
-        if (tblCalendar.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar.getColumnModel().getColumnCount() > 0) {
             tblCalendar.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1476,7 +1377,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
         tabJanuaryLayout.setVerticalGroup(
             tabJanuaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
         );
 
         outputCalendarTabbedPane.addTab("Jan", tabJanuary);
@@ -1486,36 +1387,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar2.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar2.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1525,8 +1419,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar2.setRowSelectionAllowed(false);
         tblCalendar2.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(tblCalendar2);
-        if (tblCalendar2.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar2.getColumnModel().getColumnCount() > 0) {
             tblCalendar2.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar2.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar2.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1540,7 +1433,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
         tabFebruaryLayout.setVerticalGroup(
             tabFebruaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
         );
 
         outputCalendarTabbedPane.addTab("Feb", tabFebruary);
@@ -1550,36 +1443,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar3.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar3.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1589,8 +1475,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar3.setRowSelectionAllowed(false);
         tblCalendar3.getTableHeader().setReorderingAllowed(false);
         jScrollPane7.setViewportView(tblCalendar3);
-        if (tblCalendar3.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar3.getColumnModel().getColumnCount() > 0) {
             tblCalendar3.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar3.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar3.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1604,7 +1489,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
         tabMarchLayout.setVerticalGroup(
             tabMarchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
         );
 
         outputCalendarTabbedPane.addTab("Mar", tabMarch);
@@ -1614,36 +1499,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar4.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar4.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1653,8 +1531,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar4.setRowSelectionAllowed(false);
         tblCalendar4.getTableHeader().setReorderingAllowed(false);
         jScrollPane8.setViewportView(tblCalendar4);
-        if (tblCalendar4.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar4.getColumnModel().getColumnCount() > 0) {
             tblCalendar4.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar4.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar4.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1668,7 +1545,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
         tabAprilLayout.setVerticalGroup(
             tabAprilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
         );
 
         outputCalendarTabbedPane.addTab("Apr", tabApril);
@@ -1678,36 +1555,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar10.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar10.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar10.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1717,8 +1587,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar10.setRowSelectionAllowed(false);
         tblCalendar10.getTableHeader().setReorderingAllowed(false);
         jScrollPane14.setViewportView(tblCalendar10);
-        if (tblCalendar10.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar10.getColumnModel().getColumnCount() > 0) {
             tblCalendar10.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar10.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar10.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1732,7 +1601,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
         tabMayLayout.setVerticalGroup(
             tabMayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
         );
 
         outputCalendarTabbedPane.addTab("May", tabMay);
@@ -1742,36 +1611,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar9.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar9.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar9.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1781,8 +1643,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar9.setRowSelectionAllowed(false);
         tblCalendar9.getTableHeader().setReorderingAllowed(false);
         jScrollPane13.setViewportView(tblCalendar9);
-        if (tblCalendar9.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar9.getColumnModel().getColumnCount() > 0) {
             tblCalendar9.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar9.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar9.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1796,7 +1657,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
         tabJuneLayout.setVerticalGroup(
             tabJuneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
         );
 
         outputCalendarTabbedPane.addTab("Jun", tabJune);
@@ -1806,36 +1667,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar8.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar8.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar8.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1845,8 +1699,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar8.setRowSelectionAllowed(false);
         tblCalendar8.getTableHeader().setReorderingAllowed(false);
         jScrollPane12.setViewportView(tblCalendar8);
-        if (tblCalendar8.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar8.getColumnModel().getColumnCount() > 0) {
             tblCalendar8.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar8.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar8.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1860,7 +1713,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
         tabJulyLayout.setVerticalGroup(
             tabJulyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
         );
 
         outputCalendarTabbedPane.addTab("Jul", tabJuly);
@@ -1870,36 +1723,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar11.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar11.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar11.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1909,8 +1755,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar11.setRowSelectionAllowed(false);
         tblCalendar11.getTableHeader().setReorderingAllowed(false);
         jScrollPane15.setViewportView(tblCalendar11);
-        if (tblCalendar11.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar11.getColumnModel().getColumnCount() > 0) {
             tblCalendar11.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar11.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar11.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1924,7 +1769,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
         tabAugustLayout.setVerticalGroup(
             tabAugustLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
         );
 
         outputCalendarTabbedPane.addTab("Aug", tabAugust);
@@ -1934,36 +1779,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar12.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar12.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar12.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -1973,8 +1811,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar12.setRowSelectionAllowed(false);
         tblCalendar12.getTableHeader().setReorderingAllowed(false);
         jScrollPane16.setViewportView(tblCalendar12);
-        if (tblCalendar12.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar12.getColumnModel().getColumnCount() > 0) {
             tblCalendar12.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar12.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar12.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -1988,7 +1825,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
         tabSeptemberLayout.setVerticalGroup(
             tabSeptemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
         );
 
         outputCalendarTabbedPane.addTab("Sep", tabSeptember);
@@ -1998,36 +1835,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar13.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar13.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar13.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -2037,8 +1867,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar13.setRowSelectionAllowed(false);
         tblCalendar13.getTableHeader().setReorderingAllowed(false);
         jScrollPane17.setViewportView(tblCalendar13);
-        if (tblCalendar13.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar13.getColumnModel().getColumnCount() > 0) {
             tblCalendar13.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar13.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar13.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -2052,7 +1881,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
         tabOctoberLayout.setVerticalGroup(
             tabOctoberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
         );
 
         outputCalendarTabbedPane.addTab("Oct", tabOctober);
@@ -2062,36 +1891,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar14.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar14.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar14.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -2101,8 +1923,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar14.setRowSelectionAllowed(false);
         tblCalendar14.getTableHeader().setReorderingAllowed(false);
         jScrollPane18.setViewportView(tblCalendar14);
-        if (tblCalendar14.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar14.getColumnModel().getColumnCount() > 0) {
             tblCalendar14.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar14.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar14.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -2116,7 +1937,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
         tabNovemberLayout.setVerticalGroup(
             tabNovemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
         );
 
         outputCalendarTabbedPane.addTab("Nov", tabNovember);
@@ -2126,36 +1947,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar15.setBackground(new java.awt.Color(255, 255, 255));
         tblCalendar15.setForeground(new java.awt.Color(153, 153, 153));
         tblCalendar15.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"1", "2", "3", "4", "5", "6", "7"},
                 {"8", "9", "10", "11", "12", "13", "14"},
                 {"15", "16", "17", "18", "19", "20", "21"},
                 {"22", "23", "24", "25", "26", "27", "28"},
                 {"29", "30", null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -2165,8 +1979,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblCalendar15.setRowSelectionAllowed(false);
         tblCalendar15.getTableHeader().setReorderingAllowed(false);
         jScrollPane19.setViewportView(tblCalendar15);
-        if (tblCalendar15.getColumnModel().getColumnCount() > 0)
-        {
+        if (tblCalendar15.getColumnModel().getColumnCount() > 0) {
             tblCalendar15.getColumnModel().getColumn(4).setHeaderValue("Friday");
             tblCalendar15.getColumnModel().getColumn(5).setHeaderValue("Saturday");
             tblCalendar15.getColumnModel().getColumn(6).setHeaderValue("Sunday");
@@ -2180,7 +1993,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         );
         tabDecemberLayout.setVerticalGroup(
             tabDecemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
         );
 
         outputCalendarTabbedPane.addTab("Dec", tabDecember);
@@ -2194,7 +2007,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
                 .addGap(35, 35, 35)
                 .addComponent(lessonInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(outputCalendarTabbedPane)
+                .addComponent(outputCalendarTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
         findBatter_PanelLayout.setVerticalGroup(
@@ -2223,10 +2036,8 @@ arrowButton.setBackground(Color.white);
         addTeacherNameField.setBackground(ManageTeachers_Panel.getBackground());
         addTeacherNameField.setText("e.g Jeanett Maria Jacobs");
         addTeacherNameField.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(chooseTeacherButton.getBackground(), 1, true), "Teacher Full Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), chooseTeacherButton.getBackground())); // NOI18N
-        addTeacherNameField.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyTyped(java.awt.event.KeyEvent evt)
-            {
+        addTeacherNameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
                 addTeacherNameFieldKeyTyped(evt);
             }
         });
@@ -2234,24 +2045,20 @@ arrowButton.setBackground(Color.white);
         registerClass_Field.setBackground(getBackground());
         registerClass_Field.setText("True/False");
         registerClass_Field.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(25, 115, 230)), "Has Register Class", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), chooseTeacherButton.getBackground())); // NOI18N
-        registerClass_Field.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        registerClass_Field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerClass_FieldActionPerformed(evt);
             }
         });
-        registerClass_Field.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyTyped(java.awt.event.KeyEvent evt)
-            {
+        registerClass_Field.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
                 registerClass_FieldKeyTyped(evt);
             }
         });
 
         batWeightOutputField2.setEditable(false);
         batWeightOutputField2.setBackground(getBackground());
-        batWeightOutputField2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(25, 115, 230)), "Batting Weight", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), chooseTeacherButton.getBackground())); // NOI18N
+        batWeightOutputField2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(chooseTeacherButton.getBackground()), "Hello", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Emoji", 2, 12), new java.awt.Color(153, 204, 255))); // NOI18N
 
         addTeacherHeaderPanel.setBackground(findBatter_HeaderPanel.getBackground());
 
@@ -2273,42 +2080,35 @@ arrowButton.setBackground(Color.white);
             addTeacherHeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addTeacherHeaderPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         addTimeTableTbl.setBackground(new java.awt.Color(255, 255, 255));
         addTimeTableTbl.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"Monday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Tuesday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Wednesday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Thursday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Friday", null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Day", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L10", "L11", "L12", "L13", "L14"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -2319,10 +2119,8 @@ arrowButton.setBackground(Color.white);
         addTimeTableTbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         addTimeTableTbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         addTimeTableTbl.setShowGrid(true);
-        addTimeTableTbl.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        addTimeTableTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addTimeTableTblMouseClicked(evt);
             }
         });
@@ -2333,10 +2131,8 @@ arrowButton.setBackground(Color.white);
         addTeacherButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         addTeacherButton.setForeground(new java.awt.Color(51, 255, 255));
         addTeacherButton.setText("Add Teacher");
-        addTeacherButton.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        addTeacherButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addTeacherButtonMouseClicked(evt);
             }
         });
@@ -2362,14 +2158,15 @@ arrowButton.setBackground(Color.white);
             .addGroup(addTeacherPaneLayout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addComponent(addTeacherNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(registerClass_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(207, 207, 207)
                 .addGroup(addTeacherPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(teacherExtraMuralsSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(addTeacherPaneLayout.createSequentialGroup()
+                        .addComponent(teacherExtraMuralsSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(195, 195, 195)
+                        .addComponent(batWeightOutputField2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(195, 195, 195)
-                .addComponent(batWeightOutputField2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103))
         );
         addTeacherPaneLayout.setVerticalGroup(
@@ -2380,15 +2177,15 @@ arrowButton.setBackground(Color.white);
                 .addComponent(addTeacherButton)
                 .addGap(18, 18, 18)
                 .addGroup(addTeacherPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(teacherExtraMuralsSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addGroup(addTeacherPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(batWeightOutputField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(addTeacherNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(registerClass_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(registerClass_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(teacherExtraMuralsSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane29, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Add Teacher", addTeacherPane);
@@ -2398,14 +2195,14 @@ arrowButton.setBackground(Color.white);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1600, Short.MAX_VALUE)
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -2419,17 +2216,6 @@ arrowButton.setBackground(Color.white);
         dispose();
     }//GEN-LAST:event_jButton1MouseClicked
 
-    private void formMouseDragged(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseDragged
-    {//GEN-HEADEREND:event_formMouseDragged
-        // TODO add your handling code here:
-        int mouseX = evt.getXOnScreen();
-        int mouseY = evt.getYOnScreen();
-        getContentPane().setLocation(
-                evt.getXOnScreen() - evt.getX(), 
-                evt.getYOnScreen() - evt.getY()
-        );
-    }//GEN-LAST:event_formMouseDragged
-
     private void registerClassOutput_FieldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_registerClassOutput_FieldActionPerformed
     {//GEN-HEADEREND:event_registerClassOutput_FieldActionPerformed
         // TODO add your handling code here:
@@ -2441,7 +2227,7 @@ arrowButton.setBackground(Color.white);
         teacherComboBox.setEditable(!teacherComboBox.isEditable());
         registerClassOutput_Field.setEditable(!registerClassOutput_Field.isEditable());
         extraMuralsNr_Text.setEditable(!extraMuralsNr_Text.isEditable());
-        tblTeacherTimeTable.setEnabled(!tblTeacherTimeTable.isEnabled());
+        tblViewTimeTable.setEnabled(!tblViewTimeTable.isEnabled());
         confirmEditsButton.setVisible(!confirmEditsButton.isVisible());
     }//GEN-LAST:event_editableButtonActionPerformed
 
@@ -2452,7 +2238,7 @@ arrowButton.setBackground(Color.white);
     }//GEN-LAST:event_registerClass_FieldActionPerformed
     private double getBattingWeight()
     {
-        return ((int)teacherExtraMuralsSpinner.getValue() * 0.1 + (registerClass_Field.getText().equalsIgnoreCase("true")? 0.1: 0 )+ (getNumFrees() * 0.125) );
+        return selectedTeacher.getBattingWeight();
     }
     private int getNumFrees()
     {
@@ -2522,12 +2308,13 @@ arrowButton.setBackground(Color.white);
 
     private void addTeacherButtonMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_addTeacherButtonMouseClicked
     {//GEN-HEADEREND:event_addTeacherButtonMouseClicked
+        String fullName = "";
         try
         {
             // TODO add your handling code here:
             TimeTable newTT = new TimeTable(addTeacher_tableSelection);
-            
-            dbm.addTeacher(addTeacherNameField.getText(),
+            fullName = addTeacherNameField.getText();
+            tm.addTeacher(fullName,
                     getNumFrees(), 
                     registerClass_Field.getText().equalsIgnoreCase("true"),
                     (int)teacherExtraMuralsSpinner.getValue(),
@@ -2535,6 +2322,11 @@ arrowButton.setBackground(Color.white);
         } catch (SQLException ex)
         {
             JOptionPane.showMessageDialog(null, ex.getStackTrace());
+            try {
+                tm.deleteTeacher(fullName);
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            }
             ex.printStackTrace();
         }
     }//GEN-LAST:event_addTeacherButtonMouseClicked
@@ -2559,11 +2351,80 @@ arrowButton.setBackground(Color.white);
         }
     }//GEN-LAST:event_registerClass_FieldKeyTyped
 
-    private void tblTeacherTimeTableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblTeacherTimeTableMouseClicked
-    {//GEN-HEADEREND:event_tblTeacherTimeTableMouseClicked
+    private void tblViewTimeTableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblViewTimeTableMouseClicked
+    {//GEN-HEADEREND:event_tblViewTimeTableMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tblTeacherTimeTableMouseClicked
+        int row = tblViewTimeTable.getSelectedRow(), col = tblViewTimeTable.getSelectedColumn();
+        tblViewTimeTable.setValueAt( (tblViewTimeTable.getValueAt(row, col) == null? "X":""), 
+                row, col);
+    }//GEN-LAST:event_tblViewTimeTableMouseClicked
 
+    private void ManageTeachers_PanelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ManageTeachers_PanelFocusGained
+        // TODO add your handling code here:
+        try
+        {
+                teacherComboBox.setModel(new DefaultComboBoxModel<> (tm.getTeacherNames()));
+                
+                /*update all the fields to match that of the teacher*/
+                setViewValues();
+        } catch(java.sql.SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_ManageTeachers_PanelFocusGained
+
+    private void teacherComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherComboBoxActionPerformed
+        // TODO add your handling code here:
+        setViewValues();
+    }//GEN-LAST:event_teacherComboBoxActionPerformed
+
+    private void confirmEditsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmEditsButtonMouseClicked
+        // TODO add your handling code here:
+        try
+        {
+            selectedTeacher.setFullName((String) teacherComboBox.getSelectedItem());
+            selectedTeacher.setTimeTable(new TimeTable(getUpdateTableSelection()));//needa make this method
+            selectedTeacher.setExtraMuralHours(Integer.parseInt(extraMuralsNr_Text.getText()));
+            selectedTeacher.setHasRegisterClass(registerClassOutput_Field.getText().equalsIgnoreCase("true"));
+            tm.updateTeacher(selectedTeacher, viewOriginalName);
+            selectedTeacher.setNumFrees(getNumFrees());
+        }catch(java.sql.SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_confirmEditsButtonMouseClicked
+    private boolean [][] getUpdateTableSelection()
+    {
+        boolean [][] tempTimetable = new boolean [5][14];
+        int rowCount = tblViewTimeTable.getRowCount();
+        int colCount = tblViewTimeTable.getColumnCount();
+        
+        for (int row = 0; row < tempTimetable.length; row++)
+        {
+            boolean [] day = tempTimetable[row];
+            for (int column = 0; column < day.length; column ++)
+            {
+                tempTimetable[row][column] = tblViewTimeTable.getValueAt(row, column).equals("X");
+            }
+        }
+        return tempTimetable;  
+    }
+    public void setViewValues()
+    {
+        try
+        {
+            /*update all the fields to match that of the teacher*/
+            selectedTeacher = tm.getTeacher((String)teacherComboBox.getSelectedItem());
+            viewOriginalName = selectedTeacher.getFullName();
+            tblViewTimeTable.setModel(tm.getTimeTableModel(selectedTeacher.getFullName()));
+            registerClassOutput_Field.setText("" + selectedTeacher.getHasRegisterClass());
+            batWeightField.setText("" + selectedTeacher.getBattingWeight());
+            extraMuralsNr_Text.setText("" + selectedTeacher.getExtraMuralHours());
+        } catch(java.sql.SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -2612,8 +2473,10 @@ arrowButton.setBackground(Color.white);
             }
         });
     }
+    private String viewOriginalName;
+    private int xDrag = 0, yDrag= 0, xPress = 0, yPress = 0;
+    private TeacherManager tm = new TeacherManager();
     private Teacher selectedTeacher;
-    private DatabaseManager dbm = new DatabaseManager();
     private boolean [][] addTeacher_tableSelection = new boolean[5][14];
     private ArrayList<Cell> selectedCells = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2643,6 +2506,7 @@ arrowButton.setBackground(Color.white);
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -2724,7 +2588,7 @@ arrowButton.setBackground(Color.white);
     private javax.swing.JTable tblCalendar7;
     private javax.swing.JTable tblCalendar8;
     private javax.swing.JTable tblCalendar9;
-    private javax.swing.JTable tblTeacherTimeTable;
+    private javax.swing.JTable tblViewTimeTable;
     private javax.swing.JComboBox<String> teacherComboBox;
     private javax.swing.JSpinner teacherExtraMuralsSpinner;
     private javax.swing.JPanel weeksApril;

@@ -11,7 +11,11 @@ package Backend;
  */
 public class Teacher
 {
-    private final TimeTable timeTable;
+    private TimeTable timeTable;
+
+    public void setTimeTable(TimeTable timeTable) {
+        this.timeTable = timeTable;
+    }
     private int numBattings, numFrees, extraMuralHours;
     private boolean hasRegisterClass;
     private String fullName ;
@@ -35,7 +39,7 @@ public class Teacher
         String summary = fullName + "#" + numBattings + "#";
         
         //for each day in the timetable
-        for (boolean [] day : timeTable.getTimeTable())
+        for (boolean [] day : timeTable.toBoolArray())
         {
             //for each lesson in the day
             for (boolean lesson: day)
@@ -47,5 +51,49 @@ public class Teacher
         }
         
         return summary;
+    }
+
+    public TimeTable getTimeTable() {
+        return timeTable;
+    }
+
+    public int getNumBattings() {
+        return numBattings;
+    }
+
+    public int getNumFrees() {
+        return numFrees;
+    }
+
+    public int getExtraMuralHours() {
+        return extraMuralHours;
+    }
+
+    public boolean getHasRegisterClass() {
+        return hasRegisterClass;
+    }
+
+    public void setNumBattings(int numBattings) {
+        this.numBattings = numBattings;
+    }
+
+    public void setNumFrees(int numFrees) {
+        this.numFrees = numFrees;
+    }
+
+    public void setExtraMuralHours(int extraMuralHours) {
+        this.extraMuralHours = extraMuralHours;
+    }
+
+    public void setHasRegisterClass(boolean hasRegisterClass) {
+        this.hasRegisterClass = hasRegisterClass;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 }

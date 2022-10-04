@@ -15,7 +15,7 @@ public class TimeTable
     {
         timeTable = tt;
     }
-    public boolean[][] getTimeTable()
+    public boolean[][] toBoolArray()
     {
         return timeTable;
     }

@@ -17,7 +17,7 @@ public class YearTimeTableArr
     {
         for (boolean[][] t : yearTT)
         {
-            t = tt.getTimeTable();
+            t = tt.toBoolArray();
         }
     }
     public boolean isBusy(int dayNr, int lessonNr)
