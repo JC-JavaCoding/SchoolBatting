@@ -196,18 +196,13 @@ public class TeacherManager
                            + "WHERE `FullName` = \""+ originalName +"\";";
         dbm.update(updateTblTeachersQuery);
         
-        String updateTimetableQuery = "UPDATE `tblTimetables`"
-                + "SET ("
-                    + ""
-                + ")";
         String [] collumnNames;
         boolean [][] tempTimetable;
+        
+        /*Get column labels*/
         resultSet = dbm.query("SELECT * FROM `tblTimetables`;");
         ResultSetMetaData rsm = resultSet.getMetaData();
         collumnNames = new String [rsm.getColumnCount()-1];
-        
-        //populate the array
-        
         for (int count = 0; count < rsm.getColumnCount()-1; count++)
         {
             collumnNames[count] = rsm.getColumnLabel(count+2);
@@ -217,14 +212,14 @@ public class TeacherManager
         //update every day's lessons for the teacher
         for (int day = 1; day <= 5; day++)
         {
-            String lineUpdate = "UPDATE `tblTimetables` SET ";
+            String lineUpdate = "UPDATE `jcjDB`.`tblTimetables` SET ";
             
-            for (int i = 0; i < collumnNames.length-1; i ++)
+            for (int i = 0; i < tempTimetable[day-1].length; i ++)
             {
-                lineUpdate += collumnNames[i] +" = "+ tempTimetable[day][i] +(i != collumnNames.length-1? ",":"");
+                lineUpdate += collumnNames[i+1] +" = "+ tempTimetable[day-1][i] +(i != tempTimetable[day-1].length-1? ", ":" ");
             } 
             
-            lineUpdate += " WHERE (`Day` = "+ day +") AND (`ID` = (SELECT `ID` FROM `tblTeachers` WHERE `FullName` = \""+ t.getFullName() +"\"));";
+            lineUpdate += " WHERE (`ID` = (SELECT `ID` FROM `jcjDB`.`tblTeachers` WHERE `tblTeachers`.`FullName` = \""+ t.getFullName() +"\")) AND (`Day` =  "+ day +") ;";
             dbm.update(lineUpdate);
         }
         

@@ -5,22 +5,16 @@
 package UI;
 
 import Backend.Cell;
-import Backend.DatabaseManager;
 import Backend.Teacher;
 import Backend.TeacherManager;
 import Backend.TimeTable;
 import com.formdev.flatlaf.ui.FlatArrowButton;
 import com.formdev.flatlaf.ui.FlatComboBoxUI;
 import java.awt.Color;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
@@ -2266,12 +2260,12 @@ arrowButton.setBackground(Color.white);
         int selectedRow= addTimeTableTbl.getSelectedRow();
         int selectedCollumn = addTimeTableTbl.getSelectedColumn();
         
-        Cell selectedC = new Cell(selectedRow, selectedCollumn);
+        Cell selectedC = new Cell(selectedRow, selectedCollumn-1);
         
         addTeacher_tableSelection [selectedRow][selectedCollumn-1] = !addTeacher_tableSelection [selectedRow][selectedCollumn-1];
         if (addTimeTableTbl.getValueAt(selectedRow, selectedCollumn) == null)
         {
-            selectedCells.add(selectedC);
+            add_selectedCells.add(selectedC);
             addTimeTableTbl.setValueAt("X", selectedRow, selectedCollumn);
         }else {
             addTimeTableTbl.setValueAt(null, selectedRow, selectedCollumn);
@@ -2364,10 +2358,18 @@ arrowButton.setBackground(Color.white);
         // TODO add your handling code here:
         if(tblViewTimeTable.isEnabled())
         {
-            int row = tblViewTimeTable.getSelectedRow(), col = tblViewTimeTable.getSelectedColumn();
-            tblViewTimeTable.setValueAt( 
-                    (tblViewTimeTable.getValueAt(row, col) == null || tblViewTimeTable.getValueAt(row, col).equals("")? "X":""), 
-                    row, col);
+                int row = tblViewTimeTable.getSelectedRow(), col = tblViewTimeTable.getSelectedColumn();
+
+            Cell selectedC = new Cell(row, col-1);
+
+            changeTeacher_tableSelection [row][col-1] = !changeTeacher_tableSelection [row][col-1];
+            if (tblViewTimeTable.getValueAt(row, col) == null)
+            {
+                change_selectedCells.add(selectedC);
+                tblViewTimeTable.setValueAt("X", row, col);
+            }else {
+                tblViewTimeTable.setValueAt(null, row, col);
+            }
         }
     }//GEN-LAST:event_tblViewTimeTableMouseClicked
 
@@ -2411,12 +2413,12 @@ arrowButton.setBackground(Color.white);
         int rowCount = tblViewTimeTable.getRowCount();
         int colCount = tblViewTimeTable.getColumnCount();
         
-        for (int row = 0; row < tempTimetable.length; row++)
+        for (int row = 0; row < rowCount; row++)
         {
             boolean [] day = tempTimetable[row];
             for (int column = 0; column < day.length; column ++)
             {
-                tempTimetable[row][column] = tblViewTimeTable.getValueAt(row, column).equals("X");
+                tempTimetable[row][column] = tblViewTimeTable.getValueAt(row, column+1) != null;
             }
         }
         return tempTimetable;  
@@ -2486,11 +2488,12 @@ arrowButton.setBackground(Color.white);
         });
     }
     private String viewOriginalName;
-    private int xDrag = 0, yDrag= 0, xPress = 0, yPress = 0;
     private TeacherManager tm = new TeacherManager();
     private Teacher selectedTeacher;
     private boolean [][] addTeacher_tableSelection = new boolean[5][14];
-    private ArrayList<Cell> selectedCells = new ArrayList<>();
+    private boolean [][] changeTeacher_tableSelection = new boolean[5][14];
+    private ArrayList<Cell> add_selectedCells = new ArrayList<>();
+    private ArrayList<Cell> change_selectedCells = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ManageTeachers_Panel;
     private javax.swing.JButton addTeacherButton;
