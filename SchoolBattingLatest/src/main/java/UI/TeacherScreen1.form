@@ -73,20 +73,22 @@
               <Group type="102" attributes="0">
                   <EmptySpace pref="645" max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="462" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="471" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="458" max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" pref="29" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="129" max="-2" attributes="0"/>
               </Group>
-              <Component id="jLabel1" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" pref="29" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -162,37 +164,44 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="battingWeightLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="batWeightField" min="-2" pref="134" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
-                                      <Component id="registerClassLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="registerClassOutput_Field" min="-2" pref="135" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel5" min="-2" pref="165" max="-2" attributes="0"/>
-                                      <Component id="teacherComboBox" min="-2" pref="185" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="extramuralsLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="extraMuralsNr_Text" min="-2" pref="131" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="editableButton" min="-2" max="-2" attributes="0"/>
-                                  <Component id="confirmEditsButton" min="-2" pref="49" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
                           <Component id="manageT_HeaderPanel" max="32767" attributes="0"/>
                           <Component id="jScrollPane30" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="battingWeightLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="batWeightField" min="-2" pref="134" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
+                              <Component id="registerClassLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="registerClassOutput_Field" min="-2" pref="135" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="jLabel5" min="-2" pref="165" max="-2" attributes="0"/>
+                              <Component id="teacherComboBox" min="-2" pref="185" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="47" pref="277" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="editableButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="confirmEditsButton" min="-2" pref="49" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="extramuralsLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="extraMuralsNr_Text" min="-2" pref="131" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -202,30 +211,26 @@
                       <Component id="manageT_HeaderPanel" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                      <Component id="teacherComboBox" min="-2" pref="28" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="teacherComboBox" min="-2" pref="28" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="battingWeightLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="batWeightField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="registerClassLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="registerClassOutput_Field" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="extraMuralsNr_Text" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="extramuralsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="editableButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="extraMuralsNr_Text" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="extramuralsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="confirmEditsButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="editableButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="confirmEditsButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -322,7 +327,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="teacherComboBoxActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="teacherComboBox.setUI(new FlatComboBoxUI(){&#xa;        @Override&#xa;            protected FlatArrowButton createArrowButton() {&#xa;                //---style arrow button anyway you like&#xa;                FlatArrowButton arrowButton = new FlatArrowButton(3, &quot;Default&quot;, Color.lightGray, Color.lightGray, Color.lightGray, chooseDayLabel.getForeground(), chooseDayLabel.getForeground().brighter(), chooseDayLabel.getForeground().brighter());&#xa;                arrowButton.setBorder(null);&#xa;                arrowButton.setBorderPainted(false);&#xa;                arrowButton.setBackground(chooseDayLabel.getForeground());//---button&apos;s color&#xa;                return arrowButton; &#xa;            }&#xa;    });&#xa;//get values&#xa;try&#xa;{&#xa;        teacherComboBox.setModel(new DefaultComboBoxModel&lt;&gt; (tm.getTeacherNames()));&#xa;} catch(java.sql.SQLException e)&#xa;{&#xa;    e.printStackTrace();&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="teacherComboBox.setUI(new FlatComboBoxUI(){&#xa;        @Override&#xa;            protected JButton createArrowButton() {&#xa;                //---style arrow button anyway you like&#xa;                JButton arrowButton = new JButton();&#xa;                arrowButton.setBorder(null);&#xa;                arrowButton.setBorderPainted(false);&#xa;                arrowButton.setText(&quot;V&quot;);&#xa;                arrowButton.setBackground(Color.getHSBColor(213, 89, 90));&#xa;                return arrowButton; &#xa;            }&#xa;    });&#xa;//get values&#xa;try&#xa;{&#xa;        teacherComboBox.setModel(new DefaultComboBoxModel&lt;&gt; (tm.getTeacherNames()));&#xa;} catch(java.sql.SQLException e)&#xa;{&#xa;    e.printStackTrace();&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
@@ -389,6 +394,12 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="99" green="99" red="99" type="rgb"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="15" rowCount="5">
@@ -497,8 +508,12 @@
                       </TableColumnModel>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="33" red="33" type="rgb"/>
+                    </Property>
                     <Property name="opaque" type="boolean" value="false"/>
                     <Property name="rowHeight" type="int" value="105"/>
+                    <Property name="rowMargin" type="int" value="1"/>
                     <Property name="selectionMode" type="int" value="0"/>
                     <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
                       <JTableSelectionModel selectionMode="0"/>

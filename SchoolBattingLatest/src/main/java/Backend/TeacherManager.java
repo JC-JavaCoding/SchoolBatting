@@ -119,7 +119,7 @@ public class TeacherManager
             /*convert day number to String*/
             int dayNum = resultSet.getInt(2);
             data[curRow][0] =  dayNum == 1? "Monday": dayNum == 2? "Tuesday": dayNum == 3? "Wednesday": dayNum == 4? "Thursday": "Friday";
-            for (int i = 1; i < data.length-1; i++)
+            for (int i = 1; i < data[curRow].length-1; i++)
             {
                 data[curRow][i] = (resultSet.getInt(i+2) == 1)? "X":"";
             }
@@ -189,11 +189,11 @@ public class TeacherManager
     public void updateTeacher(Teacher t, String originalName) throws SQLException
     {
         String updateTblTeachersQuery = "UPDATE `tblTeachers`"
-                           + "SET (`FullName` = \""+ t.getFullName() +"\","
+                           + "SET `FullName` = \""+ t.getFullName() +"\","
                            + "`NumFrees` = "+ t.getNumFrees() +","
-                           + "`RegisterClass` = "+ (t.getHasRegisterClass()? 1: 0) +","
-                           + "`ExtramuralHours` = "+ t.getExtraMuralHours() +""
-                           + "WHERE `FullName` = \""+ originalName +"\");";
+                           + "`RegisterClass` = "+ t.getHasRegisterClass() +","
+                           + "`ExtramuralHours` = "+ t.getExtraMuralHours() +" "
+                           + "WHERE `FullName` = \""+ originalName +"\";";
         dbm.update(updateTblTeachersQuery);
         
         String updateTimetableQuery = "UPDATE `tblTimetables`"
@@ -204,28 +204,27 @@ public class TeacherManager
         boolean [][] tempTimetable;
         resultSet = dbm.query("SELECT * FROM `tblTimetables`;");
         ResultSetMetaData rsm = resultSet.getMetaData();
-        collumnNames = new String [rsm.getColumnCount()-2];
+        collumnNames = new String [rsm.getColumnCount()-1];
         
         //populate the array
-        int count = 0;
-        while (resultSet.next())
+        
+        for (int count = 0; count < rsm.getColumnCount()-1; count++)
         {
-            collumnNames[count] = resultSet.getString(count+2);
-            count ++;
+            collumnNames[count] = rsm.getColumnLabel(count+2);
         }
         tempTimetable = t.getTimeTable().toBoolArray();
         
         //update every day's lessons for the teacher
-        for (int day = 0; day < 5; day++)
+        for (int day = 1; day <= 5; day++)
         {
-            String lineUpdate = "UPDATE `tblTimetables` SET (";
+            String lineUpdate = "UPDATE `tblTimetables` SET ";
             
-            for (int i = 0; i < collumnNames.length; i ++)
+            for (int i = 0; i < collumnNames.length-1; i ++)
             {
                 lineUpdate += collumnNames[i] +" = "+ tempTimetable[day][i] +(i != collumnNames.length-1? ",":"");
             } 
             
-            lineUpdate += ")WHERE `Day` = "+ day +" AND `ID` = (SELECT `ID` FROM `tblTeachers` WHERE `FullName` = \""+ t.getFullName() +"\");";
+            lineUpdate += " WHERE (`Day` = "+ day +") AND (`ID` = (SELECT `ID` FROM `tblTeachers` WHERE `FullName` = \""+ t.getFullName() +"\"));";
             dbm.update(lineUpdate);
         }
         

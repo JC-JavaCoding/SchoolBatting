@@ -210,17 +210,18 @@ public class TeacherScreen1 extends javax.swing.JFrame
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addContainerGap(645, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(471, 471, 471)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(458, 458, 458)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         headerPanelLayout.setVerticalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane.setBackground(new java.awt.Color(0, 0, 51));
@@ -273,12 +274,13 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         teacherComboBox.setUI(new FlatComboBoxUI(){
             @Override
-            protected FlatArrowButton createArrowButton() {
+            protected JButton createArrowButton() {
                 //---style arrow button anyway you like
-                FlatArrowButton arrowButton = new FlatArrowButton(3, "Default", Color.lightGray, Color.lightGray, Color.lightGray, chooseDayLabel.getForeground(), chooseDayLabel.getForeground().brighter(), chooseDayLabel.getForeground().brighter());
+                JButton arrowButton = new JButton();
                 arrowButton.setBorder(null);
                 arrowButton.setBorderPainted(false);
-                arrowButton.setBackground(chooseDayLabel.getForeground());//---button's color
+                arrowButton.setText("V");
+                arrowButton.setBackground(Color.getHSBColor(213, 89, 90));
                 return arrowButton;
             }
         });
@@ -327,6 +329,8 @@ public class TeacherScreen1 extends javax.swing.JFrame
         });
 
         tblViewTimeTable.setBackground(new java.awt.Color(255, 255, 255));
+        tblViewTimeTable.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tblViewTimeTable.setForeground(new java.awt.Color(153, 153, 153));
         tblViewTimeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Monday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -357,8 +361,10 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblViewTimeTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
         tblViewTimeTable.setCellSelectionEnabled(true);
         tblViewTimeTable.setEnabled(false);
+        tblViewTimeTable.setGridColor(new java.awt.Color(51, 51, 51));
         tblViewTimeTable.setOpaque(false);
         tblViewTimeTable.setRowHeight(105);
+        tblViewTimeTable.setRowMargin(1);
         tblViewTimeTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblViewTimeTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblViewTimeTable.setShowGrid(true);
@@ -380,31 +386,35 @@ public class TeacherScreen1 extends javax.swing.JFrame
             ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
                 .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
-                                .addComponent(battingWeightLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(batWeightField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(198, 198, 198)
-                                .addComponent(registerClassLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(registerClassOutput_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(teacherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(47, 47, 47)
-                        .addComponent(extramuralsLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(extraMuralsNr_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(109, 109, 109)
-                        .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(editableButton)
-                            .addComponent(confirmEditsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(manageT_HeaderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane30))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
+                        .addComponent(battingWeightLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(batWeightField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(198, 198, 198)
+                        .addComponent(registerClassLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(registerClassOutput_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(teacherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(47, 277, Short.MAX_VALUE)
+                .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ManageTeachers_PanelLayout.createSequentialGroup()
+                        .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editableButton)
+                            .addComponent(confirmEditsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ManageTeachers_PanelLayout.createSequentialGroup()
+                        .addComponent(extramuralsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(extraMuralsNr_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(172, 172, 172))))
         );
         ManageTeachers_PanelLayout.setVerticalGroup(
             ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,25 +422,23 @@ public class TeacherScreen1 extends javax.swing.JFrame
                 .addComponent(manageT_HeaderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
-                        .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(teacherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5))
+                        .addGap(25, 25, 25)
+                        .addComponent(teacherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(battingWeightLabel)
                             .addComponent(batWeightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(registerClassLabel)
-                            .addComponent(registerClassOutput_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(registerClassOutput_Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(extraMuralsNr_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(extramuralsLabel)))
                     .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editableButton)
-                        .addGap(18, 18, 18)
                         .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(extraMuralsNr_Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(extramuralsLabel)
-                            .addComponent(confirmEditsButton))))
+                            .addComponent(editableButton)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addComponent(confirmEditsButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane30, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(57, Short.MAX_VALUE))
@@ -2354,9 +2362,13 @@ arrowButton.setBackground(Color.white);
     private void tblViewTimeTableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblViewTimeTableMouseClicked
     {//GEN-HEADEREND:event_tblViewTimeTableMouseClicked
         // TODO add your handling code here:
-        int row = tblViewTimeTable.getSelectedRow(), col = tblViewTimeTable.getSelectedColumn();
-        tblViewTimeTable.setValueAt( (tblViewTimeTable.getValueAt(row, col) == null? "X":""), 
-                row, col);
+        if(tblViewTimeTable.isEnabled())
+        {
+            int row = tblViewTimeTable.getSelectedRow(), col = tblViewTimeTable.getSelectedColumn();
+            tblViewTimeTable.setValueAt( 
+                    (tblViewTimeTable.getValueAt(row, col) == null || tblViewTimeTable.getValueAt(row, col).equals("")? "X":""), 
+                    row, col);
+        }
     }//GEN-LAST:event_tblViewTimeTableMouseClicked
 
     private void ManageTeachers_PanelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ManageTeachers_PanelFocusGained
