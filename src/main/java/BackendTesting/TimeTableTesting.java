@@ -6,7 +6,7 @@ package BackendTesting;
 
 import Backend.TeacherManager;
 import Backend.TimeTable;
-import Backend.YearTimeTableArr;
+import Backend.BattingLesson;
 import SQL.DatabaseManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,7 +41,7 @@ public class TimeTableTesting
         TeacherManager tm = new TeacherManager();
         System.out.println(ttA.toString());
         
-        YearTimeTableArr yttA = new YearTimeTableArr(ttA);
+        BattingLesson yttA = new BattingLesson(ttA);
         
         
     }

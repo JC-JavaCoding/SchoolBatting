@@ -13,17 +13,17 @@ public class Teacher
 {
     private TimeTable timeTable;
 
-    public void setTimeTable(TimeTable timeTable) {
+    public void setTimeTable(TimeTable timeTable) 
+    {
         this.timeTable = timeTable;
     }
     private int numBattings, numFrees, extraMuralHours;
     private boolean hasRegisterClass;
     private String fullName ;
 
-    public Teacher(TimeTable timeTable, int numFrees, int numBattings, int extraMuralHours, String fullName, boolean hasRegisterClass)
+    public Teacher(TimeTable timeTable, int numBattings, int extraMuralHours, String fullName, boolean hasRegisterClass)
     {
         this.timeTable = timeTable;
-        this.numFrees = numFrees;
         this.numBattings = numBattings;
         this.extraMuralHours = extraMuralHours;
         this.hasRegisterClass = hasRegisterClass;
@@ -53,6 +53,11 @@ public class Teacher
         return summary;
     }
 
+    public boolean isFree(int lesson, int dayOfWeek)
+    {
+        return !timeTable.toBoolArray()[dayOfWeek-1][lesson-1];
+    }
+    
     public TimeTable getTimeTable() {
         return timeTable;
     }
@@ -61,8 +66,16 @@ public class Teacher
         return numBattings;
     }
 
-    public int getNumFrees() {
-        return numFrees;
+    public int getNumFrees()    {
+        int count =0;
+        for (boolean [] bArr : timeTable.toBoolArray())
+        {
+            for (boolean b : bArr)
+            {
+                count += (!b)? 1:0;
+            }
+        }
+        return count;
     }
 
     public int getExtraMuralHours() {

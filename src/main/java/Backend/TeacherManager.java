@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -34,20 +35,31 @@ public class TeacherManager
     public Teacher getTeacher(String tName) throws SQLException
     {
         /*Get TimeTable*/
-        String getTimeTableQuery = "Select * from `jcjDB`.`tblTimetables`"
-                + "WHERE `ID` = (SELECT `ID` FROM `jcjDB`.`tblTeachers`"
-                                        + " WHERE `FullName` LIKE \""+tName+"\");";
+        //get ID
+        ResultSet idResult = dbm.query("SELECT `ID` FROM `tblTeachers`"
+                                    +"WHERE `FullName` = \""+ tName +"\";");
+        idResult.next();
+        String id = idResult.getString(1);
         
+        //get collumnCount
+        ResultSetMetaData tblTimetablesRSMD = dbm.query("SELECT * From `tblTimetables`;").getMetaData();
+        int colCount = tblTimetablesRSMD.getColumnCount();
+        
+        //get timetable
+        String getTimeTableQuery = "SELECT * FROM `tblTimetables`"
+                     + "WHERE `ID` = "+ id +";";
         resultSet = dbm.query(getTimeTableQuery);
         
         boolean [][] timeTableArr = new boolean[5][14];
        
+        int dayCount = 0;
         while (resultSet.next())
         {
-            for (int i = 2; i < resultSet.getFetchSize(); i ++)
+            for (int i = 0; i < timeTableArr[0].length; i ++)
             {
-                timeTableArr[resultSet.getInt(1)][i] = resultSet.getInt(i) == 1;
+                timeTableArr[dayCount][i] = (resultSet.getInt(i+3) == 1);
             }
+            dayCount++;
         }
         TimeTable ttb = new TimeTable(timeTableArr);
         /*End Of Getting TimeTable*/
@@ -66,7 +78,7 @@ public class TeacherManager
         resultSet = dbm.query(numBattingsQuery);
         resultSet.next();
         int numBattings = resultSet.getInt(1);
-        return new Teacher(ttb, numFrees, numBattings, extraMuralHours, tName, hasRegisterClass);
+        return new Teacher(ttb, numBattings, extraMuralHours, tName, hasRegisterClass);
     }
     public String [] getTeacherNames() throws SQLException
     {
@@ -103,7 +115,7 @@ public class TeacherManager
                                     +"WHERE `FullName` = \""+ fullName +"\");";
         resultSet = dbm.query(query);
         ResultSetMetaData meta  = resultSet.getMetaData();
-        
+        int columnCount = meta.getColumnCount();
         String [][] data = new String [5][15];
         String [] cols = new String [meta.getColumnCount() - 1];
         //populate collumns
@@ -119,7 +131,7 @@ public class TeacherManager
             /*convert day number to String*/
             int dayNum = resultSet.getInt(2);
             data[curRow][0] =  dayNum == 1? "Monday": dayNum == 2? "Tuesday": dayNum == 3? "Wednesday": dayNum == 4? "Thursday": "Friday";
-            for (int i = 1; i < data[curRow].length-1; i++)
+            for (int i = 1; i < data[curRow].length; i++)
             {
                 data[curRow][i] = (resultSet.getInt(i+2) == 1)? "X":"";
             }
@@ -149,7 +161,7 @@ public class TeacherManager
     private void insertIntoTblTeachers(String fullName, int numFrees, boolean hasRegisterClass, int extraMuralHours) throws SQLException
     {
         
-        String addTeacherQueryString = "INSERT INTO `jcjDB`.`tblTeachers` (`FullName`, `NumFrees`, `Register Class`, `ExtramuralHours`) \n" +
+        String addTeacherQueryString = "INSERT INTO `jcjDB`.`tblTeachers` (`FullName`, `NumFrees`, `RegisterClass`, `ExtramuralHours`) \n" +
 "VALUES ('"+ fullName +"', '"+ numFrees +"', '"+ ((hasRegisterClass)? 1:0) +"', '"+ extraMuralHours +"');";
         
         dbm.update(addTeacherQueryString);
@@ -264,10 +276,30 @@ public class TeacherManager
         
         return stringRepresentation;
     }    
-    public boolean isFree(int day, int lesson)
+    public boolean isFree(Teacher t, int lesson, int dayOfWeek, int dayOfMonth, int month) throws SQLException
     {
-//        int weekNr = 
-//        return teacher.ytt.isBusy(weekNr, dayNr, lesson) ;
+        teacher = t;
+        int teacherID;
+        String getBattingsQuery;
+        
+        //see if teacher has a lesson at that lesson
+        if(teacher.isFree(lesson, dayOfWeek))
+        {
+            //see wether the teacher has a batting scheduled for the time
+            teacherID = getTeacherID(teacher.getFullName());
+            
+            //from database:  get battings for teacher
+            getBattingsQuery = "SELECT * FROM `tblBattings` WHERE `ID` = "+ teacherID +"";
+            resultSet = dbm.query(getBattingsQuery);
+            
+            //
+            while(resultSet.next())
+            {
+                 if (resultSet.getInt(2) == lesson && resultSet.getInt(3) == dayOfWeek && resultSet.getInt(4) == dayOfMonth && resultSet.getInt(5) == month )return false;
+            }
+            return true;
+        }
+        
         return false;
     }
 }
