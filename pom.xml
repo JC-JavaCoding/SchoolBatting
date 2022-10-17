@@ -8,7 +8,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
-        <exec.mainClass>com.mycompany.schoolbatting.SchoolBatting</exec.mainClass>
+        <exec.mainClass>src/main/java/UI/TeacherScreen1.java</exec.mainClass>
     </properties>
     <dependencies>
         <dependency>

@@ -31,7 +31,7 @@ public class Teacher
     }
     public double getBattingWeight()
     {
-        return (numFrees * 0.3 + numBattings * 0.3 + extraMuralHours * 0.3 + (hasRegisterClass? 1: 0 * 0.1)) ;
+        return (numFrees * 0.3 + numBattings * 0.5 + extraMuralHours * 0.3 + (hasRegisterClass? 1: 0 )*0.1 ) ;
     }
     @Override
     public String toString()

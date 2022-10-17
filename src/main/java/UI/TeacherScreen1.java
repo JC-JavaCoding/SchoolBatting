@@ -67,6 +67,8 @@ import com.formdev.flatlaf.ui.FlatComboBoxUI;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -75,7 +77,9 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
@@ -93,6 +97,29 @@ public class TeacherScreen1 extends javax.swing.JFrame
     public TeacherScreen1()
     {
          initComponents();  
+         
+         Month [] monthArr = {Month.JANUARY,
+         Month.FEBRUARY,
+         Month.MARCH,
+         Month.APRIL,
+         Month.MAY,
+         Month.JUNE,
+         Month.JULY,
+         Month.AUGUST,
+         Month.SEPTEMBER,
+         Month.OCTOBER,
+         Month.NOVEMBER,
+         Month.DECEMBER
+         };
+         
+         JTable [] battingCalendarArr = {tblJanBatting, tblFebBatting, tblMarBatting, tblAprBatting, tblMayBatting, tblJunBatting, tblJulBatting, tblAugBatting, tblSepBatting, tblOctBatting, tblNovBatting, tblDecBatting};
+         JTable [] selectBattingMonthArr = {tblJanWeeks, tblFebWeeks, tblMarchWeeks, tblAprilWeeks, tblMayWeeks, tblJuneWeeks, tblJulyWeeks, tblAugWeeks, tblSeptWeeks, tblOctWeeks, tblNovWeeks, tblDecWeeks};
+         
+         for(int i = 0; i < 12; i++)
+         {
+             setBattingMonthCalendar(monthArr[i], battingCalendarArr[i]);
+             setBattingMonthCalendar(monthArr[i], selectBattingMonthArr[i]);
+         }
     }
 
     /**
@@ -120,6 +147,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         jScrollPane30 = new javax.swing.JScrollPane();
         tblViewTimeTable = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
+        deleteTeacherButton = new javax.swing.JButton();
         findBatter_Panel = new javax.swing.JPanel();
         findBatter_HeaderPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -176,6 +204,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         chooseTeacherButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         outputTeacherList = new javax.swing.JList<>();
+        deleteBattingTeacherButton = new javax.swing.JButton();
         outputCalendarTabbedPane = new javax.swing.JTabbedPane();
         tabJanuary = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -430,6 +459,19 @@ public class TeacherScreen1 extends javax.swing.JFrame
         jLabel5.setForeground(new java.awt.Color(25, 117, 229));
         jLabel5.setText("Teacher Name");
 
+        deleteTeacherButton.setBackground(new java.awt.Color(255, 255, 255));
+        deleteTeacherButton.setForeground(new java.awt.Color(204, 0, 0));
+        deleteTeacherButton.setText("Delete teacher");
+        deleteTeacherButton.setBorder(null);
+        deleteTeacherButton.setBorderPainted(false);
+        deleteTeacherButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                deleteTeacherButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ManageTeachers_PanelLayout = new javax.swing.GroupLayout(ManageTeachers_Panel);
         ManageTeachers_Panel.setLayout(ManageTeachers_PanelLayout);
         ManageTeachers_PanelLayout.setHorizontalGroup(
@@ -440,16 +482,20 @@ public class TeacherScreen1 extends javax.swing.JFrame
                     .addComponent(jScrollPane30))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
-                .addGap(192, 192, 192)
-                .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
+                        .addGap(192, 192, 192)
                         .addComponent(batWeightField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(325, 325, 325)
                         .addComponent(registerClassOutput_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28))
-                    .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(teacherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(deleteTeacherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(teacherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(377, 392, Short.MAX_VALUE)
                 .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ManageTeachers_PanelLayout.createSequentialGroup()
@@ -467,8 +513,13 @@ public class TeacherScreen1 extends javax.swing.JFrame
                 .addComponent(manageT_HeaderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(teacherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(teacherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(ManageTeachers_PanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(deleteTeacherButton)))
                         .addGap(18, 18, 18)
                         .addGroup(ManageTeachers_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(batWeightField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -544,7 +595,9 @@ public class TeacherScreen1 extends javax.swing.JFrame
                 {"Tuesday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Wednesday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {"Thursday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"Friday", null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {"Friday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"Saturday", null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"Sunday", null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String []
             {
@@ -626,62 +679,47 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblJanWeeks.setBackground(new java.awt.Color(255, 255, 255));
         tblJanWeeks.setForeground(new java.awt.Color(153, 153, 153));
-        tblJanWeeks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {"1", "2", "3", "4", "5", "6", "7"},
-                {"8", "9", "10", "11", "12", "13", "14"},
-                {"15", "16", "17", "18", "19", "20", "21"},
-                {"22", "23", "24", "25", "26", "27", "28"},
-                {"29", "30", null, null, null, null, null}
-            },
-            new String []
-            {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
+        tblJanWeeks.setModel(new javax.swing.table.DefaultTableModel()
+        );
         tblJanWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblJanWeeks.setGridColor(new java.awt.Color(102, 102, 102));
         tblJanWeeks.getTableHeader().setReorderingAllowed(false);
-        jScrollPane9.setViewportView(tblJanWeeks);
-        if (tblJanWeeks.getColumnModel().getColumnCount() > 0)
+        String [][] month = new String[6][7];
+        LocalDate monthD = LocalDate.of(LocalDate.now().getYear(), Month.JANUARY, 1);
+
+        int day = 1;
+        for(int i = 0; i < month.length; i++)
         {
-            tblJanWeeks.getColumnModel().getColumn(4).setHeaderValue("Friday");
-            tblJanWeeks.getColumnModel().getColumn(5).setHeaderValue("Saturday");
-            tblJanWeeks.getColumnModel().getColumn(6).setHeaderValue("Sunday");
+            int j = 0;
+            //get the month start day
+            if(i == 0) j = monthD.getDayOfWeek().getValue()-1;
+
+            //for rest of month
+            for(; j < month[i].length && day <= monthD.lengthOfMonth(); j++)
+            {
+                month[i][j] = ""+ day++;
+            }
         }
+        String [] colNames = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        tblJanWeeks.setModel(new DefaultTableModel(month, colNames));
+        tblJanWeeks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblJanWeeksMouseReleased(evt);
+            }
+        });
+        jScrollPane9.setViewportView(tblJanWeeks);
 
         javax.swing.GroupLayout weeksJanuaryLayout = new javax.swing.GroupLayout(weeksJanuary);
         weeksJanuary.setLayout(weeksJanuaryLayout);
         weeksJanuaryLayout.setHorizontalGroup(
             weeksJanuaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         weeksJanuaryLayout.setVerticalGroup(
             weeksJanuaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(weeksJanuaryLayout.createSequentialGroup()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
         );
 
         tblBatWeek.addTab("Jan", weeksJanuary);
@@ -690,62 +728,46 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblFebWeeks.setBackground(new java.awt.Color(255, 255, 255));
         tblFebWeeks.setForeground(new java.awt.Color(153, 153, 153));
-        tblFebWeeks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {"1", "2", "3", "4", "5", "6", "7"},
-                {"8", "9", "10", "11", "12", "13", "14"},
-                {"15", "16", "17", "18", "19", "20", "21"},
-                {"22", "23", "24", "25", "26", "27", "28"},
-                {"29", "30", null, null, null, null, null}
-            },
-            new String []
-            {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
+        tblFebWeeks.setModel(new DefaultTableModel());
         tblFebWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblFebWeeks.setGridColor(new java.awt.Color(102, 102, 102));
         tblFebWeeks.getTableHeader().setReorderingAllowed(false);
-        jScrollPane5.setViewportView(tblFebWeeks);
-        if (tblFebWeeks.getColumnModel().getColumnCount() > 0)
+        month = new String [5][7];
+        LocalDate febD = LocalDate.of( LocalDate.now().getYear(), Month.FEBRUARY, 1);
+
+        day = 1;
+        for(int i = 0; i < month.length; i++)
         {
-            tblFebWeeks.getColumnModel().getColumn(4).setHeaderValue("Friday");
-            tblFebWeeks.getColumnModel().getColumn(5).setHeaderValue("Saturday");
-            tblFebWeeks.getColumnModel().getColumn(6).setHeaderValue("Sunday");
+            int j = 0;
+            //get the month start day
+            if(i == 0) j = febD.getDayOfWeek().getValue()-1;
+
+            //for rest of month
+            for(; j < month[i].length; j++)
+            {
+                if(day <= febD.lengthOfMonth()) month[i][j] = ""+ day++;
+            }
         }
+
+        tblFebWeeks.setModel(new DefaultTableModel(month, colNames));
+        tblFebWeeks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblFebWeeksMouseReleased(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tblFebWeeks);
 
         javax.swing.GroupLayout weeksFebruaryLayout = new javax.swing.GroupLayout(weeksFebruary);
         weeksFebruary.setLayout(weeksFebruaryLayout);
         weeksFebruaryLayout.setHorizontalGroup(
             weeksFebruaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         weeksFebruaryLayout.setVerticalGroup(
             weeksFebruaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(weeksFebruaryLayout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
         );
 
         tblBatWeek.addTab("Feb", weeksFebruary);
@@ -754,62 +776,47 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblMarchWeeks.setBackground(new java.awt.Color(255, 255, 255));
         tblMarchWeeks.setForeground(new java.awt.Color(153, 153, 153));
-        tblMarchWeeks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {"1", "2", "3", "4", "5", "6", "7"},
-                {"8", "9", "10", "11", "12", "13", "14"},
-                {"15", "16", "17", "18", "19", "20", "21"},
-                {"22", "23", "24", "25", "26", "27", "28"},
-                {"29", "30", null, null, null, null, null}
-            },
-            new String []
-            {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
+        tblMarchWeeks.setModel(new DefaultTableModel());
         tblMarchWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblMarchWeeks.setGridColor(new java.awt.Color(102, 102, 102));
         tblMarchWeeks.getTableHeader().setReorderingAllowed(false);
-        jScrollPane10.setViewportView(tblMarchWeeks);
-        if (tblMarchWeeks.getColumnModel().getColumnCount() > 0)
+        month = new String[5][7];
+
+        LocalDate marD = LocalDate.of(LocalDate.now().getYear(), Month.MARCH, 1);
+
+        day = 1;
+        for(int i = 0; i < month.length && day <= marD.lengthOfMonth(); i++)
         {
-            tblMarchWeeks.getColumnModel().getColumn(4).setHeaderValue("Friday");
-            tblMarchWeeks.getColumnModel().getColumn(5).setHeaderValue("Saturday");
-            tblMarchWeeks.getColumnModel().getColumn(6).setHeaderValue("Sunday");
+            int j = 0;
+            //get the month start day
+            if(i == 0) j = marD.getDayOfWeek().getValue()-1;
+
+            //for rest of month
+            for(; j < month[i].length && day <= marD.lengthOfMonth(); j++)
+            {
+                month[i][j] = ""+ day++;
+            }
         }
+
+        tblMarchWeeks.setModel(new DefaultTableModel(month, colNames));
+        tblMarchWeeks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblMarchWeeksMouseReleased(evt);
+            }
+        });
+        jScrollPane10.setViewportView(tblMarchWeeks);
 
         javax.swing.GroupLayout weeksMarchLayout = new javax.swing.GroupLayout(weeksMarch);
         weeksMarch.setLayout(weeksMarchLayout);
         weeksMarchLayout.setHorizontalGroup(
             weeksMarchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         weeksMarchLayout.setVerticalGroup(
             weeksMarchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(weeksMarchLayout.createSequentialGroup()
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
         );
 
         tblBatWeek.addTab("Mar", weeksMarch);
@@ -818,62 +825,45 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblAprilWeeks.setBackground(new java.awt.Color(255, 255, 255));
         tblAprilWeeks.setForeground(new java.awt.Color(153, 153, 153));
-        tblAprilWeeks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {"1", "2", "3", "4", "5", "6", "7"},
-                {"8", "9", "10", "11", "12", "13", "14"},
-                {"15", "16", "17", "18", "19", "20", "21"},
-                {"22", "23", "24", "25", "26", "27", "28"},
-                {"29", "30", null, null, null, null, null}
-            },
-            new String []
-            {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
+        tblAprilWeeks.setModel(new DefaultTableModel());
         tblAprilWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblAprilWeeks.setGridColor(new java.awt.Color(102, 102, 102));
         tblAprilWeeks.getTableHeader().setReorderingAllowed(false);
-        jScrollPane11.setViewportView(tblAprilWeeks);
-        if (tblAprilWeeks.getColumnModel().getColumnCount() > 0)
+        month = new String[5][7];LocalDate aprD = LocalDate.of( LocalDate.now().getYear(), Month.APRIL, 1);
+
+        day = 1;
+        for(int i = 0; i < month.length && day <= aprD.lengthOfMonth(); i++)
         {
-            tblAprilWeeks.getColumnModel().getColumn(4).setHeaderValue("Friday");
-            tblAprilWeeks.getColumnModel().getColumn(5).setHeaderValue("Saturday");
-            tblAprilWeeks.getColumnModel().getColumn(6).setHeaderValue("Sunday");
+            int j = 0;
+            //get the month start day
+            if(i == 0) j = aprD.getDayOfWeek().getValue()-1;
+
+            //for rest of month
+            for(; j < month[i].length && day <= aprD.lengthOfMonth(); j++)
+            {
+                month[i][j] = ""+ day++;
+            }
         }
+
+        tblAprilWeeks.setModel(new DefaultTableModel(month, colNames));
+        tblAprilWeeks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblAprilWeeksMouseReleased(evt);
+            }
+        });
+        jScrollPane11.setViewportView(tblAprilWeeks);
 
         javax.swing.GroupLayout weeksAprilLayout = new javax.swing.GroupLayout(weeksApril);
         weeksApril.setLayout(weeksAprilLayout);
         weeksAprilLayout.setHorizontalGroup(
             weeksAprilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         weeksAprilLayout.setVerticalGroup(
             weeksAprilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(weeksAprilLayout.createSequentialGroup()
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
         );
 
         tblBatWeek.addTab("April", weeksApril);
@@ -882,62 +872,46 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblMayWeeks.setBackground(new java.awt.Color(255, 255, 255));
         tblMayWeeks.setForeground(new java.awt.Color(153, 153, 153));
-        tblMayWeeks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {"1", "2", "3", "4", "5", "6", "7"},
-                {"8", "9", "10", "11", "12", "13", "14"},
-                {"15", "16", "17", "18", "19", "20", "21"},
-                {"22", "23", "24", "25", "26", "27", "28"},
-                {"29", "30", null, null, null, null, null}
-            },
-            new String []
-            {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
+        tblMayWeeks.setModel(new DefaultTableModel());
         tblMayWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblMayWeeks.setGridColor(new java.awt.Color(102, 102, 102));
         tblMayWeeks.getTableHeader().setReorderingAllowed(false);
-        jScrollPane20.setViewportView(tblMayWeeks);
-        if (tblMayWeeks.getColumnModel().getColumnCount() > 0)
+        month = new String[5][7];
+        LocalDate mayD = LocalDate.of( LocalDate.now().getYear(), Month.MAY, 1);
+
+        day = 1;
+        for(int i = 0; i < month.length && day <= mayD.lengthOfMonth(); i++)
         {
-            tblMayWeeks.getColumnModel().getColumn(4).setHeaderValue("Friday");
-            tblMayWeeks.getColumnModel().getColumn(5).setHeaderValue("Saturday");
-            tblMayWeeks.getColumnModel().getColumn(6).setHeaderValue("Sunday");
+            int j = 0;
+            //get the month start day
+            if(i == 0) j = mayD.getDayOfWeek().getValue()-1;
+
+            //for rest of month
+            for(; j < month[i].length && day <= mayD.lengthOfMonth(); j++)
+            {
+                month[i][j] = ""+ day++;
+            }
         }
+
+        tblMayWeeks.setModel(new DefaultTableModel(month, colNames));
+        tblMayWeeks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblMayWeeksMouseReleased(evt);
+            }
+        });
+        jScrollPane20.setViewportView(tblMayWeeks);
 
         javax.swing.GroupLayout weeksMayLayout = new javax.swing.GroupLayout(weeksMay);
         weeksMay.setLayout(weeksMayLayout);
         weeksMayLayout.setHorizontalGroup(
             weeksMayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane20, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane20, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         weeksMayLayout.setVerticalGroup(
             weeksMayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(weeksMayLayout.createSequentialGroup()
-                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
         );
 
         tblBatWeek.addTab("May", weeksMay);
@@ -946,43 +920,34 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblJuneWeeks.setBackground(new java.awt.Color(255, 255, 255));
         tblJuneWeeks.setForeground(new java.awt.Color(153, 153, 153));
-        tblJuneWeeks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {"1", "2", "3", "4", "5", "6", "7"},
-                {"8", "9", "10", "11", "12", "13", "14"},
-                {"15", "16", "17", "18", "19", "20", "21"},
-                {"22", "23", "24", "25", "26", "27", "28"},
-                {"29", "30", null, null, null, null, null}
-            },
-            new String []
-            {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
+        tblJuneWeeks.setModel(new DefaultTableModel());
         tblJuneWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblJuneWeeks.setGridColor(new java.awt.Color(102, 102, 102));
         tblJuneWeeks.getTableHeader().setReorderingAllowed(false);
+        month = new String[5][7]; LocalDate junD = LocalDate.of( LocalDate.now().getYear(), Month.JUNE, 1);
+
+        day = 1;
+        for(int i = 0; i < month.length && day <= junD.lengthOfMonth(); i++)
+        {
+            int j = 0;
+            //get the month start day
+            if(i == 0) j = junD.getDayOfWeek().getValue()-1;
+
+            //for rest of month
+            for(; j < month[i].length && day <= junD.lengthOfMonth(); j++)
+            {
+                month[i][j] = ""+ day++;
+            }
+        }
+
+        tblJuneWeeks.setModel(new DefaultTableModel(month, colNames));
+        tblJuneWeeks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblJuneWeeksMouseReleased(evt);
+            }
+        });
         jScrollPane21.setViewportView(tblJuneWeeks);
         if (tblJuneWeeks.getColumnModel().getColumnCount() > 0)
         {
@@ -995,13 +960,11 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksJune.setLayout(weeksJuneLayout);
         weeksJuneLayout.setHorizontalGroup(
             weeksJuneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane21, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane21, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         weeksJuneLayout.setVerticalGroup(
             weeksJuneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(weeksJuneLayout.createSequentialGroup()
-                .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane21, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
         );
 
         tblBatWeek.addTab("June", weeksJune);
@@ -1010,43 +973,34 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblJulyWeeks.setBackground(new java.awt.Color(255, 255, 255));
         tblJulyWeeks.setForeground(new java.awt.Color(153, 153, 153));
-        tblJulyWeeks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {"1", "2", "3", "4", "5", "6", "7"},
-                {"8", "9", "10", "11", "12", "13", "14"},
-                {"15", "16", "17", "18", "19", "20", "21"},
-                {"22", "23", "24", "25", "26", "27", "28"},
-                {"29", "30", null, null, null, null, null}
-            },
-            new String []
-            {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
+        tblJulyWeeks.setModel(new DefaultTableModel());
         tblJulyWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblJulyWeeks.setGridColor(new java.awt.Color(102, 102, 102));
         tblJulyWeeks.getTableHeader().setReorderingAllowed(false);
+        month = new String[5][7]; LocalDate julD = LocalDate.of( LocalDate.now().getYear(), Month.JULY, 1);
+
+        day = 1;
+        for(int i = 0; i < month.length && day <= julD.lengthOfMonth(); i++)
+        {
+            int j = 0;
+            //get the month start day
+            if(i == 0) j = julD.getDayOfWeek().getValue()-1;
+
+            //for rest of month
+            for(; j < month[i].length && day <= julD.lengthOfMonth(); j++)
+            {
+                month[i][j] = ""+ day++;
+            }
+        }
+
+        tblJulyWeeks.setModel(new DefaultTableModel(month, colNames));
+        tblJulyWeeks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblJulyWeeksMouseReleased(evt);
+            }
+        });
         jScrollPane22.setViewportView(tblJulyWeeks);
         if (tblJulyWeeks.getColumnModel().getColumnCount() > 0)
         {
@@ -1059,13 +1013,11 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksJuly.setLayout(weeksJulyLayout);
         weeksJulyLayout.setHorizontalGroup(
             weeksJulyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane22, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane22, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         weeksJulyLayout.setVerticalGroup(
             weeksJulyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(weeksJulyLayout.createSequentialGroup()
-                .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane22, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
         );
 
         tblBatWeek.addTab("July", weeksJuly);
@@ -1074,43 +1026,34 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblAugWeeks.setBackground(new java.awt.Color(255, 255, 255));
         tblAugWeeks.setForeground(new java.awt.Color(153, 153, 153));
-        tblAugWeeks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {"1", "2", "3", "4", "5", "6", "7"},
-                {"8", "9", "10", "11", "12", "13", "14"},
-                {"15", "16", "17", "18", "19", "20", "21"},
-                {"22", "23", "24", "25", "26", "27", "28"},
-                {"29", "30", null, null, null, null, null}
-            },
-            new String []
-            {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
+        tblAugWeeks.setModel(new DefaultTableModel());
         tblAugWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblAugWeeks.setGridColor(new java.awt.Color(102, 102, 102));
         tblAugWeeks.getTableHeader().setReorderingAllowed(false);
+        month = new String[5][7]; LocalDate augD = LocalDate.of( LocalDate.now().getYear(), Month.AUGUST, 1);
+
+        day = 1;
+        for(int i = 0; i < month.length && day <= augD.lengthOfMonth(); i++)
+        {
+            int j = 0;
+            //get the month start day
+            if(i == 0) j = augD.getDayOfWeek().getValue()-1;
+
+            //for rest of month
+            for(; j < month[i].length && day <= augD.lengthOfMonth(); j++)
+            {
+                month[i][j] = ""+ day++;
+            }
+        }
+
+        tblAugWeeks.setModel(new DefaultTableModel(month, colNames));
+        tblAugWeeks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblAugWeeksMouseReleased(evt);
+            }
+        });
         jScrollPane23.setViewportView(tblAugWeeks);
         if (tblAugWeeks.getColumnModel().getColumnCount() > 0)
         {
@@ -1123,13 +1066,11 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksAugust.setLayout(weeksAugustLayout);
         weeksAugustLayout.setHorizontalGroup(
             weeksAugustLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         weeksAugustLayout.setVerticalGroup(
             weeksAugustLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(weeksAugustLayout.createSequentialGroup()
-                .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
         );
 
         tblBatWeek.addTab("Aug", weeksAugust);
@@ -1138,43 +1079,34 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblSeptWeeks.setBackground(new java.awt.Color(255, 255, 255));
         tblSeptWeeks.setForeground(new java.awt.Color(153, 153, 153));
-        tblSeptWeeks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {"1", "2", "3", "4", "5", "6", "7"},
-                {"8", "9", "10", "11", "12", "13", "14"},
-                {"15", "16", "17", "18", "19", "20", "21"},
-                {"22", "23", "24", "25", "26", "27", "28"},
-                {"29", "30", null, null, null, null, null}
-            },
-            new String []
-            {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
+        tblSeptWeeks.setModel(new DefaultTableModel());
         tblSeptWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblSeptWeeks.setGridColor(new java.awt.Color(102, 102, 102));
         tblSeptWeeks.getTableHeader().setReorderingAllowed(false);
+        month = new String[5][7]; LocalDate sepD = LocalDate.of( LocalDate.now().getYear(), Month.SEPTEMBER, 1);
+
+        day = 1;
+        for(int i = 0; i < month.length && day <= sepD.lengthOfMonth(); i++)
+        {
+            int j = 0;
+            //get the month start day
+            if(i == 0) j = sepD.getDayOfWeek().getValue()-1;
+
+            //for rest of month
+            for(; j < month[i].length && day <= sepD.lengthOfMonth(); j++)
+            {
+                month[i][j] = ""+ day++;
+            }
+        }
+
+        tblSeptWeeks.setModel(new DefaultTableModel(month, colNames));
+        tblSeptWeeks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblSeptWeeksMouseReleased(evt);
+            }
+        });
         jScrollPane24.setViewportView(tblSeptWeeks);
         if (tblSeptWeeks.getColumnModel().getColumnCount() > 0)
         {
@@ -1187,13 +1119,11 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksSeptember.setLayout(weeksSeptemberLayout);
         weeksSeptemberLayout.setHorizontalGroup(
             weeksSeptemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane24, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane24, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         weeksSeptemberLayout.setVerticalGroup(
             weeksSeptemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(weeksSeptemberLayout.createSequentialGroup()
-                .addComponent(jScrollPane24, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane24, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
         );
 
         tblBatWeek.addTab("Sept", weeksSeptember);
@@ -1202,43 +1132,34 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblOctWeeks.setBackground(new java.awt.Color(255, 255, 255));
         tblOctWeeks.setForeground(new java.awt.Color(153, 153, 153));
-        tblOctWeeks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {"1", "2", "3", "4", "5", "6", "7"},
-                {"8", "9", "10", "11", "12", "13", "14"},
-                {"15", "16", "17", "18", "19", "20", "21"},
-                {"22", "23", "24", "25", "26", "27", "28"},
-                {"29", "30", null, null, null, null, null}
-            },
-            new String []
-            {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
+        tblOctWeeks.setModel(new DefaultTableModel());
         tblOctWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblOctWeeks.setGridColor(new java.awt.Color(102, 102, 102));
         tblOctWeeks.getTableHeader().setReorderingAllowed(false);
+        month = new String[6][7]; LocalDate octD = LocalDate.of( LocalDate.now().getYear(), Month.OCTOBER, 1);
+
+        day = 1;
+        for(int i = 0; i < month.length && day <= octD.lengthOfMonth(); i++)
+        {
+            int j = 0;
+            //get the month start day
+            if(i == 0) j = octD.getDayOfWeek().getValue()-1;
+
+            //for rest of month
+            for(; j < month[i].length && day <= sepD.lengthOfMonth(); j++)
+            {
+                month[i][j] = ""+ day++;
+            }
+        }
+
+        tblOctWeeks.setModel(new DefaultTableModel(month, colNames));
+        tblOctWeeks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblOctWeeksMouseReleased(evt);
+            }
+        });
         jScrollPane25.setViewportView(tblOctWeeks);
         if (tblOctWeeks.getColumnModel().getColumnCount() > 0)
         {
@@ -1251,13 +1172,11 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksOctober.setLayout(weeksOctoberLayout);
         weeksOctoberLayout.setHorizontalGroup(
             weeksOctoberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane25, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane25, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         weeksOctoberLayout.setVerticalGroup(
             weeksOctoberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(weeksOctoberLayout.createSequentialGroup()
-                .addComponent(jScrollPane25, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane25, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
         );
 
         tblBatWeek.addTab("Oct", weeksOctober);
@@ -1266,43 +1185,34 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblNovWeeks.setBackground(new java.awt.Color(255, 255, 255));
         tblNovWeeks.setForeground(new java.awt.Color(153, 153, 153));
-        tblNovWeeks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {"1", "2", "3", "4", "5", "6", "7"},
-                {"8", "9", "10", "11", "12", "13", "14"},
-                {"15", "16", "17", "18", "19", "20", "21"},
-                {"22", "23", "24", "25", "26", "27", "28"},
-                {"29", "30", null, null, null, null, null}
-            },
-            new String []
-            {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
+        tblNovWeeks.setModel(new DefaultTableModel());
         tblNovWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblNovWeeks.setGridColor(new java.awt.Color(102, 102, 102));
         tblNovWeeks.getTableHeader().setReorderingAllowed(false);
+        month = new String[5][7]; LocalDate novD = LocalDate.of( LocalDate.now().getYear(), Month.NOVEMBER, 1);
+
+        day = 1;
+        for(int i = 0; i < month.length && day <= novD.lengthOfMonth(); i++)
+        {
+            int j = 0;
+            //get the month start day
+            if(i == 0) j = novD.getDayOfWeek().getValue()-1;
+
+            //for rest of month
+            for(; j < month[i].length && day <= novD.lengthOfMonth(); j++)
+            {
+                month[i][j] = ""+ day++;
+            }
+        }
+
+        tblNovWeeks.setModel(new DefaultTableModel(month, colNames));
+        tblNovWeeks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblNovWeeksMouseReleased(evt);
+            }
+        });
         jScrollPane26.setViewportView(tblNovWeeks);
         if (tblNovWeeks.getColumnModel().getColumnCount() > 0)
         {
@@ -1315,13 +1225,11 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksNovember.setLayout(weeksNovemberLayout);
         weeksNovemberLayout.setHorizontalGroup(
             weeksNovemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane26, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane26, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         weeksNovemberLayout.setVerticalGroup(
             weeksNovemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(weeksNovemberLayout.createSequentialGroup()
-                .addComponent(jScrollPane26, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane26, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
         );
 
         tblBatWeek.addTab("Nov", weeksNovember);
@@ -1330,43 +1238,34 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblDecWeeks.setBackground(new java.awt.Color(255, 255, 255));
         tblDecWeeks.setForeground(new java.awt.Color(153, 153, 153));
-        tblDecWeeks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {"1", "2", "3", "4", "5", "6", "7"},
-                {"8", "9", "10", "11", "12", "13", "14"},
-                {"15", "16", "17", "18", "19", "20", "21"},
-                {"22", "23", "24", "25", "26", "27", "28"},
-                {"29", "30", null, null, null, null, null}
-            },
-            new String []
-            {
-                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-            }
-        )
-        {
-            Class[] types = new Class []
-            {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean []
-            {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex)
-            {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
-                return canEdit [columnIndex];
-            }
-        });
+        tblDecWeeks.setModel(new DefaultTableModel());
         tblDecWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblDecWeeks.setGridColor(new java.awt.Color(102, 102, 102));
         tblDecWeeks.getTableHeader().setReorderingAllowed(false);
+        month = new String[5][7]; LocalDate decD = LocalDate.of( LocalDate.now().getYear(), Month.DECEMBER, 1);
+
+        day = 1;
+        for(int i = 0; i < month.length && day <= decD.lengthOfMonth(); i++)
+        {
+            int j = 0;
+            //get the month start day
+            if(i == 0) j = decD.getDayOfWeek().getValue()-1;
+
+            //for rest of month
+            for(; j < month[i].length && day <= decD.lengthOfMonth(); j++)
+            {
+                month[i][j] = ""+ day++;
+            }
+        }
+
+        tblDecWeeks.setModel(new DefaultTableModel(month, colNames));
+        tblDecWeeks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblDecWeeksMouseReleased(evt);
+            }
+        });
         jScrollPane27.setViewportView(tblDecWeeks);
         if (tblDecWeeks.getColumnModel().getColumnCount() > 0)
         {
@@ -1379,13 +1278,11 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksDecember.setLayout(weeksDecemberLayout);
         weeksDecemberLayout.setHorizontalGroup(
             weeksDecemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane27, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane27, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         weeksDecemberLayout.setVerticalGroup(
             weeksDecemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(weeksDecemberLayout.createSequentialGroup()
-                .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane27, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
         );
 
         tblBatWeek.addTab("Dec", weeksDecember);
@@ -1403,7 +1300,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         chooseTeacherButton.setBackground(chooseDayLabel.getForeground());
         chooseTeacherButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         chooseTeacherButton.setForeground(new java.awt.Color(204, 255, 255));
-        chooseTeacherButton.setText("Choose");
+        chooseTeacherButton.setText("Choose Batting Teacher");
         chooseTeacherButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -1423,26 +1320,27 @@ public class TeacherScreen1 extends javax.swing.JFrame
         outputTeacherList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(outputTeacherList);
 
+        deleteBattingTeacherButton.setBackground(new java.awt.Color(255, 0, 0));
+        deleteBattingTeacherButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        deleteBattingTeacherButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteBattingTeacherButton.setText("Delete Batting");
+        deleteBattingTeacherButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 51, 0), 1, true));
+
         javax.swing.GroupLayout lessonInputPanelLayout = new javax.swing.GroupLayout(lessonInputPanel);
         lessonInputPanel.setLayout(lessonInputPanelLayout);
         lessonInputPanelLayout.setHorizontalGroup(
             lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lessonInputPanelLayout.createSequentialGroup()
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
+                .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(findTeacherButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chooseLessonLAbel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(lessonInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lessonInputPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lessonInputPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(chooseTeacherButton)
-                        .addGap(533, 533, 533))
                     .addGroup(lessonInputPanelLayout.createSequentialGroup()
                         .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tblBatWeek)
@@ -1458,28 +1356,34 @@ public class TeacherScreen1 extends javax.swing.JFrame
                                 .addGap(17, 17, 17)
                                 .addComponent(chooseDayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(lessonInputPanelLayout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(findTeacherButton)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(lessonInputPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lessonInputPanelLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(chooseTeacherButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteBattingTeacherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63))))
         );
         lessonInputPanelLayout.setVerticalGroup(
             lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lessonInputPanelLayout.createSequentialGroup()
-                .addGap(13, 13, 13)
                 .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lessonInputPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(23, 23, 23)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(chooseDayLabel)
                     .addGroup(lessonInputPanelLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tblBatWeek, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                        .addGap(21, 21, 21)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(lessonInputPanelLayout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(chooseDayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tblBatWeek, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lessonInputPanelLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -1489,23 +1393,25 @@ public class TeacherScreen1 extends javax.swing.JFrame
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(chooseLessonLAbel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(findTeacherButton)
-                .addGap(26, 26, 26)
+                .addGap(0, 0, 0)
                 .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lessonInputPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(lessonInputPanelLayout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(chooseLessonLAbel1))
-                .addGap(18, 18, 18)
+                    .addComponent(chooseLessonLAbel1)
+                    .addGroup(lessonInputPanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(chooseTeacherButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chooseTeacherButton)
+                    .addComponent(deleteBattingTeacherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         outputCalendarTabbedPane.setBackground(new java.awt.Color(255, 255, 255));
@@ -1568,7 +1474,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabJanuary.setLayout(tabJanuaryLayout);
         tabJanuaryLayout.setHorizontalGroup(
             tabJanuaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         tabJanuaryLayout.setVerticalGroup(
             tabJanuaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1632,7 +1538,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabFebruary.setLayout(tabFebruaryLayout);
         tabFebruaryLayout.setHorizontalGroup(
             tabFebruaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         tabFebruaryLayout.setVerticalGroup(
             tabFebruaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1696,7 +1602,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabMarch.setLayout(tabMarchLayout);
         tabMarchLayout.setHorizontalGroup(
             tabMarchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         tabMarchLayout.setVerticalGroup(
             tabMarchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1760,7 +1666,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabApril.setLayout(tabAprilLayout);
         tabAprilLayout.setHorizontalGroup(
             tabAprilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         tabAprilLayout.setVerticalGroup(
             tabAprilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1824,7 +1730,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabMay.setLayout(tabMayLayout);
         tabMayLayout.setHorizontalGroup(
             tabMayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         tabMayLayout.setVerticalGroup(
             tabMayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1888,7 +1794,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabJune.setLayout(tabJuneLayout);
         tabJuneLayout.setHorizontalGroup(
             tabJuneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         tabJuneLayout.setVerticalGroup(
             tabJuneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1952,7 +1858,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabJuly.setLayout(tabJulyLayout);
         tabJulyLayout.setHorizontalGroup(
             tabJulyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         tabJulyLayout.setVerticalGroup(
             tabJulyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2016,7 +1922,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabAugust.setLayout(tabAugustLayout);
         tabAugustLayout.setHorizontalGroup(
             tabAugustLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         tabAugustLayout.setVerticalGroup(
             tabAugustLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2080,7 +1986,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabSeptember.setLayout(tabSeptemberLayout);
         tabSeptemberLayout.setHorizontalGroup(
             tabSeptemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         tabSeptemberLayout.setVerticalGroup(
             tabSeptemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2144,7 +2050,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabOctober.setLayout(tabOctoberLayout);
         tabOctoberLayout.setHorizontalGroup(
             tabOctoberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         tabOctoberLayout.setVerticalGroup(
             tabOctoberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2208,7 +2114,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabNovember.setLayout(tabNovemberLayout);
         tabNovemberLayout.setHorizontalGroup(
             tabNovemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         tabNovemberLayout.setVerticalGroup(
             tabNovemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2272,7 +2178,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabDecember.setLayout(tabDecemberLayout);
         tabDecemberLayout.setHorizontalGroup(
             tabDecemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         tabDecemberLayout.setVerticalGroup(
             tabDecemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2574,6 +2480,35 @@ arrowButton.setBackground(Color.white);
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setBattingMonthCalendar(Month m, JTable jtbl)
+    {
+
+        LocalDate monthD = LocalDate.of(LocalDate.now().getYear(), m, 1);
+          String [][] month = new String[Math.ceilDiv(monthD.lengthOfMonth(), 7)+1][7];
+
+        int day = 1;
+        for (int i = 0; i < month.length; i++)
+        {
+            int j = 0;
+            //get the month start day
+            if (i == 0)
+            {
+                j = monthD.getDayOfWeek().getValue() - 1;
+            }
+
+            //for rest of month
+            for (; j < month[i].length && day <= monthD.lengthOfMonth(); j++)
+            {
+                month[i][j] = "" + day++;
+            }
+        }
+        String[] colNames =
+        {
+            "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        };
+        jtbl.setModel(new DefaultTableModel(month, colNames));
+    }
+    
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButton1MouseClicked
     {//GEN-HEADEREND:event_jButton1MouseClicked
         // TODO add your handling code here:
@@ -2837,6 +2772,128 @@ arrowButton.setBackground(Color.white);
         String battingName = outputTeacherList.getSelectedValue();
         addBatting(battingMonth, battingWeek, battingDayOfWeek, battingLesson, battingName);
     }//GEN-LAST:event_chooseTeacherButtonActionPerformed
+
+    private void deleteTeacherButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteTeacherButtonActionPerformed
+    {//GEN-HEADEREND:event_deleteTeacherButtonActionPerformed
+        try
+        {
+            tm.deleteTeacher(selectedTeacher.getFullName());
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_deleteTeacherButtonActionPerformed
+
+    private void tblJanWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblJanWeeksMouseReleased
+    {//GEN-HEADEREND:event_tblJanWeeksMouseReleased
+        //in the selected row, cycle throw the days to see which days are in the week of this month
+        focusedBattingWeeksCalendar = tblJanWeeks;
+        setLessonInputTableData(tblJanWeeks);
+    }//GEN-LAST:event_tblJanWeeksMouseReleased
+
+    private void tblFebWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblFebWeeksMouseReleased
+    {//GEN-HEADEREND:event_tblFebWeeksMouseReleased
+        // TODO add your handling code here:
+        focusedBattingWeeksCalendar = tblFebWeeks;
+                setLessonInputTableData(tblFebWeeks);
+    }//GEN-LAST:event_tblFebWeeksMouseReleased
+
+    private void tblMarchWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblMarchWeeksMouseReleased
+    {//GEN-HEADEREND:event_tblMarchWeeksMouseReleased
+        // TODO add your handling code here:
+                setLessonInputTableData(tblMarchWeeks);
+                focusedBattingWeeksCalendar = tblMarchWeeks;
+    }//GEN-LAST:event_tblMarchWeeksMouseReleased
+
+    private void tblAprilWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblAprilWeeksMouseReleased
+    {//GEN-HEADEREND:event_tblAprilWeeksMouseReleased
+        // TODO add your handling code here:
+       focusedBattingWeeksCalendar = tblAprilWeeks;
+                setLessonInputTableData(tblAprilWeeks);
+    }//GEN-LAST:event_tblAprilWeeksMouseReleased
+
+    private void tblMayWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblMayWeeksMouseReleased
+    {//GEN-HEADEREND:event_tblMayWeeksMouseReleased
+        // TODO add your handling code here:
+        focusedBattingWeeksCalendar = tblMayWeeks;
+                setLessonInputTableData(tblMayWeeks);
+    }//GEN-LAST:event_tblMayWeeksMouseReleased
+
+    private void tblJuneWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblJuneWeeksMouseReleased
+    {//GEN-HEADEREND:event_tblJuneWeeksMouseReleased
+        // TODO add your handling code here:
+        focusedBattingWeeksCalendar = tblJuneWeeks;
+                setLessonInputTableData(tblJuneWeeks);
+    }//GEN-LAST:event_tblJuneWeeksMouseReleased
+
+    private void tblJulyWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblJulyWeeksMouseReleased
+    {//GEN-HEADEREND:event_tblJulyWeeksMouseReleased
+        // TODO add your handling code here:
+        focusedBattingWeeksCalendar = tblJulyWeeks;
+                setLessonInputTableData(tblJulyWeeks);
+    }//GEN-LAST:event_tblJulyWeeksMouseReleased
+
+    private void tblAugWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblAugWeeksMouseReleased
+    {//GEN-HEADEREND:event_tblAugWeeksMouseReleased
+        // TODO add your handling code here:
+        focusedBattingWeeksCalendar = tblAugWeeks;
+                setLessonInputTableData(tblAugWeeks);
+    }//GEN-LAST:event_tblAugWeeksMouseReleased
+
+    private void tblSeptWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblSeptWeeksMouseReleased
+    {//GEN-HEADEREND:event_tblSeptWeeksMouseReleased
+        // TODO add your handling code here:
+        focusedBattingWeeksCalendar = tblSeptWeeks;
+                setLessonInputTableData(tblSeptWeeks);
+    }//GEN-LAST:event_tblSeptWeeksMouseReleased
+
+    private void tblOctWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblOctWeeksMouseReleased
+    {//GEN-HEADEREND:event_tblOctWeeksMouseReleased
+        // TODO add your handling code here:
+        focusedBattingWeeksCalendar = tblOctWeeks;
+                setLessonInputTableData(tblOctWeeks);
+    }//GEN-LAST:event_tblOctWeeksMouseReleased
+
+    private void tblNovWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblNovWeeksMouseReleased
+    {//GEN-HEADEREND:event_tblNovWeeksMouseReleased
+        // TODO add your handling code here:
+        focusedBattingWeeksCalendar = tblNovWeeks;
+                setLessonInputTableData(tblNovWeeks);
+    }//GEN-LAST:event_tblNovWeeksMouseReleased
+
+    private void tblDecWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblDecWeeksMouseReleased
+    {//GEN-HEADEREND:event_tblDecWeeksMouseReleased
+        // TODO add your handling code here:
+        focusedBattingWeeksCalendar = tblDecWeeks;
+                setLessonInputTableData(tblDecWeeks);
+    }//GEN-LAST:event_tblDecWeeksMouseReleased
+    private void setLessonInputTableData(JTable tbl)
+    {
+         battingWeek = tbl.getSelectedRow();
+        ArrayList<String> daysInWeek = new ArrayList<String>();
+        for(int i = 0; i < tbl.getColumnCount(); i++)
+        {
+            if( tbl.getValueAt(battingWeek, i) != null) daysInWeek.add(tbl.getColumnName(i));
+        }
+        
+        //then make the timetable table from the amount of days there00
+        int cycleCount = 0;
+        String [][] data = new String [daysInWeek.size()][15];
+        for(String [] arr1 : data)
+        {
+            arr1[0] = daysInWeek.get(cycleCount++);
+        }
+        
+        //get the table header 
+        String [] header = new String[15];
+        for(int i = 0; i < header.length; i++)
+        {
+            header[i] = lessonInputTable.getColumnName(i);
+        }
+        
+        lessonInputTable.setModel(new DefaultTableModel(data, header));
+    }
+    
     private void addBatting(int month, int week, int dayOfWeek, int lesson, String name)
     {
         String initials = getInitials(name);
@@ -2983,6 +3040,7 @@ arrowButton.setBackground(Color.white);
         });
     }
     
+    private JTable focusedBattingWeeksCalendar;
     private int battingLesson, battingWeek, battingMonth, battingDayOfMonth, battingDayOfWeek;
     private String viewOriginalName;
     private TeacherManager tm = new TeacherManager();
@@ -3006,6 +3064,8 @@ arrowButton.setBackground(Color.white);
     private javax.swing.JLabel chooseLessonLAbel1;
     private javax.swing.JButton chooseTeacherButton;
     private javax.swing.JButton confirmEditsButton;
+    private javax.swing.JButton deleteBattingTeacherButton;
+    private javax.swing.JButton deleteTeacherButton;
     private javax.swing.JRadioButton editableButton;
     private javax.swing.JTextField extraMuralsNr_Text;
     private javax.swing.JPanel findBatter_HeaderPanel;

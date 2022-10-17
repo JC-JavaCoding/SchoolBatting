@@ -118,17 +118,22 @@
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
                                   <Component id="batWeightField" min="-2" pref="134" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="325" max="-2" attributes="0"/>
                                   <Component id="registerClassOutput_Field" min="-2" pref="135" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel5" min="-2" pref="165" max="-2" attributes="0"/>
-                                  <Component id="teacherComboBox" min="-2" pref="185" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="deleteTeacherButton" min="-2" pref="95" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel5" min="-2" pref="165" max="-2" attributes="0"/>
+                                      <Component id="teacherComboBox" min="-2" pref="185" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="377" pref="392" max="32767" attributes="0"/>
@@ -154,8 +159,16 @@
                           <Component id="manageT_HeaderPanel" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                  <Component id="teacherComboBox" min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                          <Component id="teacherComboBox" min="-2" pref="28" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="deleteTeacherButton" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="batWeightField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -505,6 +518,24 @@
                     <Property name="text" type="java.lang.String" value="Teacher Name"/>
                   </Properties>
                 </Component>
+                <Component class="javax.swing.JButton" name="deleteTeacherButton">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="cc" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Delete teacher"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="null"/>
+                    </Property>
+                    <Property name="borderPainted" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteTeacherButtonActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="findBatter_Panel">
@@ -608,25 +639,19 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jSeparator5" min="-2" pref="140" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jSeparator5" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <Component id="findTeacherButton" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="chooseLessonLAbel1" max="32767" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jSeparator6" min="-2" pref="379" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jScrollPane1" max="32767" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="chooseTeacherButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="533" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="tblBatWeek" max="32767" attributes="0"/>
                                           <Component id="jScrollPane4" max="32767" attributes="0"/>
@@ -644,13 +669,19 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jSeparator4" min="-2" pref="379" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                              <Component id="findTeacherButton" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                      <Component id="chooseTeacherButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="deleteBattingTeacherButton" min="-2" pref="127" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -659,21 +690,23 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                       <Component id="jSeparator3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="chooseDayLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                       <Component id="jSeparator4" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
+                                      <Component id="chooseDayLabel" min="-2" pref="21" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="tblBatWeek" min="-2" pref="162" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tblBatWeek" min="-2" pref="176" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -686,26 +719,29 @@
                                   <Component id="chooseLessonLAbel" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" min="-2" pref="178" max="-2" attributes="0"/>
+                              <Component id="jScrollPane4" pref="0" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="findTeacherButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                      <Component id="jSeparator5" min="-2" max="-2" attributes="0"/>
-                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                       <Component id="jSeparator6" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="chooseLessonLAbel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                      <Component id="jSeparator5" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="93" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="chooseTeacherButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="chooseTeacherButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="deleteBattingTeacherButton" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -752,30 +788,8 @@
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="15" rowCount="5">
-                                <Column editable="false" title="Day" type="java.lang.String">
-                                  <Data value="Monday"/>
-                                  <Data value="Tuesday"/>
-                                  <Data value="Wednesday"/>
-                                  <Data value="Thursday"/>
-                                  <Data value="Friday"/>
-                                </Column>
-                                <Column editable="false" title="L1" type="java.lang.Object"/>
-                                <Column editable="false" title="L2" type="java.lang.Object"/>
-                                <Column editable="false" title="L3" type="java.lang.Object"/>
-                                <Column editable="false" title="L4" type="java.lang.Object"/>
-                                <Column editable="false" title="L5" type="java.lang.Object"/>
-                                <Column editable="false" title="L6" type="java.lang.Object"/>
-                                <Column editable="false" title="L7" type="java.lang.Object"/>
-                                <Column editable="false" title="L8" type="java.lang.Object"/>
-                                <Column editable="false" title="L9" type="java.lang.Object"/>
-                                <Column editable="false" title="L10" type="java.lang.Object"/>
-                                <Column editable="false" title="L11" type="java.lang.Object"/>
-                                <Column editable="false" title="L12" type="java.lang.Object"/>
-                                <Column editable="false" title="L13" type="java.lang.Object"/>
-                                <Column editable="false" title="L14" type="java.lang.Object"/>
-                              </Table>
+                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][]&#xa;    {&#xa;        {&quot;Monday&quot;, null, null, null, null, null, null, null, null, null, null, null, null, null, null},&#xa;        {&quot;Tuesday&quot;, null, null, null, null, null, null, null, null, null, null, null, null, null, null},&#xa;        {&quot;Wednesday&quot;, null, null, null, null, null, null, null, null, null, null, null, null, null, null},&#xa;        {&quot;Thursday&quot;, null, null, null, null, null, null, null, null, null, null, null, null, null, null},&#xa;        {&quot;Friday&quot;, null, null, null, null, null, null, null, null, null, null, null, null, null, null},&#xa;        {&quot;Saturday&quot;, null, null, null, null, null, null, null, null, null, null, null, null, null, null},&#xa;        {&quot;Sunday&quot;, null, null, null, null, null, null, null, null, null, null, null, null, null, null}&#xa;    },&#xa;    new String []&#xa;    {&#xa;        &quot;Day&quot;, &quot;L1&quot;, &quot;L2&quot;, &quot;L3&quot;, &quot;L4&quot;, &quot;L5&quot;, &quot;L6&quot;, &quot;L7&quot;, &quot;L8&quot;, &quot;L9&quot;, &quot;L10&quot;, &quot;L11&quot;, &quot;L12&quot;, &quot;L13&quot;, &quot;L14&quot;&#xa;    }&#xa;)&#xa;{&#xa;    Class[] types = new Class []&#xa;    {&#xa;        java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class&#xa;    };&#xa;    boolean[] canEdit = new boolean []&#xa;    {&#xa;        false, false, false, false, false, false, false, false, false, false, false, false, false, false, false&#xa;    };&#xa;&#xa;    public Class getColumnClass(int columnIndex)&#xa;    {&#xa;        return types [columnIndex];&#xa;    }&#xa;&#xa;    public boolean isCellEditable(int rowIndex, int columnIndex)&#xa;    {&#xa;        return canEdit [columnIndex];&#xa;    }&#xa;}" type="code"/>
                             </Property>
                             <Property name="autoResizeMode" type="int" value="1"/>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -959,15 +973,12 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane9" alignment="0" pref="652" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane9" alignment="0" pref="718" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane9" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane9" alignment="0" pref="145" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -987,58 +998,8 @@
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                     </Property>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="5">
-                                        <Column editable="false" title="Monday" type="java.lang.String">
-                                          <Data value="1"/>
-                                          <Data value="8"/>
-                                          <Data value="15"/>
-                                          <Data value="22"/>
-                                          <Data value="29"/>
-                                        </Column>
-                                        <Column editable="false" title="Tuesday" type="java.lang.String">
-                                          <Data value="2"/>
-                                          <Data value="9"/>
-                                          <Data value="16"/>
-                                          <Data value="23"/>
-                                          <Data value="30"/>
-                                        </Column>
-                                        <Column editable="false" title="Wednesday" type="java.lang.String">
-                                          <Data value="3"/>
-                                          <Data value="10"/>
-                                          <Data value="17"/>
-                                          <Data value="24"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Thursday" type="java.lang.String">
-                                          <Data value="4"/>
-                                          <Data value="11"/>
-                                          <Data value="18"/>
-                                          <Data value="25"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Friday" type="java.lang.String">
-                                          <Data value="5"/>
-                                          <Data value="12"/>
-                                          <Data value="19"/>
-                                          <Data value="26"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Saturday" type="java.lang.String">
-                                          <Data value="6"/>
-                                          <Data value="13"/>
-                                          <Data value="20"/>
-                                          <Data value="27"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Sunday" type="java.lang.String">
-                                          <Data value="7"/>
-                                          <Data value="14"/>
-                                          <Data value="21"/>
-                                          <Data value="28"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new javax.swing.table.DefaultTableModel()&#xa;" type="code"/>
                                     </Property>
                                     <Property name="autoResizeMode" type="int" value="4"/>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1064,17 +1025,17 @@
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Friday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Saturday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Sunday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
@@ -1087,6 +1048,12 @@
                                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblJanWeeksMouseReleased"/>
+                                  </Events>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="String [][] month = new String[6][7];&#xa;LocalDate monthD = LocalDate.of(LocalDate.now().getYear(), Month.JANUARY, 1);&#xa;&#xa;int day = 1;&#xa;for(int i = 0; i &lt; month.length; i++)&#xa;{&#xa;    int j = 0;&#xa;    //get the month start day&#xa;    if(i == 0) j = monthD.getDayOfWeek().getValue()-1;&#xa;    &#xa;    //for rest of month&#xa;    for(; j &lt; month[i].length &amp;&amp; day &lt;= monthD.lengthOfMonth(); j++)&#xa;    {&#xa;        month[i][j] = &quot;&quot;+ day++;&#xa;    }&#xa;}&#xa;String [] colNames = {&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;}; &#xa;tblJanWeeks.setModel(new DefaultTableModel(month, colNames));"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -1109,15 +1076,12 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane5" alignment="0" pref="652" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane5" alignment="0" pref="718" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane5" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane5" alignment="0" pref="145" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -1137,58 +1101,8 @@
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                     </Property>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="5">
-                                        <Column editable="false" title="Monday" type="java.lang.String">
-                                          <Data value="1"/>
-                                          <Data value="8"/>
-                                          <Data value="15"/>
-                                          <Data value="22"/>
-                                          <Data value="29"/>
-                                        </Column>
-                                        <Column editable="false" title="Tuesday" type="java.lang.String">
-                                          <Data value="2"/>
-                                          <Data value="9"/>
-                                          <Data value="16"/>
-                                          <Data value="23"/>
-                                          <Data value="30"/>
-                                        </Column>
-                                        <Column editable="false" title="Wednesday" type="java.lang.String">
-                                          <Data value="3"/>
-                                          <Data value="10"/>
-                                          <Data value="17"/>
-                                          <Data value="24"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Thursday" type="java.lang.String">
-                                          <Data value="4"/>
-                                          <Data value="11"/>
-                                          <Data value="18"/>
-                                          <Data value="25"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Friday" type="java.lang.String">
-                                          <Data value="5"/>
-                                          <Data value="12"/>
-                                          <Data value="19"/>
-                                          <Data value="26"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Saturday" type="java.lang.String">
-                                          <Data value="6"/>
-                                          <Data value="13"/>
-                                          <Data value="20"/>
-                                          <Data value="27"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Sunday" type="java.lang.String">
-                                          <Data value="7"/>
-                                          <Data value="14"/>
-                                          <Data value="21"/>
-                                          <Data value="28"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new DefaultTableModel()" type="code"/>
                                     </Property>
                                     <Property name="autoResizeMode" type="int" value="4"/>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1214,17 +1128,17 @@
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Friday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Saturday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Sunday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
@@ -1237,6 +1151,12 @@
                                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblFebWeeksMouseReleased"/>
+                                  </Events>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="month = new String [5][7];&#xa;LocalDate febD = LocalDate.of( LocalDate.now().getYear(), Month.FEBRUARY, 1);&#xa;&#xa;day = 1;&#xa;for(int i = 0; i &lt; month.length; i++)&#xa;{&#xa;    int j = 0;&#xa;    //get the month start day&#xa;    if(i == 0) j = febD.getDayOfWeek().getValue()-1;&#xa;    &#xa;    //for rest of month&#xa;    for(; j &lt; month[i].length; j++)&#xa;    {&#xa;        if(day &lt;= febD.lengthOfMonth()) month[i][j] = &quot;&quot;+ day++;&#xa;    }&#xa;}&#xa;&#xa;tblFebWeeks.setModel(new DefaultTableModel(month, colNames));"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -1259,15 +1179,12 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane10" alignment="0" pref="652" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane10" alignment="0" pref="718" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane10" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane10" alignment="0" pref="145" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -1287,58 +1204,8 @@
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                     </Property>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="5">
-                                        <Column editable="false" title="Monday" type="java.lang.String">
-                                          <Data value="1"/>
-                                          <Data value="8"/>
-                                          <Data value="15"/>
-                                          <Data value="22"/>
-                                          <Data value="29"/>
-                                        </Column>
-                                        <Column editable="false" title="Tuesday" type="java.lang.String">
-                                          <Data value="2"/>
-                                          <Data value="9"/>
-                                          <Data value="16"/>
-                                          <Data value="23"/>
-                                          <Data value="30"/>
-                                        </Column>
-                                        <Column editable="false" title="Wednesday" type="java.lang.String">
-                                          <Data value="3"/>
-                                          <Data value="10"/>
-                                          <Data value="17"/>
-                                          <Data value="24"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Thursday" type="java.lang.String">
-                                          <Data value="4"/>
-                                          <Data value="11"/>
-                                          <Data value="18"/>
-                                          <Data value="25"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Friday" type="java.lang.String">
-                                          <Data value="5"/>
-                                          <Data value="12"/>
-                                          <Data value="19"/>
-                                          <Data value="26"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Saturday" type="java.lang.String">
-                                          <Data value="6"/>
-                                          <Data value="13"/>
-                                          <Data value="20"/>
-                                          <Data value="27"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Sunday" type="java.lang.String">
-                                          <Data value="7"/>
-                                          <Data value="14"/>
-                                          <Data value="21"/>
-                                          <Data value="28"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new DefaultTableModel()" type="code"/>
                                     </Property>
                                     <Property name="autoResizeMode" type="int" value="4"/>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1364,17 +1231,17 @@
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Friday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Saturday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Sunday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
@@ -1387,6 +1254,12 @@
                                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblMarchWeeksMouseReleased"/>
+                                  </Events>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="month = new String[5][7];&#xa;&#xa;LocalDate marD = LocalDate.of(LocalDate.now().getYear(), Month.MARCH, 1);&#xa;&#xa;day = 1;&#xa;for(int i = 0; i &lt; month.length &amp;&amp; day &lt;= marD.lengthOfMonth(); i++)&#xa;{&#xa;    int j = 0;&#xa;    //get the month start day&#xa;    if(i == 0) j = marD.getDayOfWeek().getValue()-1;&#xa;    &#xa;    //for rest of month&#xa;    for(; j &lt; month[i].length &amp;&amp; day &lt;= marD.lengthOfMonth(); j++)&#xa;    {&#xa;        month[i][j] = &quot;&quot;+ day++;&#xa;    }&#xa;}&#xa;&#xa;tblMarchWeeks.setModel(new DefaultTableModel(month, colNames));"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -1409,15 +1282,12 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane11" alignment="0" pref="652" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane11" alignment="0" pref="718" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane11" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane11" alignment="0" pref="145" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -1437,58 +1307,8 @@
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                     </Property>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="5">
-                                        <Column editable="false" title="Monday" type="java.lang.String">
-                                          <Data value="1"/>
-                                          <Data value="8"/>
-                                          <Data value="15"/>
-                                          <Data value="22"/>
-                                          <Data value="29"/>
-                                        </Column>
-                                        <Column editable="false" title="Tuesday" type="java.lang.String">
-                                          <Data value="2"/>
-                                          <Data value="9"/>
-                                          <Data value="16"/>
-                                          <Data value="23"/>
-                                          <Data value="30"/>
-                                        </Column>
-                                        <Column editable="false" title="Wednesday" type="java.lang.String">
-                                          <Data value="3"/>
-                                          <Data value="10"/>
-                                          <Data value="17"/>
-                                          <Data value="24"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Thursday" type="java.lang.String">
-                                          <Data value="4"/>
-                                          <Data value="11"/>
-                                          <Data value="18"/>
-                                          <Data value="25"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Friday" type="java.lang.String">
-                                          <Data value="5"/>
-                                          <Data value="12"/>
-                                          <Data value="19"/>
-                                          <Data value="26"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Saturday" type="java.lang.String">
-                                          <Data value="6"/>
-                                          <Data value="13"/>
-                                          <Data value="20"/>
-                                          <Data value="27"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Sunday" type="java.lang.String">
-                                          <Data value="7"/>
-                                          <Data value="14"/>
-                                          <Data value="21"/>
-                                          <Data value="28"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new DefaultTableModel()" type="code"/>
                                     </Property>
                                     <Property name="autoResizeMode" type="int" value="4"/>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1514,17 +1334,17 @@
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Friday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Saturday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Sunday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
@@ -1537,6 +1357,12 @@
                                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblAprilWeeksMouseReleased"/>
+                                  </Events>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="month = new String[5][7];LocalDate aprD = LocalDate.of( LocalDate.now().getYear(), Month.APRIL, 1);&#xa;&#xa;day = 1;&#xa;for(int i = 0; i &lt; month.length &amp;&amp; day &lt;= aprD.lengthOfMonth(); i++)&#xa;{&#xa;    int j = 0;&#xa;    //get the month start day&#xa;    if(i == 0) j = aprD.getDayOfWeek().getValue()-1;&#xa;    &#xa;    //for rest of month&#xa;    for(; j &lt; month[i].length &amp;&amp; day &lt;= aprD.lengthOfMonth(); j++)&#xa;    {&#xa;        month[i][j] = &quot;&quot;+ day++;&#xa;    }&#xa;}&#xa;&#xa;tblAprilWeeks.setModel(new DefaultTableModel(month, colNames));"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -1559,15 +1385,12 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane20" alignment="0" pref="652" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane20" alignment="0" pref="718" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane20" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane20" alignment="1" pref="145" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -1587,58 +1410,8 @@
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                     </Property>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="5">
-                                        <Column editable="false" title="Monday" type="java.lang.String">
-                                          <Data value="1"/>
-                                          <Data value="8"/>
-                                          <Data value="15"/>
-                                          <Data value="22"/>
-                                          <Data value="29"/>
-                                        </Column>
-                                        <Column editable="false" title="Tuesday" type="java.lang.String">
-                                          <Data value="2"/>
-                                          <Data value="9"/>
-                                          <Data value="16"/>
-                                          <Data value="23"/>
-                                          <Data value="30"/>
-                                        </Column>
-                                        <Column editable="false" title="Wednesday" type="java.lang.String">
-                                          <Data value="3"/>
-                                          <Data value="10"/>
-                                          <Data value="17"/>
-                                          <Data value="24"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Thursday" type="java.lang.String">
-                                          <Data value="4"/>
-                                          <Data value="11"/>
-                                          <Data value="18"/>
-                                          <Data value="25"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Friday" type="java.lang.String">
-                                          <Data value="5"/>
-                                          <Data value="12"/>
-                                          <Data value="19"/>
-                                          <Data value="26"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Saturday" type="java.lang.String">
-                                          <Data value="6"/>
-                                          <Data value="13"/>
-                                          <Data value="20"/>
-                                          <Data value="27"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Sunday" type="java.lang.String">
-                                          <Data value="7"/>
-                                          <Data value="14"/>
-                                          <Data value="21"/>
-                                          <Data value="28"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new DefaultTableModel()" type="code"/>
                                     </Property>
                                     <Property name="autoResizeMode" type="int" value="4"/>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1664,17 +1437,17 @@
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Friday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Saturday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                                          <Title value="Sunday"/>
+                                          <Title/>
                                           <Editor/>
                                           <Renderer/>
                                         </Column>
@@ -1687,6 +1460,12 @@
                                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblMayWeeksMouseReleased"/>
+                                  </Events>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="month = new String[5][7];&#xa;LocalDate mayD = LocalDate.of( LocalDate.now().getYear(), Month.MAY, 1);&#xa;&#xa;day = 1;&#xa;for(int i = 0; i &lt; month.length &amp;&amp; day &lt;= mayD.lengthOfMonth(); i++)&#xa;{&#xa;    int j = 0;&#xa;    //get the month start day&#xa;    if(i == 0) j = mayD.getDayOfWeek().getValue()-1;&#xa;    &#xa;    //for rest of month&#xa;    for(; j &lt; month[i].length &amp;&amp; day &lt;= mayD.lengthOfMonth(); j++)&#xa;    {&#xa;        month[i][j] = &quot;&quot;+ day++;&#xa;    }&#xa;}&#xa;&#xa;tblMayWeeks.setModel(new DefaultTableModel(month, colNames));"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -1709,15 +1488,12 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane21" alignment="0" pref="652" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane21" alignment="0" pref="718" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane21" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane21" alignment="0" pref="145" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -1737,58 +1513,8 @@
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                     </Property>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="5">
-                                        <Column editable="false" title="Monday" type="java.lang.String">
-                                          <Data value="1"/>
-                                          <Data value="8"/>
-                                          <Data value="15"/>
-                                          <Data value="22"/>
-                                          <Data value="29"/>
-                                        </Column>
-                                        <Column editable="false" title="Tuesday" type="java.lang.String">
-                                          <Data value="2"/>
-                                          <Data value="9"/>
-                                          <Data value="16"/>
-                                          <Data value="23"/>
-                                          <Data value="30"/>
-                                        </Column>
-                                        <Column editable="false" title="Wednesday" type="java.lang.String">
-                                          <Data value="3"/>
-                                          <Data value="10"/>
-                                          <Data value="17"/>
-                                          <Data value="24"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Thursday" type="java.lang.String">
-                                          <Data value="4"/>
-                                          <Data value="11"/>
-                                          <Data value="18"/>
-                                          <Data value="25"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Friday" type="java.lang.String">
-                                          <Data value="5"/>
-                                          <Data value="12"/>
-                                          <Data value="19"/>
-                                          <Data value="26"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Saturday" type="java.lang.String">
-                                          <Data value="6"/>
-                                          <Data value="13"/>
-                                          <Data value="20"/>
-                                          <Data value="27"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Sunday" type="java.lang.String">
-                                          <Data value="7"/>
-                                          <Data value="14"/>
-                                          <Data value="21"/>
-                                          <Data value="28"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new DefaultTableModel()" type="code"/>
                                     </Property>
                                     <Property name="autoResizeMode" type="int" value="4"/>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1837,6 +1563,12 @@
                                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblJuneWeeksMouseReleased"/>
+                                  </Events>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="month = new String[5][7]; LocalDate junD = LocalDate.of( LocalDate.now().getYear(), Month.JUNE, 1);&#xa;&#xa;day = 1;&#xa;for(int i = 0; i &lt; month.length &amp;&amp; day &lt;= junD.lengthOfMonth(); i++)&#xa;{&#xa;    int j = 0;&#xa;    //get the month start day&#xa;    if(i == 0) j = junD.getDayOfWeek().getValue()-1;&#xa;    &#xa;    //for rest of month&#xa;    for(; j &lt; month[i].length &amp;&amp; day &lt;= junD.lengthOfMonth(); j++)&#xa;    {&#xa;        month[i][j] = &quot;&quot;+ day++;&#xa;    }&#xa;}&#xa;&#xa;tblJuneWeeks.setModel(new DefaultTableModel(month, colNames));"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -1859,15 +1591,12 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane22" alignment="0" pref="652" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane22" alignment="0" pref="718" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane22" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane22" alignment="0" pref="145" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -1887,58 +1616,8 @@
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                     </Property>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="5">
-                                        <Column editable="false" title="Monday" type="java.lang.String">
-                                          <Data value="1"/>
-                                          <Data value="8"/>
-                                          <Data value="15"/>
-                                          <Data value="22"/>
-                                          <Data value="29"/>
-                                        </Column>
-                                        <Column editable="false" title="Tuesday" type="java.lang.String">
-                                          <Data value="2"/>
-                                          <Data value="9"/>
-                                          <Data value="16"/>
-                                          <Data value="23"/>
-                                          <Data value="30"/>
-                                        </Column>
-                                        <Column editable="false" title="Wednesday" type="java.lang.String">
-                                          <Data value="3"/>
-                                          <Data value="10"/>
-                                          <Data value="17"/>
-                                          <Data value="24"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Thursday" type="java.lang.String">
-                                          <Data value="4"/>
-                                          <Data value="11"/>
-                                          <Data value="18"/>
-                                          <Data value="25"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Friday" type="java.lang.String">
-                                          <Data value="5"/>
-                                          <Data value="12"/>
-                                          <Data value="19"/>
-                                          <Data value="26"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Saturday" type="java.lang.String">
-                                          <Data value="6"/>
-                                          <Data value="13"/>
-                                          <Data value="20"/>
-                                          <Data value="27"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Sunday" type="java.lang.String">
-                                          <Data value="7"/>
-                                          <Data value="14"/>
-                                          <Data value="21"/>
-                                          <Data value="28"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new DefaultTableModel()" type="code"/>
                                     </Property>
                                     <Property name="autoResizeMode" type="int" value="4"/>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1987,6 +1666,12 @@
                                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblJulyWeeksMouseReleased"/>
+                                  </Events>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="month = new String[5][7]; LocalDate julD = LocalDate.of( LocalDate.now().getYear(), Month.JULY, 1);&#xa; &#xa; day = 1;&#xa; for(int i = 0; i &lt; month.length &amp;&amp; day &lt;= julD.lengthOfMonth(); i++)&#xa; {&#xa;     int j = 0;&#xa;     //get the month start day&#xa;     if(i == 0) j = julD.getDayOfWeek().getValue()-1;&#xa;     &#xa;     //for rest of month&#xa;     for(; j &lt; month[i].length &amp;&amp; day &lt;= julD.lengthOfMonth(); j++)&#xa;     {&#xa;         month[i][j] = &quot;&quot;+ day++;&#xa;     }&#xa; }&#xa; &#xa; tblJulyWeeks.setModel(new DefaultTableModel(month, colNames));"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -2009,15 +1694,12 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane23" alignment="0" pref="652" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane23" alignment="0" pref="718" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane23" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane23" alignment="0" pref="145" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -2037,58 +1719,8 @@
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                     </Property>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="5">
-                                        <Column editable="false" title="Monday" type="java.lang.String">
-                                          <Data value="1"/>
-                                          <Data value="8"/>
-                                          <Data value="15"/>
-                                          <Data value="22"/>
-                                          <Data value="29"/>
-                                        </Column>
-                                        <Column editable="false" title="Tuesday" type="java.lang.String">
-                                          <Data value="2"/>
-                                          <Data value="9"/>
-                                          <Data value="16"/>
-                                          <Data value="23"/>
-                                          <Data value="30"/>
-                                        </Column>
-                                        <Column editable="false" title="Wednesday" type="java.lang.String">
-                                          <Data value="3"/>
-                                          <Data value="10"/>
-                                          <Data value="17"/>
-                                          <Data value="24"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Thursday" type="java.lang.String">
-                                          <Data value="4"/>
-                                          <Data value="11"/>
-                                          <Data value="18"/>
-                                          <Data value="25"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Friday" type="java.lang.String">
-                                          <Data value="5"/>
-                                          <Data value="12"/>
-                                          <Data value="19"/>
-                                          <Data value="26"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Saturday" type="java.lang.String">
-                                          <Data value="6"/>
-                                          <Data value="13"/>
-                                          <Data value="20"/>
-                                          <Data value="27"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Sunday" type="java.lang.String">
-                                          <Data value="7"/>
-                                          <Data value="14"/>
-                                          <Data value="21"/>
-                                          <Data value="28"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new DefaultTableModel()" type="code"/>
                                     </Property>
                                     <Property name="autoResizeMode" type="int" value="4"/>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -2137,6 +1769,12 @@
                                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblAugWeeksMouseReleased"/>
+                                  </Events>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="month = new String[5][7]; LocalDate augD = LocalDate.of( LocalDate.now().getYear(), Month.AUGUST, 1);&#xa; &#xa; day = 1;&#xa; for(int i = 0; i &lt; month.length &amp;&amp; day &lt;= augD.lengthOfMonth(); i++)&#xa; {&#xa;     int j = 0;&#xa;     //get the month start day&#xa;     if(i == 0) j = augD.getDayOfWeek().getValue()-1;&#xa;     &#xa;     //for rest of month&#xa;     for(; j &lt; month[i].length &amp;&amp; day &lt;= augD.lengthOfMonth(); j++)&#xa;     {&#xa;         month[i][j] = &quot;&quot;+ day++;&#xa;     }&#xa; }&#xa; &#xa; tblAugWeeks.setModel(new DefaultTableModel(month, colNames));"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -2159,15 +1797,12 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane24" alignment="0" pref="652" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane24" alignment="0" pref="718" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane24" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane24" alignment="0" pref="145" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -2187,58 +1822,8 @@
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                     </Property>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="5">
-                                        <Column editable="false" title="Monday" type="java.lang.String">
-                                          <Data value="1"/>
-                                          <Data value="8"/>
-                                          <Data value="15"/>
-                                          <Data value="22"/>
-                                          <Data value="29"/>
-                                        </Column>
-                                        <Column editable="false" title="Tuesday" type="java.lang.String">
-                                          <Data value="2"/>
-                                          <Data value="9"/>
-                                          <Data value="16"/>
-                                          <Data value="23"/>
-                                          <Data value="30"/>
-                                        </Column>
-                                        <Column editable="false" title="Wednesday" type="java.lang.String">
-                                          <Data value="3"/>
-                                          <Data value="10"/>
-                                          <Data value="17"/>
-                                          <Data value="24"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Thursday" type="java.lang.String">
-                                          <Data value="4"/>
-                                          <Data value="11"/>
-                                          <Data value="18"/>
-                                          <Data value="25"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Friday" type="java.lang.String">
-                                          <Data value="5"/>
-                                          <Data value="12"/>
-                                          <Data value="19"/>
-                                          <Data value="26"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Saturday" type="java.lang.String">
-                                          <Data value="6"/>
-                                          <Data value="13"/>
-                                          <Data value="20"/>
-                                          <Data value="27"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Sunday" type="java.lang.String">
-                                          <Data value="7"/>
-                                          <Data value="14"/>
-                                          <Data value="21"/>
-                                          <Data value="28"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new DefaultTableModel()" type="code"/>
                                     </Property>
                                     <Property name="autoResizeMode" type="int" value="4"/>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -2287,6 +1872,12 @@
                                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblSeptWeeksMouseReleased"/>
+                                  </Events>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="month = new String[5][7]; LocalDate sepD = LocalDate.of( LocalDate.now().getYear(), Month.SEPTEMBER, 1);&#xa; &#xa; day = 1;&#xa; for(int i = 0; i &lt; month.length &amp;&amp; day &lt;= sepD.lengthOfMonth(); i++)&#xa; {&#xa;     int j = 0;&#xa;     //get the month start day&#xa;     if(i == 0) j = sepD.getDayOfWeek().getValue()-1;&#xa;     &#xa;     //for rest of month&#xa;     for(; j &lt; month[i].length &amp;&amp; day &lt;= sepD.lengthOfMonth(); j++)&#xa;     {&#xa;         month[i][j] = &quot;&quot;+ day++;&#xa;     }&#xa; }&#xa; &#xa; tblSeptWeeks.setModel(new DefaultTableModel(month, colNames));"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -2309,15 +1900,12 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane25" alignment="0" pref="652" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane25" alignment="0" pref="718" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane25" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane25" alignment="0" pref="145" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -2337,58 +1925,8 @@
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                     </Property>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="5">
-                                        <Column editable="false" title="Monday" type="java.lang.String">
-                                          <Data value="1"/>
-                                          <Data value="8"/>
-                                          <Data value="15"/>
-                                          <Data value="22"/>
-                                          <Data value="29"/>
-                                        </Column>
-                                        <Column editable="false" title="Tuesday" type="java.lang.String">
-                                          <Data value="2"/>
-                                          <Data value="9"/>
-                                          <Data value="16"/>
-                                          <Data value="23"/>
-                                          <Data value="30"/>
-                                        </Column>
-                                        <Column editable="false" title="Wednesday" type="java.lang.String">
-                                          <Data value="3"/>
-                                          <Data value="10"/>
-                                          <Data value="17"/>
-                                          <Data value="24"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Thursday" type="java.lang.String">
-                                          <Data value="4"/>
-                                          <Data value="11"/>
-                                          <Data value="18"/>
-                                          <Data value="25"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Friday" type="java.lang.String">
-                                          <Data value="5"/>
-                                          <Data value="12"/>
-                                          <Data value="19"/>
-                                          <Data value="26"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Saturday" type="java.lang.String">
-                                          <Data value="6"/>
-                                          <Data value="13"/>
-                                          <Data value="20"/>
-                                          <Data value="27"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Sunday" type="java.lang.String">
-                                          <Data value="7"/>
-                                          <Data value="14"/>
-                                          <Data value="21"/>
-                                          <Data value="28"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new DefaultTableModel()" type="code"/>
                                     </Property>
                                     <Property name="autoResizeMode" type="int" value="4"/>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -2437,6 +1975,12 @@
                                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblOctWeeksMouseReleased"/>
+                                  </Events>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="month = new String[6][7]; LocalDate octD = LocalDate.of( LocalDate.now().getYear(), Month.OCTOBER, 1);&#xa; &#xa; day = 1;&#xa; for(int i = 0; i &lt; month.length &amp;&amp; day &lt;= octD.lengthOfMonth(); i++)&#xa; {&#xa;     int j = 0;&#xa;     //get the month start day&#xa;     if(i == 0) j = octD.getDayOfWeek().getValue()-1;&#xa;     &#xa;     //for rest of month&#xa;     for(; j &lt; month[i].length &amp;&amp; day &lt;= sepD.lengthOfMonth(); j++)&#xa;     {&#xa;         month[i][j] = &quot;&quot;+ day++;&#xa;     }&#xa; }&#xa; &#xa; tblOctWeeks.setModel(new DefaultTableModel(month, colNames));"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -2459,15 +2003,12 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane26" alignment="0" pref="652" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane26" alignment="0" pref="718" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane26" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane26" alignment="0" pref="145" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -2487,58 +2028,8 @@
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                     </Property>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="5">
-                                        <Column editable="false" title="Monday" type="java.lang.String">
-                                          <Data value="1"/>
-                                          <Data value="8"/>
-                                          <Data value="15"/>
-                                          <Data value="22"/>
-                                          <Data value="29"/>
-                                        </Column>
-                                        <Column editable="false" title="Tuesday" type="java.lang.String">
-                                          <Data value="2"/>
-                                          <Data value="9"/>
-                                          <Data value="16"/>
-                                          <Data value="23"/>
-                                          <Data value="30"/>
-                                        </Column>
-                                        <Column editable="false" title="Wednesday" type="java.lang.String">
-                                          <Data value="3"/>
-                                          <Data value="10"/>
-                                          <Data value="17"/>
-                                          <Data value="24"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Thursday" type="java.lang.String">
-                                          <Data value="4"/>
-                                          <Data value="11"/>
-                                          <Data value="18"/>
-                                          <Data value="25"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Friday" type="java.lang.String">
-                                          <Data value="5"/>
-                                          <Data value="12"/>
-                                          <Data value="19"/>
-                                          <Data value="26"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Saturday" type="java.lang.String">
-                                          <Data value="6"/>
-                                          <Data value="13"/>
-                                          <Data value="20"/>
-                                          <Data value="27"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Sunday" type="java.lang.String">
-                                          <Data value="7"/>
-                                          <Data value="14"/>
-                                          <Data value="21"/>
-                                          <Data value="28"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new DefaultTableModel()" type="code"/>
                                     </Property>
                                     <Property name="autoResizeMode" type="int" value="4"/>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -2587,6 +2078,12 @@
                                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblNovWeeksMouseReleased"/>
+                                  </Events>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="month = new String[5][7]; LocalDate novD = LocalDate.of( LocalDate.now().getYear(), Month.NOVEMBER, 1);&#xa; &#xa; day = 1;&#xa; for(int i = 0; i &lt; month.length &amp;&amp; day &lt;= novD.lengthOfMonth(); i++)&#xa; {&#xa;     int j = 0;&#xa;     //get the month start day&#xa;     if(i == 0) j = novD.getDayOfWeek().getValue()-1;&#xa;     &#xa;     //for rest of month&#xa;     for(; j &lt; month[i].length &amp;&amp; day &lt;= novD.lengthOfMonth(); j++)&#xa;     {&#xa;         month[i][j] = &quot;&quot;+ day++;&#xa;     }&#xa; }&#xa; &#xa; tblNovWeeks.setModel(new DefaultTableModel(month, colNames));"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -2609,15 +2106,12 @@
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane27" alignment="0" pref="652" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane27" alignment="0" pref="718" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane27" min="-2" pref="129" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane27" alignment="0" pref="145" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -2637,58 +2131,8 @@
                                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                     </Property>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="5">
-                                        <Column editable="false" title="Monday" type="java.lang.String">
-                                          <Data value="1"/>
-                                          <Data value="8"/>
-                                          <Data value="15"/>
-                                          <Data value="22"/>
-                                          <Data value="29"/>
-                                        </Column>
-                                        <Column editable="false" title="Tuesday" type="java.lang.String">
-                                          <Data value="2"/>
-                                          <Data value="9"/>
-                                          <Data value="16"/>
-                                          <Data value="23"/>
-                                          <Data value="30"/>
-                                        </Column>
-                                        <Column editable="false" title="Wednesday" type="java.lang.String">
-                                          <Data value="3"/>
-                                          <Data value="10"/>
-                                          <Data value="17"/>
-                                          <Data value="24"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Thursday" type="java.lang.String">
-                                          <Data value="4"/>
-                                          <Data value="11"/>
-                                          <Data value="18"/>
-                                          <Data value="25"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Friday" type="java.lang.String">
-                                          <Data value="5"/>
-                                          <Data value="12"/>
-                                          <Data value="19"/>
-                                          <Data value="26"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Saturday" type="java.lang.String">
-                                          <Data value="6"/>
-                                          <Data value="13"/>
-                                          <Data value="20"/>
-                                          <Data value="27"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                        <Column editable="false" title="Sunday" type="java.lang.String">
-                                          <Data value="7"/>
-                                          <Data value="14"/>
-                                          <Data value="21"/>
-                                          <Data value="28"/>
-                                          <Data value="null"/>
-                                        </Column>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="new DefaultTableModel()" type="code"/>
                                     </Property>
                                     <Property name="autoResizeMode" type="int" value="4"/>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -2737,6 +2181,12 @@
                                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblDecWeeksMouseReleased"/>
+                                  </Events>
+                                  <AuxValues>
+                                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="month = new String[5][7]; LocalDate decD = LocalDate.of( LocalDate.now().getYear(), Month.DECEMBER, 1);&#xa; &#xa; day = 1;&#xa; for(int i = 0; i &lt; month.length &amp;&amp; day &lt;= decD.lengthOfMonth(); i++)&#xa; {&#xa;     int j = 0;&#xa;     //get the month start day&#xa;     if(i == 0) j = decD.getDayOfWeek().getValue()-1;&#xa;     &#xa;     //for rest of month&#xa;     for(; j &lt; month[i].length &amp;&amp; day &lt;= decD.lengthOfMonth(); j++)&#xa;     {&#xa;         month[i][j] = &quot;&quot;+ day++;&#xa;     }&#xa; }&#xa; &#xa; tblDecWeeks.setModel(new DefaultTableModel(month, colNames));"/>
+                                  </AuxValues>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -2784,7 +2234,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="cc" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Choose"/>
+                        <Property name="text" type="java.lang.String" value="Choose Batting Teacher"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chooseTeacherButtonActionPerformed"/>
@@ -2818,6 +2268,27 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JButton" name="deleteBattingTeacherButton">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="0" green="0" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Delete Batting"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder roundedCorners="true">
+                              <Color PropertyName="color" blue="0" green="33" red="66" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JTabbedPane" name="outputCalendarTabbedPane">
@@ -2853,7 +2324,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane2" alignment="0" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="0" pref="695" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -3007,7 +2478,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane6" alignment="0" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane6" alignment="0" pref="695" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -3158,7 +2629,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane7" alignment="0" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane7" alignment="0" pref="695" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -3309,7 +2780,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane8" alignment="0" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane8" alignment="0" pref="695" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -3460,7 +2931,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane14" alignment="0" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane14" alignment="0" pref="695" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -3611,7 +3082,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane13" alignment="0" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane13" alignment="0" pref="695" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -3762,7 +3233,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane12" alignment="0" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane12" alignment="0" pref="695" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -3913,7 +3384,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane15" alignment="0" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane15" alignment="0" pref="695" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -4064,7 +3535,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane16" alignment="0" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane16" alignment="0" pref="695" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -4215,7 +3686,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane17" alignment="0" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane17" alignment="0" pref="695" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -4366,7 +3837,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane18" alignment="0" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane18" alignment="0" pref="695" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -4517,7 +3988,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane19" alignment="0" pref="761" max="32767" attributes="0"/>
+                              <Component id="jScrollPane19" alignment="0" pref="695" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">

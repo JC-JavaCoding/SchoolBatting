@@ -11,11 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
 /**
  *
  * @author Cliftonb
@@ -77,30 +72,5 @@ public class DatabaseManager
 
 
         return resultSet;
-    }
-    public String processBookRequest(ResultSet rs)
-    {
-        try
-        {
-            String temp = "";
-            ResultSetMetaData meta = rs.getMetaData();
-            int size = meta.getColumnCount();
-            while (rs.next())
-            {
-                int isbn = rs.getInt(1);
-                String title = rs.getString(2);
-                String author = rs.getString(3);
-                int rating = rs.getInt(4);
-                double replacement_cost = rs.getDouble(5);
-
-                temp += isbn + "#" + title + "#" + author + "#" + rating + "#" + replacement_cost;
-            }
-
-            return temp;
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

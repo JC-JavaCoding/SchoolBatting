@@ -105,7 +105,6 @@ public class TeacherManager
         return teacherNames;
     }
 //SELECT
-    
     public TableModel getTimeTableModel(String fullName) throws SQLException
     {
         DefaultTableModel outputModel;// = new DefaultTableModel(data, columnNames);
@@ -197,6 +196,11 @@ public class TeacherManager
     {
         String deleteQuery = "DELETE FROM `jcjDB`.`tblTeachers` WHERE (`FullName = \""+ fullName +"\");";
         dbm.update(deleteQuery);
+        
+        for (int day = 1; day <= 5; day++ )
+        {
+            dbm.update("DELETE FROM `tblTimetables` WHERE `ID` = "+ getTeacherID(fullName) +" AND `Day` = "+ day +";");  
+        }
     }
     public void updateTeacher(Teacher t, String originalName) throws SQLException
     {
@@ -231,7 +235,7 @@ public class TeacherManager
                 lineUpdate += collumnNames[i+1] +" = "+ tempTimetable[day-1][i] +(i != tempTimetable[day-1].length-1? ", ":" ");
             } 
             
-            lineUpdate += " WHERE (`ID` = (SELECT `ID` FROM `jcjDB`.`tblTeachers` WHERE `tblTeachers`.`FullName` = \""+ t.getFullName() +"\")) AND (`Day` =  "+ day +") ;";
+            lineUpdate += " WHERE (`ID` = "+ getTeacherID(t.getFullName()) +") AND (`Day` =  "+ day +") ;";
             dbm.update(lineUpdate);
         }
         
