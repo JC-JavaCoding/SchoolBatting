@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.imageio.plugins.bmp.BMPImageWriteParam;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -165,7 +166,7 @@ public class TeacherManager
         
         dbm.update(addTeacherQueryString);
     }
-    private int getTeacherID(String fullName) throws SQLException
+    public int getTeacherID(String fullName) throws SQLException
     {
         String getIDQuery = "Select `ID` FROM `jcjDB`.`tblTeachers`"
                 + "WHERE `tblTeachers`.`FullName` = \""+ fullName +"\";";
@@ -280,28 +281,14 @@ public class TeacherManager
         
         return stringRepresentation;
     }    
-    public boolean isFree(Teacher t, int lesson, int dayOfWeek, int dayOfMonth, int month) throws SQLException
+    public boolean isFree(Teacher t, int lesson, int dayOfWeek, int dayOfMonth, int month, int year) throws SQLException
     {
         teacher = t;
-        int teacherID;
-        String getBattingsQuery;
-        
+        BattingManager bm = new BattingManager();
         //see if teacher has a lesson at that lesson
         if(teacher.isFree(lesson, dayOfWeek))
         {
-            //see wether the teacher has a batting scheduled for the time
-            teacherID = getTeacherID(teacher.getFullName());
-            
-            //from database:  get battings for teacher
-            getBattingsQuery = "SELECT * FROM `tblBattings` WHERE `ID` = "+ teacherID +"";
-            resultSet = dbm.query(getBattingsQuery);
-            
-            //
-            while(resultSet.next())
-            {
-                 if (resultSet.getInt(2) == lesson && resultSet.getInt(3) == dayOfWeek && resultSet.getInt(4) == dayOfMonth && resultSet.getInt(5) == month )return false;
-            }
-            return true;
+            return !(bm.teacherHasBatting(new BattingLesson(t.getFullName(), lesson, dayOfMonth, month, year)));
         }
         
         return false;

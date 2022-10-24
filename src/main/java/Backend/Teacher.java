@@ -55,7 +55,8 @@ public class Teacher
 
     public boolean isFree(int lesson, int dayOfWeek)
     {
-        return !timeTable.toBoolArray()[dayOfWeek-1][lesson-1];
+        if( dayOfWeek <= 5) return !timeTable.toBoolArray()[dayOfWeek-1][lesson-1];
+        else return true;
     }
     
     public TimeTable getTimeTable() {

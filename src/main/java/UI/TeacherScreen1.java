@@ -59,11 +59,14 @@ package UI;
 import Backend.BattingLesson;
 import Backend.BattingManager;
 import Backend.Cell;
+import Backend.MultiLineTableCellRenderer;
 import Backend.Teacher;
 import Backend.TeacherManager;
 import Backend.TimeTable;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.ui.FlatArrowButton;
 import com.formdev.flatlaf.ui.FlatComboBoxUI;
+import com.formdev.flatlaf.ui.FlatTableHeaderUI;
 import java.awt.Color;
 import java.awt.Component;
 import java.sql.SQLException;
@@ -75,14 +78,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-
 
 /**
  *
@@ -96,30 +100,32 @@ public class TeacherScreen1 extends javax.swing.JFrame
      */
     public TeacherScreen1()
     {
-         initComponents();  
-         
-         Month [] monthArr = {Month.JANUARY,
-         Month.FEBRUARY,
-         Month.MARCH,
-         Month.APRIL,
-         Month.MAY,
-         Month.JUNE,
-         Month.JULY,
-         Month.AUGUST,
-         Month.SEPTEMBER,
-         Month.OCTOBER,
-         Month.NOVEMBER,
-         Month.DECEMBER
-         };
-         
-         JTable [] battingCalendarArr = {tblJanBatting, tblFebBatting, tblMarBatting, tblAprBatting, tblMayBatting, tblJunBatting, tblJulBatting, tblAugBatting, tblSepBatting, tblOctBatting, tblNovBatting, tblDecBatting};
-         JTable [] selectBattingMonthArr = {tblJanWeeks, tblFebWeeks, tblMarchWeeks, tblAprilWeeks, tblMayWeeks, tblJuneWeeks, tblJulyWeeks, tblAugWeeks, tblSeptWeeks, tblOctWeeks, tblNovWeeks, tblDecWeeks};
-         
-         for(int i = 0; i < 12; i++)
-         {
-             setBattingMonthCalendar(monthArr[i], battingCalendarArr[i]);
-             setBattingMonthCalendar(monthArr[i], selectBattingMonthArr[i]);
-         }
+        initComponents();
+
+        JTable[] battingCalendarArr =
+        {
+            tblJanBatting, tblFebBatting, tblMarBatting, tblAprBatting, tblMayBatting, tblJunBatting, tblJulBatting, tblAugBatting, tblSepBatting, tblOctBatting, tblNovBatting, tblDecBatting
+        };
+        JTable[] selectBattingMonthArr =
+        {
+            tblJanWeeks, tblFebWeeks, tblMarchWeeks, tblAprilWeeks, tblMayWeeks, tblJuneWeeks, tblJulyWeeks, tblAugWeeks, tblSeptWeeks, tblOctWeeks, tblNovWeeks, tblDecWeeks
+        };
+
+        lessonInputTable.getTableHeader().setBackground(findBatter_HeaderPanel.getBackground());
+        tblViewTimeTable.getTableHeader().setBackground(manageT_HeaderPanel.getBackground());
+        addTimeTableTbl.getTableHeader().setBackground(addTeacherHeaderPanel.getBackground());
+        lessonInputTable.getTableHeader().setUI(new FlatTableHeaderUI());
+        tblViewTimeTable.getTableHeader().setUI(new FlatTableHeaderUI());
+        addTimeTableTbl.getTableHeader().setUI(new FlatTableHeaderUI());
+        for (int i = 0; i < 12; i++)
+        {
+            battingCalendarArr[i].getTableHeader().setBackground(addTeacherHeaderPanel.getBackground());
+            selectBattingMonthArr[i].getTableHeader().setBackground(addTeacherHeaderPanel.getBackground());
+            battingCalendarArr[i].getTableHeader().setUI(new FlatTableHeaderUI());
+            selectBattingMonthArr[i].getTableHeader().setUI(new FlatTableHeaderUI());
+            setBattingMonthCalendar(Month.of(i + 1), battingCalendarArr[i]);
+            setBasicCalendar(Month.of(i + 1), selectBattingMonthArr[i]);
+        }
     }
 
     /**
@@ -204,7 +210,6 @@ public class TeacherScreen1 extends javax.swing.JFrame
         chooseTeacherButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         outputTeacherList = new javax.swing.JList<>();
-        deleteBattingTeacherButton = new javax.swing.JButton();
         outputCalendarTabbedPane = new javax.swing.JTabbedPane();
         tabJanuary = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -259,6 +264,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabDecember = new javax.swing.JPanel();
         jScrollPane19 = new javax.swing.JScrollPane();
         tblDecBatting = new javax.swing.JTable();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         addTeacherPane = new javax.swing.JPanel();
         teacherExtraMuralsSpinner = new javax.swing.JSpinner();
         teacherExtraMuralsSpinner.setBackground(Color.white);
@@ -352,6 +358,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
             e.printStackTrace();
         }
         teacherComboBox.setBackground(ManageTeachers_Panel.getBackground());
+        teacherComboBox.setForeground(new java.awt.Color(102, 102, 102));
         teacherComboBox.setBorder(new javax.swing.border.LineBorder(chooseTeacherButton.getBackground(), 1, true));
         teacherComboBox.setOpaque(true);
         teacherComboBox.addActionListener(new java.awt.event.ActionListener()
@@ -364,11 +371,12 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         batWeightField.setEditable(false);
         batWeightField.setBackground(getBackground());
-        batWeightField.setForeground(new java.awt.Color(153, 153, 153));
+        batWeightField.setForeground(new java.awt.Color(102, 102, 102));
         batWeightField.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(25, 117, 229), 1, true), "BattingWeight", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(25, 117, 229))); // NOI18N
 
         registerClassOutput_Field.setEditable(false);
         registerClassOutput_Field.setBackground(getBackground());
+        registerClassOutput_Field.setForeground(new java.awt.Color(102, 102, 102));
         registerClassOutput_Field.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(25, 117, 229), 1, true), "Register Class", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(25, 117, 229))); // NOI18N
         registerClassOutput_Field.addActionListener(new java.awt.event.ActionListener()
         {
@@ -380,6 +388,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         extraMuralsNr_Text.setEditable(false);
         extraMuralsNr_Text.setBackground(getBackground());
+        extraMuralsNr_Text.setForeground(new java.awt.Color(102, 102, 102));
         extraMuralsNr_Text.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(25, 117, 229), 1, true), "Extramural Hours", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(25, 117, 229))); // NOI18N
 
         confirmEditsButton.setBackground(getBackground());
@@ -399,7 +408,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tblViewTimeTable.setBackground(new java.awt.Color(255, 255, 255));
         tblViewTimeTable.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tblViewTimeTable.setForeground(new java.awt.Color(153, 153, 153));
+        tblViewTimeTable.setForeground(new java.awt.Color(102, 102, 102));
         tblViewTimeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -588,6 +597,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         chooseLessonLAbel.setText("Choose Lesson");
 
         lessonInputTable.setBackground(new java.awt.Color(255, 255, 255));
+        lessonInputTable.setForeground(new java.awt.Color(102, 102, 102));
         lessonInputTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -678,11 +688,12 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksJanuary.setBackground(new java.awt.Color(255, 255, 255));
 
         tblJanWeeks.setBackground(new java.awt.Color(255, 255, 255));
-        tblJanWeeks.setForeground(new java.awt.Color(153, 153, 153));
+        tblJanWeeks.setForeground(new java.awt.Color(102, 102, 102));
         tblJanWeeks.setModel(new javax.swing.table.DefaultTableModel()
         );
         tblJanWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblJanWeeks.setGridColor(new java.awt.Color(102, 102, 102));
+        tblJanWeeks.setShowGrid(false);
         tblJanWeeks.getTableHeader().setReorderingAllowed(false);
         String [][] month = new String[6][7];
         LocalDate monthD = LocalDate.of(LocalDate.now().getYear(), Month.JANUARY, 1);
@@ -727,7 +738,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksFebruary.setBackground(new java.awt.Color(255, 255, 255));
 
         tblFebWeeks.setBackground(new java.awt.Color(255, 255, 255));
-        tblFebWeeks.setForeground(new java.awt.Color(153, 153, 153));
+        tblFebWeeks.setForeground(new java.awt.Color(102, 102, 102));
         tblFebWeeks.setModel(new DefaultTableModel());
         tblFebWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblFebWeeks.setGridColor(new java.awt.Color(102, 102, 102));
@@ -775,7 +786,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksMarch.setBackground(new java.awt.Color(255, 255, 255));
 
         tblMarchWeeks.setBackground(new java.awt.Color(255, 255, 255));
-        tblMarchWeeks.setForeground(new java.awt.Color(153, 153, 153));
+        tblMarchWeeks.setForeground(new java.awt.Color(102, 102, 102));
         tblMarchWeeks.setModel(new DefaultTableModel());
         tblMarchWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblMarchWeeks.setGridColor(new java.awt.Color(102, 102, 102));
@@ -824,7 +835,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksApril.setBackground(new java.awt.Color(255, 255, 255));
 
         tblAprilWeeks.setBackground(new java.awt.Color(255, 255, 255));
-        tblAprilWeeks.setForeground(new java.awt.Color(153, 153, 153));
+        tblAprilWeeks.setForeground(new java.awt.Color(102, 102, 102));
         tblAprilWeeks.setModel(new DefaultTableModel());
         tblAprilWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblAprilWeeks.setGridColor(new java.awt.Color(102, 102, 102));
@@ -871,7 +882,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksMay.setBackground(new java.awt.Color(255, 255, 255));
 
         tblMayWeeks.setBackground(new java.awt.Color(255, 255, 255));
-        tblMayWeeks.setForeground(new java.awt.Color(153, 153, 153));
+        tblMayWeeks.setForeground(new java.awt.Color(102, 102, 102));
         tblMayWeeks.setModel(new DefaultTableModel());
         tblMayWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblMayWeeks.setGridColor(new java.awt.Color(102, 102, 102));
@@ -919,7 +930,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksJune.setBackground(new java.awt.Color(255, 255, 255));
 
         tblJuneWeeks.setBackground(new java.awt.Color(255, 255, 255));
-        tblJuneWeeks.setForeground(new java.awt.Color(153, 153, 153));
+        tblJuneWeeks.setForeground(new java.awt.Color(102, 102, 102));
         tblJuneWeeks.setModel(new DefaultTableModel());
         tblJuneWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblJuneWeeks.setGridColor(new java.awt.Color(102, 102, 102));
@@ -972,7 +983,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksJuly.setBackground(new java.awt.Color(255, 255, 255));
 
         tblJulyWeeks.setBackground(new java.awt.Color(255, 255, 255));
-        tblJulyWeeks.setForeground(new java.awt.Color(153, 153, 153));
+        tblJulyWeeks.setForeground(new java.awt.Color(102, 102, 102));
         tblJulyWeeks.setModel(new DefaultTableModel());
         tblJulyWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblJulyWeeks.setGridColor(new java.awt.Color(102, 102, 102));
@@ -1025,7 +1036,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksAugust.setBackground(new java.awt.Color(255, 255, 255));
 
         tblAugWeeks.setBackground(new java.awt.Color(255, 255, 255));
-        tblAugWeeks.setForeground(new java.awt.Color(153, 153, 153));
+        tblAugWeeks.setForeground(new java.awt.Color(102, 102, 102));
         tblAugWeeks.setModel(new DefaultTableModel());
         tblAugWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblAugWeeks.setGridColor(new java.awt.Color(102, 102, 102));
@@ -1078,7 +1089,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksSeptember.setBackground(new java.awt.Color(255, 255, 255));
 
         tblSeptWeeks.setBackground(new java.awt.Color(255, 255, 255));
-        tblSeptWeeks.setForeground(new java.awt.Color(153, 153, 153));
+        tblSeptWeeks.setForeground(new java.awt.Color(102, 102, 102));
         tblSeptWeeks.setModel(new DefaultTableModel());
         tblSeptWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblSeptWeeks.setGridColor(new java.awt.Color(102, 102, 102));
@@ -1131,7 +1142,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksOctober.setBackground(new java.awt.Color(255, 255, 255));
 
         tblOctWeeks.setBackground(new java.awt.Color(255, 255, 255));
-        tblOctWeeks.setForeground(new java.awt.Color(153, 153, 153));
+        tblOctWeeks.setForeground(new java.awt.Color(102, 102, 102));
         tblOctWeeks.setModel(new DefaultTableModel());
         tblOctWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblOctWeeks.setGridColor(new java.awt.Color(102, 102, 102));
@@ -1184,7 +1195,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksNovember.setBackground(new java.awt.Color(255, 255, 255));
 
         tblNovWeeks.setBackground(new java.awt.Color(255, 255, 255));
-        tblNovWeeks.setForeground(new java.awt.Color(153, 153, 153));
+        tblNovWeeks.setForeground(new java.awt.Color(102, 102, 102));
         tblNovWeeks.setModel(new DefaultTableModel());
         tblNovWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblNovWeeks.setGridColor(new java.awt.Color(102, 102, 102));
@@ -1237,7 +1248,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         weeksDecember.setBackground(new java.awt.Color(255, 255, 255));
 
         tblDecWeeks.setBackground(new java.awt.Color(255, 255, 255));
-        tblDecWeeks.setForeground(new java.awt.Color(153, 153, 153));
+        tblDecWeeks.setForeground(new java.awt.Color(102, 102, 102));
         tblDecWeeks.setModel(new DefaultTableModel());
         tblDecWeeks.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblDecWeeks.setGridColor(new java.awt.Color(102, 102, 102));
@@ -1320,20 +1331,12 @@ public class TeacherScreen1 extends javax.swing.JFrame
         outputTeacherList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(outputTeacherList);
 
-        deleteBattingTeacherButton.setBackground(new java.awt.Color(255, 0, 0));
-        deleteBattingTeacherButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        deleteBattingTeacherButton.setForeground(new java.awt.Color(255, 255, 255));
-        deleteBattingTeacherButton.setText("Delete Batting");
-        deleteBattingTeacherButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 51, 0), 1, true));
-
         javax.swing.GroupLayout lessonInputPanelLayout = new javax.swing.GroupLayout(lessonInputPanel);
         lessonInputPanel.setLayout(lessonInputPanelLayout);
         lessonInputPanelLayout.setHorizontalGroup(
             lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lessonInputPanelLayout.createSequentialGroup()
-                .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(findTeacherButton))
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chooseLessonLAbel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -1341,6 +1344,13 @@ public class TeacherScreen1 extends javax.swing.JFrame
             .addGroup(lessonInputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lessonInputPanelLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(chooseTeacherButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(lessonInputPanelLayout.createSequentialGroup()
+                        .addComponent(findTeacherButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(lessonInputPanelLayout.createSequentialGroup()
                         .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tblBatWeek)
@@ -1356,17 +1366,9 @@ public class TeacherScreen1 extends javax.swing.JFrame
                                 .addGap(17, 17, 17)
                                 .addComponent(chooseDayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-                    .addGroup(lessonInputPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lessonInputPanelLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(chooseTeacherButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteBattingTeacherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63))))
+                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1))
+                        .addContainerGap())))
         );
         lessonInputPanelLayout.setVerticalGroup(
             lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1394,9 +1396,9 @@ public class TeacherScreen1 extends javax.swing.JFrame
                     .addComponent(chooseLessonLAbel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(4, 4, 4)
                 .addComponent(findTeacherButton)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lessonInputPanelLayout.createSequentialGroup()
                         .addGap(8, 8, 8)
@@ -1408,9 +1410,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(lessonInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chooseTeacherButton)
-                    .addComponent(deleteBattingTeacherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(chooseTeacherButton)
                 .addContainerGap())
         );
 
@@ -1421,6 +1421,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
 
         tabJanuary.setBackground(new java.awt.Color(255, 255, 255));
 
+        tblJanBatting.getTableHeader().setBackground(findBatter_HeaderPanel.getBackground());
         tblJanBatting.setBackground(new java.awt.Color(255, 255, 255));
         tblJanBatting.setForeground(new java.awt.Color(153, 153, 153));
         tblJanBatting.setModel(new javax.swing.table.DefaultTableModel(
@@ -1462,6 +1463,13 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblJanBatting.setRowHeight(110);
         tblJanBatting.setRowSelectionAllowed(false);
         tblJanBatting.getTableHeader().setReorderingAllowed(false);
+        tblJanBatting.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblJanBattingMouseReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblJanBatting);
         if (tblJanBatting.getColumnModel().getColumnCount() > 0)
         {
@@ -1474,7 +1482,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabJanuary.setLayout(tabJanuaryLayout);
         tabJanuaryLayout.setHorizontalGroup(
             tabJanuaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         tabJanuaryLayout.setVerticalGroup(
             tabJanuaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1486,7 +1494,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabFebruary.setBackground(new java.awt.Color(255, 255, 255));
 
         tblFebBatting.setBackground(new java.awt.Color(255, 255, 255));
-        tblFebBatting.setForeground(new java.awt.Color(153, 153, 153));
+        tblFebBatting.setForeground(new java.awt.Color(102, 102, 102));
         tblFebBatting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -1526,6 +1534,14 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblFebBatting.setRowHeight(110);
         tblFebBatting.setRowSelectionAllowed(false);
         tblFebBatting.getTableHeader().setReorderingAllowed(false);
+        tblFebBatting.getTableHeader().setBackground(findBatter_HeaderPanel.getBackground());
+        tblFebBatting.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblFebBattingMouseReleased(evt);
+            }
+        });
         jScrollPane6.setViewportView(tblFebBatting);
         if (tblFebBatting.getColumnModel().getColumnCount() > 0)
         {
@@ -1538,7 +1554,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabFebruary.setLayout(tabFebruaryLayout);
         tabFebruaryLayout.setHorizontalGroup(
             tabFebruaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         tabFebruaryLayout.setVerticalGroup(
             tabFebruaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1550,7 +1566,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabMarch.setBackground(new java.awt.Color(255, 255, 255));
 
         tblMarBatting.setBackground(new java.awt.Color(255, 255, 255));
-        tblMarBatting.setForeground(new java.awt.Color(153, 153, 153));
+        tblMarBatting.setForeground(new java.awt.Color(102, 102, 102));
         tblMarBatting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -1590,6 +1606,14 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblMarBatting.setRowHeight(110);
         tblMarBatting.setRowSelectionAllowed(false);
         tblMarBatting.getTableHeader().setReorderingAllowed(false);
+        tblMarBatting.getTableHeader().setBackground(findBatter_HeaderPanel.getBackground());
+        tblMarBatting.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblMarBattingMouseReleased(evt);
+            }
+        });
         jScrollPane7.setViewportView(tblMarBatting);
         if (tblMarBatting.getColumnModel().getColumnCount() > 0)
         {
@@ -1602,7 +1626,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabMarch.setLayout(tabMarchLayout);
         tabMarchLayout.setHorizontalGroup(
             tabMarchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         tabMarchLayout.setVerticalGroup(
             tabMarchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1614,7 +1638,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabApril.setBackground(new java.awt.Color(255, 255, 255));
 
         tblAprBatting.setBackground(new java.awt.Color(255, 255, 255));
-        tblAprBatting.setForeground(new java.awt.Color(153, 153, 153));
+        tblAprBatting.setForeground(new java.awt.Color(102, 102, 102));
         tblAprBatting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -1650,10 +1674,19 @@ public class TeacherScreen1 extends javax.swing.JFrame
             }
         });
         tblAprBatting.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblAprBatting.setAutoscrolls(false);
         tblAprBatting.setGridColor(new java.awt.Color(102, 102, 102));
         tblAprBatting.setRowHeight(110);
         tblAprBatting.setRowSelectionAllowed(false);
         tblAprBatting.getTableHeader().setReorderingAllowed(false);
+        tblAprBatting.getTableHeader().setBackground(findBatter_HeaderPanel.getBackground());
+        tblAprBatting.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblAprBattingMouseReleased(evt);
+            }
+        });
         jScrollPane8.setViewportView(tblAprBatting);
         if (tblAprBatting.getColumnModel().getColumnCount() > 0)
         {
@@ -1666,7 +1699,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabApril.setLayout(tabAprilLayout);
         tabAprilLayout.setHorizontalGroup(
             tabAprilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         tabAprilLayout.setVerticalGroup(
             tabAprilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1678,7 +1711,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabMay.setBackground(new java.awt.Color(255, 255, 255));
 
         tblMayBatting.setBackground(new java.awt.Color(255, 255, 255));
-        tblMayBatting.setForeground(new java.awt.Color(153, 153, 153));
+        tblMayBatting.setForeground(new java.awt.Color(102, 102, 102));
         tblMayBatting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -1718,6 +1751,14 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblMayBatting.setRowHeight(110);
         tblMayBatting.setRowSelectionAllowed(false);
         tblMayBatting.getTableHeader().setReorderingAllowed(false);
+        tblMayBatting.getTableHeader().setBackground(findBatter_HeaderPanel.getBackground());
+        tblMayBatting.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblMayBattingMouseReleased(evt);
+            }
+        });
         jScrollPane14.setViewportView(tblMayBatting);
         if (tblMayBatting.getColumnModel().getColumnCount() > 0)
         {
@@ -1730,7 +1771,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabMay.setLayout(tabMayLayout);
         tabMayLayout.setHorizontalGroup(
             tabMayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         tabMayLayout.setVerticalGroup(
             tabMayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1742,7 +1783,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabJune.setBackground(new java.awt.Color(255, 255, 255));
 
         tblJunBatting.setBackground(new java.awt.Color(255, 255, 255));
-        tblJunBatting.setForeground(new java.awt.Color(153, 153, 153));
+        tblJunBatting.setForeground(new java.awt.Color(102, 102, 102));
         tblJunBatting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -1782,6 +1823,14 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblJunBatting.setRowHeight(110);
         tblJunBatting.setRowSelectionAllowed(false);
         tblJunBatting.getTableHeader().setReorderingAllowed(false);
+        tblJunBatting.getTableHeader().setBackground(findBatter_HeaderPanel.getBackground());
+        tblJunBatting.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblJunBattingMouseReleased(evt);
+            }
+        });
         jScrollPane13.setViewportView(tblJunBatting);
         if (tblJunBatting.getColumnModel().getColumnCount() > 0)
         {
@@ -1794,7 +1843,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabJune.setLayout(tabJuneLayout);
         tabJuneLayout.setHorizontalGroup(
             tabJuneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         tabJuneLayout.setVerticalGroup(
             tabJuneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1806,7 +1855,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabJuly.setBackground(new java.awt.Color(255, 255, 255));
 
         tblJulBatting.setBackground(new java.awt.Color(255, 255, 255));
-        tblJulBatting.setForeground(new java.awt.Color(153, 153, 153));
+        tblJulBatting.setForeground(new java.awt.Color(102, 102, 102));
         tblJulBatting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -1846,6 +1895,14 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblJulBatting.setRowHeight(110);
         tblJulBatting.setRowSelectionAllowed(false);
         tblJulBatting.getTableHeader().setReorderingAllowed(false);
+        tblJulBatting.getTableHeader().setBackground(findBatter_HeaderPanel.getBackground());
+        tblJulBatting.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblJulBattingMouseReleased(evt);
+            }
+        });
         jScrollPane12.setViewportView(tblJulBatting);
         if (tblJulBatting.getColumnModel().getColumnCount() > 0)
         {
@@ -1858,7 +1915,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabJuly.setLayout(tabJulyLayout);
         tabJulyLayout.setHorizontalGroup(
             tabJulyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         tabJulyLayout.setVerticalGroup(
             tabJulyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1870,7 +1927,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabAugust.setBackground(new java.awt.Color(255, 255, 255));
 
         tblAugBatting.setBackground(new java.awt.Color(255, 255, 255));
-        tblAugBatting.setForeground(new java.awt.Color(153, 153, 153));
+        tblAugBatting.setForeground(new java.awt.Color(102, 102, 102));
         tblAugBatting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -1905,11 +1962,22 @@ public class TeacherScreen1 extends javax.swing.JFrame
                 return canEdit [columnIndex];
             }
         });
+        tblAugBatting.setToolTipText("");
         tblAugBatting.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblAugBatting.setCellSelectionEnabled(true);
         tblAugBatting.setGridColor(new java.awt.Color(102, 102, 102));
         tblAugBatting.setRowHeight(110);
-        tblAugBatting.setRowSelectionAllowed(false);
+        tblAugBatting.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblAugBatting.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblAugBatting.getTableHeader().setReorderingAllowed(false);
+        tblAugBatting.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblAugBattingMouseReleased(evt);
+            }
+        });
+        tblAugBatting.getTableHeader().setBackground(findBatter_HeaderPanel.getBackground());
         jScrollPane15.setViewportView(tblAugBatting);
         if (tblAugBatting.getColumnModel().getColumnCount() > 0)
         {
@@ -1922,7 +1990,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabAugust.setLayout(tabAugustLayout);
         tabAugustLayout.setHorizontalGroup(
             tabAugustLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         tabAugustLayout.setVerticalGroup(
             tabAugustLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1934,7 +2002,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabSeptember.setBackground(new java.awt.Color(255, 255, 255));
 
         tblSepBatting.setBackground(new java.awt.Color(255, 255, 255));
-        tblSepBatting.setForeground(new java.awt.Color(153, 153, 153));
+        tblSepBatting.setForeground(new java.awt.Color(102, 102, 102));
         tblSepBatting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -1974,6 +2042,13 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblSepBatting.setRowHeight(110);
         tblSepBatting.setRowSelectionAllowed(false);
         tblSepBatting.getTableHeader().setReorderingAllowed(false);
+        tblSepBatting.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblSepBattingMouseReleased(evt);
+            }
+        });
         jScrollPane16.setViewportView(tblSepBatting);
         if (tblSepBatting.getColumnModel().getColumnCount() > 0)
         {
@@ -1986,7 +2061,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabSeptember.setLayout(tabSeptemberLayout);
         tabSeptemberLayout.setHorizontalGroup(
             tabSeptemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         tabSeptemberLayout.setVerticalGroup(
             tabSeptemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1998,7 +2073,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabOctober.setBackground(new java.awt.Color(255, 255, 255));
 
         tblOctBatting.setBackground(new java.awt.Color(255, 255, 255));
-        tblOctBatting.setForeground(new java.awt.Color(153, 153, 153));
+        tblOctBatting.setForeground(new java.awt.Color(102, 102, 102));
         tblOctBatting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -2038,6 +2113,13 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblOctBatting.setRowHeight(110);
         tblOctBatting.setRowSelectionAllowed(false);
         tblOctBatting.getTableHeader().setReorderingAllowed(false);
+        tblOctBatting.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblOctBattingMouseReleased(evt);
+            }
+        });
         jScrollPane17.setViewportView(tblOctBatting);
         if (tblOctBatting.getColumnModel().getColumnCount() > 0)
         {
@@ -2050,7 +2132,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabOctober.setLayout(tabOctoberLayout);
         tabOctoberLayout.setHorizontalGroup(
             tabOctoberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         tabOctoberLayout.setVerticalGroup(
             tabOctoberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2062,7 +2144,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabNovember.setBackground(new java.awt.Color(255, 255, 255));
 
         tblNovBatting.setBackground(new java.awt.Color(255, 255, 255));
-        tblNovBatting.setForeground(new java.awt.Color(153, 153, 153));
+        tblNovBatting.setForeground(new java.awt.Color(102, 102, 102));
         tblNovBatting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -2102,6 +2184,13 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblNovBatting.setRowHeight(110);
         tblNovBatting.setRowSelectionAllowed(false);
         tblNovBatting.getTableHeader().setReorderingAllowed(false);
+        tblNovBatting.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblNovBattingMouseReleased(evt);
+            }
+        });
         jScrollPane18.setViewportView(tblNovBatting);
         if (tblNovBatting.getColumnModel().getColumnCount() > 0)
         {
@@ -2114,7 +2203,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabNovember.setLayout(tabNovemberLayout);
         tabNovemberLayout.setHorizontalGroup(
             tabNovemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         tabNovemberLayout.setVerticalGroup(
             tabNovemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2126,7 +2215,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabDecember.setBackground(new java.awt.Color(255, 255, 255));
 
         tblDecBatting.setBackground(new java.awt.Color(255, 255, 255));
-        tblDecBatting.setForeground(new java.awt.Color(153, 153, 153));
+        tblDecBatting.setForeground(new java.awt.Color(102, 102, 102));
         tblDecBatting.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -2166,6 +2255,13 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tblDecBatting.setRowHeight(110);
         tblDecBatting.setRowSelectionAllowed(false);
         tblDecBatting.getTableHeader().setReorderingAllowed(false);
+        tblDecBatting.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblDecBattingMouseReleased(evt);
+            }
+        });
         jScrollPane19.setViewportView(tblDecBatting);
         if (tblDecBatting.getColumnModel().getColumnCount() > 0)
         {
@@ -2178,7 +2274,7 @@ public class TeacherScreen1 extends javax.swing.JFrame
         tabDecember.setLayout(tabDecemberLayout);
         tabDecemberLayout.setHorizontalGroup(
             tabDecemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         tabDecemberLayout.setVerticalGroup(
             tabDecemberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2195,7 +2291,9 @@ public class TeacherScreen1 extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, findBatter_PanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(lessonInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(outputCalendarTabbedPane)
                 .addContainerGap())
         );
@@ -2203,11 +2301,16 @@ public class TeacherScreen1 extends javax.swing.JFrame
             findBatter_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(findBatter_PanelLayout.createSequentialGroup()
                 .addComponent(findBatter_HeaderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(findBatter_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lessonInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(outputCalendarTabbedPane))
-                .addGap(29, 29, 29))
+                .addGroup(findBatter_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(findBatter_PanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(findBatter_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lessonInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(outputCalendarTabbedPane)))
+                    .addGroup(findBatter_PanelLayout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jTabbedPane.addTab("Find Batting Teacher", findBatter_Panel);
@@ -2223,6 +2326,7 @@ arrowButton.setBackground(Color.white);
         teacherExtraMuralsSpinner.setOpaque(true);
 
         addTeacherNameField.setBackground(ManageTeachers_Panel.getBackground());
+        addTeacherNameField.setForeground(new java.awt.Color(102, 102, 102));
         addTeacherNameField.setText("e.g Jeanett Maria Jacobs");
         addTeacherNameField.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(25, 115, 230), 1, true), "Teacher Full Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(25, 115, 230))); // NOI18N
         addTeacherNameField.addKeyListener(new java.awt.event.KeyAdapter()
@@ -2234,6 +2338,7 @@ arrowButton.setBackground(Color.white);
         });
 
         registerClass_Field.setBackground(getBackground());
+        registerClass_Field.setForeground(new java.awt.Color(102, 102, 102));
         registerClass_Field.setText("True/False");
         registerClass_Field.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(25, 115, 230)), "Has Register Class", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), chooseTeacherButton.getBackground())); // NOI18N
         registerClass_Field.addActionListener(new java.awt.event.ActionListener()
@@ -2252,7 +2357,7 @@ arrowButton.setBackground(Color.white);
         });
 
         batWeightOutputField2.setBackground(getBackground());
-        batWeightOutputField2.setForeground(new java.awt.Color(153, 153, 153));
+        batWeightOutputField2.setForeground(new java.awt.Color(102, 102, 102));
         batWeightOutputField2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(25, 115, 230), 1, true), "Batting Weight", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(25, 117, 229))); // NOI18N
 
         addTeacherHeaderPanel.setBackground(findBatter_HeaderPanel.getBackground());
@@ -2480,11 +2585,10 @@ arrowButton.setBackground(Color.white);
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setBattingMonthCalendar(Month m, JTable jtbl)
+    private void setBasicCalendar(Month m, JTable jtbl)
     {
-
         LocalDate monthD = LocalDate.of(LocalDate.now().getYear(), m, 1);
-          String [][] month = new String[Math.ceilDiv(monthD.lengthOfMonth(), 7)+1][7];
+        String[][] month = new String[Math.ceilDiv(monthD.lengthOfMonth(), 7) + 1][7];
 
         int day = 1;
         for (int i = 0; i < month.length; i++)
@@ -2508,7 +2612,41 @@ arrowButton.setBackground(Color.white);
         };
         jtbl.setModel(new DefaultTableModel(month, colNames));
     }
-    
+
+    private void setBattingMonthCalendar(Month m, JTable jtbl)
+    {
+        setBasicCalendar(m, jtbl);
+        String [][] data = getBaseCalendarArr(jtbl);
+        DefaultTableModel dm;
+        try
+        {
+            dm = (DefaultTableModel) bm.getMonthBattingModel(jtbl, m, data);
+            jtbl.setModel(dm);
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        //set the visuals
+        jtbl.setDefaultRenderer(String.class, new MultiLineTableCellRenderer());
+        jtbl.getTableHeader().setUI(new FlatTableHeaderUI());
+        jtbl.getTableHeader().setBackground(findBatter_HeaderPanel.getBackground());
+    }
+
+    private String[][] getBaseCalendarArr(JTable jtbl)
+    {
+        String[][] outputCalendarArr = new String[jtbl.getRowCount()][jtbl.getColumnCount()];
+
+        for (int row = 0; row < outputCalendarArr.length; row++)
+        {
+            for (int col = 0; col < outputCalendarArr[row].length; col++)
+            {
+                outputCalendarArr[row][col] = (String) jtbl.getValueAt(row, col);
+            }
+        }
+
+        return outputCalendarArr;
+    }
+
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButton1MouseClicked
     {//GEN-HEADEREND:event_jButton1MouseClicked
         // TODO add your handling code here:
@@ -2533,9 +2671,9 @@ arrowButton.setBackground(Color.white);
     private void registerClass_FieldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_registerClass_FieldActionPerformed
     {//GEN-HEADEREND:event_registerClass_FieldActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_registerClass_FieldActionPerformed
-    
+
     private double getBattingWeight()
     {
         return selectedTeacher.getBattingWeight();
@@ -2544,20 +2682,21 @@ arrowButton.setBackground(Color.white);
     private void addTimeTableTblMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_addTimeTableTblMouseClicked
     {//GEN-HEADEREND:event_addTimeTableTblMouseClicked
         // TODO add your handling code here:
-        int selectedRow= addTimeTableTbl.getSelectedRow();
+        int selectedRow = addTimeTableTbl.getSelectedRow();
         int selectedCollumn = addTimeTableTbl.getSelectedColumn();
-        
-        Cell selectedC = new Cell(selectedRow, selectedCollumn-1);
-        
-        addTeacher_tableSelection [selectedRow][selectedCollumn-1] = !addTeacher_tableSelection [selectedRow][selectedCollumn-1];
+
+        Cell selectedC = new Cell(selectedRow, selectedCollumn - 1);
+
+        addTeacher_tableSelection[selectedRow][selectedCollumn - 1] = !addTeacher_tableSelection[selectedRow][selectedCollumn - 1];
         if (addTimeTableTbl.getValueAt(selectedRow, selectedCollumn) == null)
         {
             add_selectedCells.add(selectedC);
             addTimeTableTbl.setValueAt("X", selectedRow, selectedCollumn);
-        }else {
+        } else
+        {
             addTimeTableTbl.setValueAt(null, selectedRow, selectedCollumn);
         }
- //<editor-fold defaultstate="collapsed" desc=" Doesn't work fold "> 
+        //<editor-fold defaultstate="collapsed" desc=" Doesn't work fold "> 
 /*  v  doesn't work folder  v
         //        addTimeTableTbl.setSelectionMode(1);
 //        int collumn = addTimeTableTbl.getSelectedColumn();
@@ -2591,7 +2730,7 @@ arrowButton.setBackground(Color.white);
                             }
             );
        }
-        */
+         */
 //</editor-fold>
     }//GEN-LAST:event_addTimeTableTblMouseClicked
 
@@ -2601,18 +2740,18 @@ arrowButton.setBackground(Color.white);
         Teacher t;
         try
         {
-            teacherComboBox.setModel(new DefaultComboBoxModel<> (tm.getTeacherNames()));
+            teacherComboBox.setModel(new DefaultComboBoxModel<>(tm.getTeacherNames()));
 
             /*update all the fields to match that of the teacher*/
             setViewValues();
 
             TimeTable newTT = new TimeTable(addTeacher_tableSelection);
             fullName = addTeacherNameField.getText();
-            
+
             tm.addTeacher(fullName,
-                    selectedTeacher.getNumFrees(), 
+                    selectedTeacher.getNumFrees(),
                     registerClass_Field.getText().equalsIgnoreCase("true"),
-                    (int)teacherExtraMuralsSpinner.getValue(),
+                    (int) teacherExtraMuralsSpinner.getValue(),
                     newTT);
         } catch (SQLException ex)
         {
@@ -2625,7 +2764,7 @@ arrowButton.setBackground(Color.white);
     private void addTeacherNameFieldKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_addTeacherNameFieldKeyTyped
     {//GEN-HEADEREND:event_addTeacherNameFieldKeyTyped
         // TODO add your handling code here:
-        if( (addTeacherNameField.getText() != null || !addTeacherNameField.getText().equals("e.g Jeanett") ) && (registerClass_Field.getText() != null)) 
+        if ((addTeacherNameField.getText() != null || !addTeacherNameField.getText().equals("e.g Jeanett")) && (registerClass_Field.getText() != null))
         {
             batWeightOutputField2.setText(
                     "" + getBattingWeight()
@@ -2636,27 +2775,28 @@ arrowButton.setBackground(Color.white);
     private void registerClass_FieldKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_registerClass_FieldKeyTyped
     {//GEN-HEADEREND:event_registerClass_FieldKeyTyped
         // TODO add your handling code here:
-        if( registerClass_Field.getText() != null && (registerClass_Field.getText().equalsIgnoreCase("True") || registerClass_Field.getText().equalsIgnoreCase("False"))) 
+        if (registerClass_Field.getText() != null && (registerClass_Field.getText().equalsIgnoreCase("True") || registerClass_Field.getText().equalsIgnoreCase("False")))
         {
-            batWeightOutputField2.setText( "" + getBattingWeight() );
+            batWeightOutputField2.setText("" + getBattingWeight());
         }
     }//GEN-LAST:event_registerClass_FieldKeyTyped
 
     private void tblViewTimeTableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblViewTimeTableMouseClicked
     {//GEN-HEADEREND:event_tblViewTimeTableMouseClicked
         // TODO add your handling code here:
-        if(tblViewTimeTable.isEnabled())
+        if (tblViewTimeTable.isEnabled())
         {
-                int row = tblViewTimeTable.getSelectedRow(), col = tblViewTimeTable.getSelectedColumn();
+            int row = tblViewTimeTable.getSelectedRow(), col = tblViewTimeTable.getSelectedColumn();
 
-            Cell selectedC = new Cell(row, col-1);
+            Cell selectedC = new Cell(row, col - 1);
 
-            changeTeacher_tableSelection [row][col-1] = !changeTeacher_tableSelection [row][col-1];
+            changeTeacher_tableSelection[row][col - 1] = !changeTeacher_tableSelection[row][col - 1];
             if (tblViewTimeTable.getValueAt(row, col) == null)
             {
                 change_selectedCells.add(selectedC);
                 tblViewTimeTable.setValueAt("X", row, col);
-            }else {
+            } else
+            {
                 tblViewTimeTable.setValueAt("", row, col);
             }
         }
@@ -2666,11 +2806,11 @@ arrowButton.setBackground(Color.white);
         // TODO add your handling code here:
         try
         {
-                teacherComboBox.setModel(new DefaultComboBoxModel<> (tm.getTeacherNames()));
-                
-                /*update all the fields to match that of the teacher*/
-                setViewValues();
-        } catch(java.sql.SQLException e)
+            teacherComboBox.setModel(new DefaultComboBoxModel<>(tm.getTeacherNames()));
+
+            /*update all the fields to match that of the teacher*/
+            setViewValues();
+        } catch (java.sql.SQLException e)
         {
             e.printStackTrace();
         }
@@ -2691,9 +2831,9 @@ arrowButton.setBackground(Color.white);
             selectedTeacher.setHasRegisterClass(registerClassOutput_Field.getText().equalsIgnoreCase("true"));
             tm.updateTeacher(selectedTeacher, viewOriginalName);
             selectedTeacher.setNumFrees(selectedTeacher.getNumFrees());
-            
+
             editableButton.doClick();
-        }catch(java.sql.SQLException e)
+        } catch (java.sql.SQLException e)
         {
             e.printStackTrace();
         }
@@ -2701,83 +2841,73 @@ arrowButton.setBackground(Color.white);
 
     private void tblBatWeekMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblBatWeekMousePressed
     {//GEN-HEADEREND:event_tblBatWeekMousePressed
-        
+
     }//GEN-LAST:event_tblBatWeekMousePressed
 
     private void lessonInputTableMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_lessonInputTableMousePressed
     {//GEN-HEADEREND:event_lessonInputTableMousePressed
-        
+
     }//GEN-LAST:event_lessonInputTableMousePressed
 
     private void findTeacherButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_findTeacherButtonActionPerformed
     {//GEN-HEADEREND:event_findTeacherButtonActionPerformed
-        //get which table has the focus, then what row was selected in that month, return both
-        for (Component c : tblBatWeek.getComponents())
-        {
-            if(c instanceof JTable)
-            {
-                JTable tbl = (JTable) c;
-                if (tbl.isFocusOwner())
-                {
-                    battingWeek = tbl.getSelectedRow()+1;
-                    String monthString = tbl.getName();
-                    battingMonth = monthString.contains("Jan")? 1 : 
-                            monthString.contains("Feb")? 2: 
-                            monthString.contains("Mar")? 3: 
-                            monthString.contains("Apr")? 4: 
-                            monthString.contains("May")? 5: 
-                            monthString.contains("Jun")? 6: 
-                            monthString.contains("Jul")? 7: 
-                            monthString.contains("Aug")? 8: 
-                            monthString.contains("Sept")? 9: 
-                            monthString.contains("Oct")? 10: 
-                            monthString.contains("Nov")? 11:
-                            12;
-                }
-            }
-        }
-        //for current time
-        battingWeek = 2;
-        battingMonth = 1;
         //return the lesson and day of week selected
         battingLesson = lessonInputTable.getSelectedColumn();
-        battingDayOfWeek = lessonInputTable.getSelectedRow() + 1;
-        battingDayOfMonth = 7*battingWeek + battingDayOfWeek;
-        try
+        String dayOfWeekStr = (String) lessonInputTable.getValueAt(lessonInputTable.getSelectedRow(), 0);
+        battingDayOfWeek = (dayOfWeekStr.equals("Monday"))? 1: (dayOfWeekStr.equals("Tuesday"))? 2: (dayOfWeekStr.equals("Wednesday"))? 3: (dayOfWeekStr.equals("Thursday"))? 4: (dayOfWeekStr.equals("Friday"))? 5: (dayOfWeekStr.equals("Saturday"))? 6: 7;
+        
+        if (insertedValuesValid())
         {
-            //call the getTeachers from battingManager, output to the text area
-            ArrayList <Teacher> viableTeachers = bm.getBattingTeachers(battingLesson, battingDayOfWeek, battingDayOfMonth, battingMonth);
-            
-            //clear textField
-            outputTeacherList.removeAll();
-            
-            //add into textArea
-            String[] namesArr = new String [ viableTeachers.size() ];
-            int i = 0;
-            for (Teacher t : viableTeachers)
+            // get the day of week's int value, that is your column value and week value as stated above
+            battingWeek = focusedBattingWeeksCalendar.getSelectedRow() +1;
+            battingDayOfMonth = Integer.parseInt((String)focusedBattingWeeksCalendar.getValueAt(battingWeek-1, battingDayOfWeek -1));
+            try
             {
-                namesArr[i] = t.getFullName();
-                i++;
+                //call the getTeachers from battingManager, output to the text area
+                ArrayList<Teacher> viableTeachers = bm.getBattingTeachers(battingLesson, battingDayOfWeek, battingDayOfMonth, battingMonth, year);
+
+                //clear textField
+                outputTeacherList.removeAll();
+
+                //add into textArea
+                String[] namesArr = new String[viableTeachers.size()];
+                int i = 0;
+                for (Teacher t : viableTeachers)
+                {
+                    namesArr[i] = t.getFullName();
+                    i++;
+                }
+                outputTeacherList.setListData(namesArr);
+            } catch (SQLException ex)
+            {
+                ex.printStackTrace();
             }
-            outputTeacherList.setListData(namesArr);
-        } catch (SQLException ex)
+        } else
         {
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(findTeacherButton, "Please Select a cell with a value in it");
         }
     }//GEN-LAST:event_findTeacherButtonActionPerformed
 
+    private boolean insertedValuesValid()
+    {
+        return (focusedBattingWeeksCalendar.getSelectedRow() == -1 || lessonInputTable.getValueAt(lessonInputTable.getSelectedRow(), lessonInputTable.getSelectedColumn()) == null);
+    }
+    
     private void chooseTeacherButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_chooseTeacherButtonActionPerformed
     {//GEN-HEADEREND:event_chooseTeacherButtonActionPerformed
         // TODO add your handling code here:
         String battingName = outputTeacherList.getSelectedValue();
-        addBatting(battingMonth, battingWeek, battingDayOfWeek, battingLesson, battingName);
+        addBatting(battingMonth, battingWeek, battingDayOfWeek, battingDayOfMonth, battingLesson, battingName);
     }//GEN-LAST:event_chooseTeacherButtonActionPerformed
 
     private void deleteTeacherButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteTeacherButtonActionPerformed
     {//GEN-HEADEREND:event_deleteTeacherButtonActionPerformed
         try
         {
-            tm.deleteTeacher(selectedTeacher.getFullName());
+            if( JOptionPane.showConfirmDialog(null, "Are you sure you want to delete "+ selectedTeacher.getFullName() +" forever?\nNOTE: This cannot be undone/reversed.") == 0)
+            {
+                tm.deleteTeacher(selectedTeacher.getFullName());
+            }
         } catch (SQLException ex)
         {
             ex.printStackTrace();
@@ -2788,6 +2918,8 @@ arrowButton.setBackground(Color.white);
     {//GEN-HEADEREND:event_tblJanWeeksMouseReleased
         //in the selected row, cycle throw the days to see which days are in the week of this month
         focusedBattingWeeksCalendar = tblJanWeeks;
+        focusedDisplayBattingsCalendar = tblJanBatting;
+        battingMonth = 1;
         setLessonInputTableData(tblJanWeeks);
     }//GEN-LAST:event_tblJanWeeksMouseReleased
 
@@ -2795,205 +2927,312 @@ arrowButton.setBackground(Color.white);
     {//GEN-HEADEREND:event_tblFebWeeksMouseReleased
         // TODO add your handling code here:
         focusedBattingWeeksCalendar = tblFebWeeks;
-                setLessonInputTableData(tblFebWeeks);
+        focusedDisplayBattingsCalendar = tblFebBatting;
+        battingMonth = 2;
+        setLessonInputTableData(tblFebWeeks);
     }//GEN-LAST:event_tblFebWeeksMouseReleased
 
     private void tblMarchWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblMarchWeeksMouseReleased
     {//GEN-HEADEREND:event_tblMarchWeeksMouseReleased
         // TODO add your handling code here:
-                setLessonInputTableData(tblMarchWeeks);
-                focusedBattingWeeksCalendar = tblMarchWeeks;
+        setLessonInputTableData(tblMarchWeeks);
+        battingMonth = 3;
+        focusedBattingWeeksCalendar = tblMarchWeeks;
+        focusedDisplayBattingsCalendar = tblMarBatting;
     }//GEN-LAST:event_tblMarchWeeksMouseReleased
 
     private void tblAprilWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblAprilWeeksMouseReleased
     {//GEN-HEADEREND:event_tblAprilWeeksMouseReleased
         // TODO add your handling code here:
-       focusedBattingWeeksCalendar = tblAprilWeeks;
-                setLessonInputTableData(tblAprilWeeks);
+        focusedBattingWeeksCalendar = tblAprilWeeks;
+        focusedDisplayBattingsCalendar = tblAprBatting;
+        battingMonth = 4;
+        setLessonInputTableData(tblAprilWeeks);
     }//GEN-LAST:event_tblAprilWeeksMouseReleased
 
     private void tblMayWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblMayWeeksMouseReleased
     {//GEN-HEADEREND:event_tblMayWeeksMouseReleased
         // TODO add your handling code here:
         focusedBattingWeeksCalendar = tblMayWeeks;
-                setLessonInputTableData(tblMayWeeks);
+        focusedDisplayBattingsCalendar = tblMayBatting;
+        battingMonth = 5;
+        setLessonInputTableData(tblMayWeeks);
     }//GEN-LAST:event_tblMayWeeksMouseReleased
 
     private void tblJuneWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblJuneWeeksMouseReleased
     {//GEN-HEADEREND:event_tblJuneWeeksMouseReleased
         // TODO add your handling code here:
         focusedBattingWeeksCalendar = tblJuneWeeks;
-                setLessonInputTableData(tblJuneWeeks);
+        focusedDisplayBattingsCalendar = tblJunBatting;
+        battingMonth = 6;
+        setLessonInputTableData(tblJuneWeeks);
     }//GEN-LAST:event_tblJuneWeeksMouseReleased
 
     private void tblJulyWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblJulyWeeksMouseReleased
     {//GEN-HEADEREND:event_tblJulyWeeksMouseReleased
         // TODO add your handling code here:
         focusedBattingWeeksCalendar = tblJulyWeeks;
-                setLessonInputTableData(tblJulyWeeks);
+        focusedDisplayBattingsCalendar = tblJunBatting;
+        battingMonth = 7;
+        setLessonInputTableData(tblJulyWeeks);
     }//GEN-LAST:event_tblJulyWeeksMouseReleased
 
     private void tblAugWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblAugWeeksMouseReleased
     {//GEN-HEADEREND:event_tblAugWeeksMouseReleased
         // TODO add your handling code here:
         focusedBattingWeeksCalendar = tblAugWeeks;
-                setLessonInputTableData(tblAugWeeks);
+        focusedDisplayBattingsCalendar = tblAugBatting;
+        battingMonth = 8;
+        setLessonInputTableData(tblAugWeeks);
     }//GEN-LAST:event_tblAugWeeksMouseReleased
 
     private void tblSeptWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblSeptWeeksMouseReleased
     {//GEN-HEADEREND:event_tblSeptWeeksMouseReleased
         // TODO add your handling code here:
         focusedBattingWeeksCalendar = tblSeptWeeks;
-                setLessonInputTableData(tblSeptWeeks);
+        focusedDisplayBattingsCalendar = tblSepBatting;
+        battingMonth = 9;
+        setLessonInputTableData(tblSeptWeeks);
     }//GEN-LAST:event_tblSeptWeeksMouseReleased
 
     private void tblOctWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblOctWeeksMouseReleased
     {//GEN-HEADEREND:event_tblOctWeeksMouseReleased
         // TODO add your handling code here:
         focusedBattingWeeksCalendar = tblOctWeeks;
-                setLessonInputTableData(tblOctWeeks);
+        focusedDisplayBattingsCalendar = tblOctBatting;
+        battingMonth = 10;
+        setLessonInputTableData(tblOctWeeks);
     }//GEN-LAST:event_tblOctWeeksMouseReleased
 
     private void tblNovWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblNovWeeksMouseReleased
     {//GEN-HEADEREND:event_tblNovWeeksMouseReleased
         // TODO add your handling code here:
         focusedBattingWeeksCalendar = tblNovWeeks;
-                setLessonInputTableData(tblNovWeeks);
+        focusedDisplayBattingsCalendar = tblNovBatting;
+        battingMonth = 11;
+        setLessonInputTableData(tblNovWeeks);
     }//GEN-LAST:event_tblNovWeeksMouseReleased
 
     private void tblDecWeeksMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblDecWeeksMouseReleased
     {//GEN-HEADEREND:event_tblDecWeeksMouseReleased
         // TODO add your handling code here:
         focusedBattingWeeksCalendar = tblDecWeeks;
-                setLessonInputTableData(tblDecWeeks);
+        focusedDisplayBattingsCalendar = tblDecBatting;
+        battingMonth = 12;
+        setLessonInputTableData(tblDecWeeks);
     }//GEN-LAST:event_tblDecWeeksMouseReleased
+
+    private void editBatting()
+    {
+        try
+        {
+            //get the teachers that do batting on the day and their lessons, save appropriately and get the changed values
+            String dayStr = ((String) focusedDisplayBattingsCalendar.getValueAt(focusedDisplayBattingsCalendar.getSelectedRow(), focusedDisplayBattingsCalendar.getSelectedColumn()) );
+            dayStr = dayStr.substring(0, dayStr.indexOf("\n"));
+            int dayOfMonth = Integer.parseInt(dayStr);
+            ArrayList dayBattingLessons = bm.getBattingForDay(dayOfMonth, battingMonth);
+            new EditBattingsFrame(dayBattingLessons).setVisible(true);
+            
+            setBattingMonthCalendar(Month.of(battingMonth), focusedDisplayBattingsCalendar);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(TeacherScreen1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void tblJanBattingMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblJanBattingMouseReleased
+    {//GEN-HEADEREND:event_tblJanBattingMouseReleased
+        // TODO add your handling code here:
+        battingMonth = 1;
+        focusedDisplayBattingsCalendar = tblJanBatting;
+        editBatting();
+    }//GEN-LAST:event_tblJanBattingMouseReleased
+
+    private void tblFebBattingMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblFebBattingMouseReleased
+    {//GEN-HEADEREND:event_tblFebBattingMouseReleased
+        // TODO add your handling code here:
+        battingMonth = 2;
+        focusedDisplayBattingsCalendar = tblFebBatting;
+        editBatting();
+    }//GEN-LAST:event_tblFebBattingMouseReleased
+
+    private void tblMarBattingMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblMarBattingMouseReleased
+    {//GEN-HEADEREND:event_tblMarBattingMouseReleased
+        // TODO add your handling code here:
+        battingMonth = 3;
+        focusedDisplayBattingsCalendar = tblMarBatting;
+    }//GEN-LAST:event_tblMarBattingMouseReleased
+
+    private void tblAprBattingMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblAprBattingMouseReleased
+    {//GEN-HEADEREND:event_tblAprBattingMouseReleased
+        // TODO add your handling code here:
+        battingMonth = 4;
+        focusedDisplayBattingsCalendar = tblAprBatting;
+        editBatting();
+    }//GEN-LAST:event_tblAprBattingMouseReleased
+
+    private void tblMayBattingMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblMayBattingMouseReleased
+    {//GEN-HEADEREND:event_tblMayBattingMouseReleased
+        // TODO add your handling code here:
+        battingMonth = 5;
+        focusedDisplayBattingsCalendar = tblMayBatting;
+        editBatting();
+    }//GEN-LAST:event_tblMayBattingMouseReleased
+
+    private void tblJunBattingMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblJunBattingMouseReleased
+    {//GEN-HEADEREND:event_tblJunBattingMouseReleased
+        // TODO add your handling code here:
+        battingMonth = 6;
+        focusedDisplayBattingsCalendar = tblJunBatting;
+        editBatting();
+    }//GEN-LAST:event_tblJunBattingMouseReleased
+
+    private void tblJulBattingMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblJulBattingMouseReleased
+    {//GEN-HEADEREND:event_tblJulBattingMouseReleased
+        // TODO add your handling code here:
+        battingMonth = 7;
+        focusedDisplayBattingsCalendar = tblJulBatting;
+        editBatting();
+    }//GEN-LAST:event_tblJulBattingMouseReleased
+
+    private void tblAugBattingMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblAugBattingMouseReleased
+    {//GEN-HEADEREND:event_tblAugBattingMouseReleased
+        // TODO add your handling code here:
+        battingMonth = 8;
+        focusedDisplayBattingsCalendar = tblAugBatting;
+        editBatting();
+    }//GEN-LAST:event_tblAugBattingMouseReleased
+
+    private void tblSepBattingMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblSepBattingMouseReleased
+    {//GEN-HEADEREND:event_tblSepBattingMouseReleased
+        // TODO add your handling code here:
+        battingMonth = 9;
+        focusedDisplayBattingsCalendar = tblSepBatting;
+        editBatting();
+    }//GEN-LAST:event_tblSepBattingMouseReleased
+
+    private void tblOctBattingMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblOctBattingMouseReleased
+    {//GEN-HEADEREND:event_tblOctBattingMouseReleased
+        // TODO add your handling code here:
+        battingMonth = 10;
+        focusedDisplayBattingsCalendar = tblJanBatting;
+        editBatting();
+    }//GEN-LAST:event_tblOctBattingMouseReleased
+
+    private void tblNovBattingMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblNovBattingMouseReleased
+    {//GEN-HEADEREND:event_tblNovBattingMouseReleased
+        // TODO add your handling code here:
+        battingMonth = 11;
+        focusedDisplayBattingsCalendar = tblNovBatting;
+        editBatting();
+    }//GEN-LAST:event_tblNovBattingMouseReleased
+
+    private void tblDecBattingMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblDecBattingMouseReleased
+    {//GEN-HEADEREND:event_tblDecBattingMouseReleased
+        // TODO add your handling code here:
+        battingMonth = 12;
+        focusedDisplayBattingsCalendar = tblDecBatting;
+        editBatting();
+    }//GEN-LAST:event_tblDecBattingMouseReleased
     private void setLessonInputTableData(JTable tbl)
     {
-         battingWeek = tbl.getSelectedRow();
-        ArrayList<String> daysInWeek = new ArrayList<String>();
-        for(int i = 0; i < tbl.getColumnCount(); i++)
+        battingWeek = tbl.getSelectedRow();
+        ArrayList<String> daysInWeek = new ArrayList<>();
+        for (int i = 0; i < tbl.getColumnCount(); i++)
         {
-            if( tbl.getValueAt(battingWeek, i) != null) daysInWeek.add(tbl.getColumnName(i));
+            if (tbl.getValueAt(battingWeek, i) != null)
+            {
+                daysInWeek.add(tbl.getColumnName(i));
+            }
         }
-        
+
         //then make the timetable table from the amount of days there00
         int cycleCount = 0;
-        String [][] data = new String [daysInWeek.size()][15];
-        for(String [] arr1 : data)
+        String[][] data = new String[daysInWeek.size()][15];
+        for (String[] arr1 : data)
         {
             arr1[0] = daysInWeek.get(cycleCount++);
         }
-        
+
         //get the table header 
-        String [] header = new String[15];
-        for(int i = 0; i < header.length; i++)
+        String[] header = new String[15];
+        for (int i = 0; i < header.length; i++)
         {
             header[i] = lessonInputTable.getColumnName(i);
         }
-        
+
         lessonInputTable.setModel(new DefaultTableModel(data, header));
     }
-    
-    private void addBatting(int month, int week, int dayOfWeek, int lesson, String name)
+
+    private void addBatting(int month, int week, int dayOfWeek, int dayOfMonth, int lesson, String name)
     {
         String initials = getInitials(name);
-        String battingDisplayMessage = "L"+ lesson +": "+ initials;
+        String battingDisplayMessage = "L" + lesson + ": " + initials;
         try
         {
-            bm.addBatting(new BattingLesson(name, lesson, dayOfWeek, week, month));
+            BattingLesson bl = new BattingLesson(name, lesson, dayOfMonth, month, year);
+            if(!bm.teacherHasBatting(bl))
+            {
+                bm.addBatting(bl);
+                focusedDisplayBattingsCalendar.setValueAt( focusedDisplayBattingsCalendar.getValueAt(week-1, dayOfWeek-1) +"\n"+ battingDisplayMessage, week-1, dayOfWeek-1);
+            }
+            else JOptionPane.showMessageDialog(chooseTeacherButton, "This Lesson is already occupied by the specified teacher.");
         } catch (SQLException ex)
         {
             ex.printStackTrace();
         }
-        switch(month)
-        {
-            case 1: 
-                tblJanBatting.setValueAt(tblJanBatting.getValueAt(week-1, dayOfWeek-1) +" || "+ battingDisplayMessage, week-1, dayOfWeek-1);
-                break;
-            case 2: 
-                tblFebBatting.setValueAt(tblFebBatting.getValueAt(week-1, dayOfWeek-1) +" || "+ battingDisplayMessage, week-1, dayOfWeek-1);
-                break;
-            case 3: 
-                tblMarBatting.setValueAt(tblMarBatting.getValueAt(week-1, dayOfWeek-1) +" || "+ battingDisplayMessage, week-1, dayOfWeek-1);
-                break;
-            case 4: 
-                tblAprBatting.setValueAt(tblAprBatting.getValueAt(week-1, dayOfWeek-1) +" || "+ battingDisplayMessage, week-1, dayOfWeek-1);
-                break;
-            case 5: 
-                tblMayBatting.setValueAt(tblMayBatting.getValueAt(week-1, dayOfWeek-1) +" || "+ battingDisplayMessage, week-1, dayOfWeek-1);
-                break;
-            case 6: 
-                tblJunBatting.setValueAt(tblJunBatting.getValueAt(week-1, dayOfWeek-1) +" || "+ battingDisplayMessage, week-1, dayOfWeek-1);
-                break;
-            case 7: 
-                tblJulBatting.setValueAt(tblJulBatting.getValueAt(week-1, dayOfWeek-1) +" || "+ battingDisplayMessage, week-1, dayOfWeek-1);
-                break;
-            case 8: 
-                tblAugBatting.setValueAt(tblAugBatting.getValueAt(week-1, dayOfWeek-1) +" || "+ battingDisplayMessage, week-1, dayOfWeek-1);
-                break;
-            case 9: 
-                tblSepBatting.setValueAt(tblSepBatting.getValueAt(week-1, dayOfWeek-1) +" || "+ battingDisplayMessage, week-1, dayOfWeek-1);
-                break;
-            case 10: 
-                tblOctBatting.setValueAt(tblOctBatting.getValueAt(week-1, dayOfWeek-1) +" || "+ battingDisplayMessage, week-1, dayOfWeek-1);
-                break;
-            case 11: 
-                tblNovBatting.setValueAt(tblNovBatting.getValueAt(week-1, dayOfWeek-1) +" || "+ battingDisplayMessage, week-1, dayOfWeek-1);
-                break;
-            case 12: 
-                tblDecBatting.setValueAt(tblDecBatting.getValueAt(week-1, dayOfWeek-1) +" || "+ battingDisplayMessage, week-1, dayOfWeek-1);
-                break;
-            default: JOptionPane.showMessageDialog(null, "Value "+ month +" out of bounds for length 12");
-        }
     }
+
     private String getInitials(String name)
     {
         String initials = "";
-        Scanner namesc =  new Scanner(name);
-        
+        Scanner namesc = new Scanner(name);
+
         while (namesc.hasNext())
         {
-            initials += namesc.next().charAt(0) +".";
+            initials += namesc.next().charAt(0) + ".";
         }
         return initials;
     }
-    private boolean [][] getUpdateTableSelection()
+
+    private boolean[][] getUpdateTableSelection()
     {
-        boolean [][] tempTimetable = new boolean [5][14];
+        boolean[][] tempTimetable = new boolean[5][14];
         int rowCount = tblViewTimeTable.getRowCount();
         int colCount = tblViewTimeTable.getColumnCount();
-        
+
         for (int row = 0; row < rowCount; row++)
         {
 //            boolean [] day = tempTimetable[row];
-            for (int column = 0; column < colCount-1; column ++)
+            for (int column = 0; column < colCount - 1; column++)
             {
-                tempTimetable[row][column] = tblViewTimeTable.getValueAt(row, column+1).equals("X");
+                tempTimetable[row][column] = tblViewTimeTable.getValueAt(row, column + 1).equals("X");
             }
         }
-        return tempTimetable;  
+        return tempTimetable;
     }
-    
+
     public void setViewValues()
     {
         try
         {
             /*update all the fields to match that of the teacher*/
-            selectedTeacher = tm.getTeacher((String)teacherComboBox.getSelectedItem());
+            selectedTeacher = tm.getTeacher((String) teacherComboBox.getSelectedItem());
             viewOriginalName = selectedTeacher.getFullName();
             tblViewTimeTable.setModel(tm.getTimeTableModel(selectedTeacher.getFullName()));
             registerClassOutput_Field.setText("" + selectedTeacher.getHasRegisterClass());
             batWeightField.setText("" + selectedTeacher.getBattingWeight());
             extraMuralsNr_Text.setText("" + selectedTeacher.getExtraMuralHours());
-        } catch(java.sql.SQLException e)
+        } catch (java.sql.SQLException e)
         {
             e.printStackTrace();
         }
     }
+
     /**
      * @param args the command line arguments
      */
-    
+
     public static void main(String args[])
     {
         /* Set the Nimbus look and feel */
@@ -3006,12 +3245,12 @@ arrowButton.setBackground(Color.white);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex)
         {
             java.util.logging.Logger.getLogger(Windows.class.getName()).log(java.util.logging.Level.SEVERE, null, ex); 
-        */
-        
+         */
+
         try
         {
             javax.swing.UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf");
-            
+
         } catch (ClassNotFoundException ex)
         {
             java.util.logging.Logger.getLogger(TeacherScreen1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -3040,15 +3279,15 @@ arrowButton.setBackground(Color.white);
         });
     }
     
-    private JTable focusedBattingWeeksCalendar;
     private int battingLesson, battingWeek, battingMonth, battingDayOfMonth, battingDayOfWeek;
+    private final int year = LocalDate.now().getYear();
     private String viewOriginalName;
     private TeacherManager tm = new TeacherManager();
     private BattingManager bm = new BattingManager();
     private Teacher selectedTeacher;
-    private boolean [][] addTeacher_tableSelection = new boolean[5][14];
-    private boolean [][] changeTeacher_tableSelection = new boolean[5][14];
-    private ArrayList<Cell> add_selectedCells = new ArrayList<>();
+    private boolean[][] addTeacher_tableSelection = new boolean[5][14];
+    private boolean[][] changeTeacher_tableSelection = new boolean[5][14];
+    private ArrayList<Cell> add_selectedCells = new ArrayList<>();  
     private ArrayList<Cell> change_selectedCells = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ManageTeachers_Panel;
@@ -3064,10 +3303,10 @@ arrowButton.setBackground(Color.white);
     private javax.swing.JLabel chooseLessonLAbel1;
     private javax.swing.JButton chooseTeacherButton;
     private javax.swing.JButton confirmEditsButton;
-    private javax.swing.JButton deleteBattingTeacherButton;
     private javax.swing.JButton deleteTeacherButton;
     private javax.swing.JRadioButton editableButton;
     private javax.swing.JTextField extraMuralsNr_Text;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JPanel findBatter_HeaderPanel;
     private javax.swing.JPanel findBatter_Panel;
     private javax.swing.JButton findTeacherButton;
@@ -3175,4 +3414,13 @@ arrowButton.setBackground(Color.white);
     private javax.swing.JPanel weeksOctober;
     private javax.swing.JPanel weeksSeptember;
     // End of variables declaration//GEN-END:variables
+    private JTable focusedBattingWeeksCalendar, focusedDisplayBattingsCalendar = tblJanBatting;
+    private JTable[] battingCalendarArr =
+        {
+            tblJanBatting, tblFebBatting, tblMarBatting, tblAprBatting, tblMayBatting, tblJunBatting, tblJulBatting, tblAugBatting, tblSepBatting, tblOctBatting, tblNovBatting, tblDecBatting
+        };
+    private JTable[] selectBattingMonthArr =
+        {
+            tblJanWeeks, tblFebWeeks, tblMarchWeeks, tblAprilWeeks, tblMayWeeks, tblJuneWeeks, tblJulyWeeks, tblAugWeeks, tblSeptWeeks, tblOctWeeks, tblNovWeeks, tblDecWeeks
+        };
 }

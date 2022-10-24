@@ -5,6 +5,7 @@
 package Backend;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 /**
  *
@@ -12,20 +13,19 @@ import java.time.LocalDate;
  */
 public class BattingLesson
 {
-    private int lesson, dayOfWeek, week, month;
+    int lesson;
+    private LocalDate battingDay;
     private String fullName;
-    public BattingLesson(String fullName, int lesson, int dayOfWeek, int week, int month)
+    public BattingLesson(String fullName, int lesson, int dayOfMonth, int month, int year)
     {
-        this.month = month;
-        this.fullName = fullName;
-        this.week = week;
-        this.dayOfWeek = dayOfWeek;
+        battingDay = LocalDate.of(year, month, dayOfMonth);
         this.lesson = lesson;
+        this.fullName = fullName;
     }
         
     public int getMonth()
     {
-        return month;
+        return battingDay.getMonthValue();
     }
 
     public int getLesson()
@@ -33,17 +33,45 @@ public class BattingLesson
         return lesson;
     }
 
-    public int getDayOfWeek()
+    public void setLesson(int lesson)
     {
-        return dayOfWeek;
+        this.lesson = lesson;
+    }
+
+    public void setBattingDay(int dayOfMonth)
+    {
+        this.battingDay = LocalDate.of(battingDay.getYear(), battingDay.getMonth(), dayOfMonth);
+    }
+    public void setBattingMonth(int month)
+    {
+        this.battingDay = LocalDate.of(battingDay.getYear(), month, battingDay.getDayOfMonth());
+    }
+    public void setBattingYear(int year)
+    {
+        this.battingDay = LocalDate.of(year, battingDay.getMonth(), battingDay.getDayOfMonth());
+    }
+
+    public LocalDate getLocalDate()
+    {
+        return battingDay;
+    }
+    
+    public void setFullName(String fullName)
+    {
+        this.fullName = fullName;
+    }
+
+    public int getDayOfMonth()
+    {
+        return battingDay.getDayOfMonth();
     }    
     public String getFullName()
     {
         return fullName;
     }
     
-    public int getWeek()
+    public int getYear()
     {
-        return week;
+        return battingDay.getYear();
     }
 }
